@@ -15,4 +15,9 @@ public class Medic extends User{
     public void setAppointment() {
 
     }
+    
+@Override
+    public User loginUser(){
+        return this;
+    }
 }

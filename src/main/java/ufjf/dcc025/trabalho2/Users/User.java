@@ -17,17 +17,20 @@ public abstract class User {
 
     // @return email do usuário
     public String getEmail() {
-        return this.email;
+        String tempEmail = this.email;
+        return tempEmail;
     }
 
     // @return cpf do usuário
     public String getCpf() {
-        return this.cpf;
+        String tempCpf = this.cpf;
+        return tempCpf;
     }
 
     // @return nome do usuário
     public String getName() {
-        return this.name;
+        String tempName = this.name;
+        return tempName;
     }
 
     // Adiciona o usuário no arquivo json correspondente ao seu tipo de login

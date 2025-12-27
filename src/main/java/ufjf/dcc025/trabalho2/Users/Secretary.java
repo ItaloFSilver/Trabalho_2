@@ -10,6 +10,10 @@ public class Secretary extends User{
 
     @Override
     public User loginUser() {
-        
+        return this;
+    }
+    
+    public User registerNewPatient(String name, String cpf, String email){
+        return new Patient(name, email, cpf);
     }
 }
