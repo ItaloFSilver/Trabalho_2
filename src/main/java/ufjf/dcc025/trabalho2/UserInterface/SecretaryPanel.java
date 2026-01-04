@@ -4,6 +4,7 @@
  */
 package ufjf.dcc025.trabalho2.UserInterface;
 import javax.swing.*;
+
 /**
  *
  * @author Ircasa
@@ -12,9 +13,11 @@ public class SecretaryPanel extends JPanel {
 
     /**
      * Creates new form SecretaryPanel
+     * @param main
      */
-    public SecretaryPanel() {
+    public SecretaryPanel(MainFrame main) {
         initComponents();
+        this.mainPage = main;
     }
 
     /**
@@ -26,33 +29,176 @@ public class SecretaryPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
+        newPatientBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        NewPacientFrame = new javax.swing.JInternalFrame();
+        jButton3 = new javax.swing.JButton();
+        nameLabel = new javax.swing.JLabel();
+        pDocumentLabel = new javax.swing.JLabel();
+        pEmailLabel = new javax.swing.JLabel();
+        pPhoneLabel = new javax.swing.JLabel();
+        pNameField = new javax.swing.JTextField();
+        pDocumentField = new javax.swing.JTextField();
+        pEmailField = new javax.swing.JTextField();
+        pPhoneField = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(100, 100));
         setPreferredSize(new java.awt.Dimension(651, 339));
 
+        jToolBar1.setRollover(true);
+
         jLabel1.setText("Boas vindas, secretaria!");
+        jToolBar1.add(jLabel1);
+
+        newPatientBtn.setText("Novo Paciente");
+        newPatientBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newPatientBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newPatientBtn.addActionListener(this::newPatientBtnActionPerformed);
+        jToolBar1.add(newPatientBtn);
+
+        jButton1.setText("LogOut");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jToolBar1.add(jButton1);
+        jButton1.getAccessibleContext().setAccessibleName("LogOutBttn");
+
+        NewPacientFrame.setVisible(false);
+
+        jButton3.setText("Concluído");
+
+        nameLabel.setText("Nome:");
+
+        pDocumentLabel.setText("Documento:");
+
+        pEmailLabel.setText("E-Mail:");
+
+        pPhoneLabel.setText("Telefone:");
+
+        pNameField.addActionListener(this::pNameFieldActionPerformed);
+
+        pDocumentField.setToolTipText("123.456.789-00");
+
+        pPhoneField.setToolTipText("(DDD)XXXXX-XXXX");
+
+        javax.swing.GroupLayout NewPacientFrameLayout = new javax.swing.GroupLayout(NewPacientFrame.getContentPane());
+        NewPacientFrame.getContentPane().setLayout(NewPacientFrameLayout);
+        NewPacientFrameLayout.setHorizontalGroup(
+            NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewPacientFrameLayout.createSequentialGroup()
+                .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NewPacientFrameLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jButton3))
+                    .addGroup(NewPacientFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameLabel)
+                            .addComponent(pDocumentLabel)
+                            .addComponent(pEmailLabel)
+                            .addComponent(pPhoneLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(pDocumentField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(pPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        NewPacientFrameLayout.setVerticalGroup(
+            NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewPacientFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(pNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pDocumentLabel)
+                    .addComponent(pDocumentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pEmailLabel)
+                    .addComponent(pEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(NewPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pPhoneLabel)
+                    .addComponent(pPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(21, 21, 21))
+        );
+
+        jButton3.getAccessibleContext().setAccessibleName("cadBtn");
+        pNameField.getAccessibleContext().setAccessibleName("nameField");
+        pDocumentField.getAccessibleContext().setAccessibleName("documentField");
+        pEmailField.getAccessibleContext().setAccessibleName("emailField");
+        pPhoneField.getAccessibleContext().setAccessibleName("phoneField");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NewPacientFrame)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NewPacientFrame)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel1)
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel1)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.mainPage.changeScreen("login");
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void pNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pNameFieldActionPerformed
 
+    private void newPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientBtnActionPerformed
+        // TODO add your handling code here:
+        this.NewPacientFrame.setVisible(true);
+    }//GEN-LAST:event_newPatientBtnActionPerformed
+
+    private MainFrame mainPage;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame NewPacientFrame;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JButton newPatientBtn;
+    private javax.swing.JTextField pDocumentField;
+    private javax.swing.JLabel pDocumentLabel;
+    private javax.swing.JTextField pEmailField;
+    private javax.swing.JLabel pEmailLabel;
+    private javax.swing.JTextField pNameField;
+    private javax.swing.JTextField pPhoneField;
+    private javax.swing.JLabel pPhoneLabel;
     // End of variables declaration//GEN-END:variables
 }

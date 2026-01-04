@@ -23,7 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         cardLayout = new CardLayout();
         jPanel = new JPanel(cardLayout);
-        SecretaryPanel secretary = new SecretaryPanel();
+        SecretaryPanel secretary = new SecretaryPanel(this);
         LoginPanel login = new LoginPanel(this);
         jPanel.add(login, "login");
         jPanel.add(secretary, "secretary");
