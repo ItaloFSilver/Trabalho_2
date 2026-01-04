@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ufjf.dcc025.trabalho2.UserInterface;
-
+import javax.swing.*;
 /**
  *
  * @author Ircasa
  */
-public class SecretaryPanel extends javax.swing.JPanel {
+public class SecretaryPanel extends JPanel {
 
     /**
      * Creates new form SecretaryPanel
