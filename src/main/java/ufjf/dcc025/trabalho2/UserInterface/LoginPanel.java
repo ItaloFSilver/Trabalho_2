@@ -116,6 +116,8 @@ public class LoginPanel extends JPanel {
         // TODO add your handling code here:
         if(jTextField1.getText().equals("Usuario01") && jPasswordField2.getText().equals("senha"))
         {
+            this.jTextField1.setText("");
+            this.jPasswordField2.setText("");
             this.mainFrame.changeScreen("secretary");
         }
         else
