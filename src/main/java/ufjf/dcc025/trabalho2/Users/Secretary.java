@@ -13,7 +13,4 @@ public class Secretary extends User{
         return this;
     }
     
-    public Patient registerNewPatient(String name, String cpf, String email){
-        return new Patient(name, email, cpf);
-    }
 }

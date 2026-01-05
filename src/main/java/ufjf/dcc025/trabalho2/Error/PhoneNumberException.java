@@ -8,7 +8,7 @@ package ufjf.dcc025.trabalho2.Error;
  *
  * @author Ircasa
  */
-public class PhoneNumberException extends Exception {
+public class PhoneNumberException extends RuntimeException {
     public PhoneNumberException(String mensagem){
         super(mensagem);
     }

@@ -111,13 +111,16 @@ public class LoginPanel extends JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void limpaCampo(javax.swing.JTextField c){
+        c.setText("");
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(jTextField1.getText().equals("Usuario01") && jPasswordField2.getText().equals("senha"))
         {
-            this.jTextField1.setText("");
-            this.jPasswordField2.setText("");
+            limpaCampo(jTextField1);
+            limpaCampo(jPasswordField2);
             this.mainFrame.changeScreen("secretary");
         }
         else

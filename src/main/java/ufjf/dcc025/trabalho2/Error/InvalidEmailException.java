@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ufjf.dcc025.trabalho2.Error;
-import java.lang.Exception;
+
 /**
  *
- * @author Ircasa
+ * @author Italo
  */
-public class InvalidDateException extends RuntimeException{
-    public InvalidDateException(String mensagem){
+public class InvalidEmailException extends RuntimeException{
+    public InvalidEmailException(String mensagem){
         super(mensagem);
     }
 }
