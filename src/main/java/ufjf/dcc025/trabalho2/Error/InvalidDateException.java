@@ -4,10 +4,7 @@
  */
 package ufjf.dcc025.trabalho2.Error;
 import java.lang.Exception;
-/**
- *
- * @author Ircasa
- */
+
 public class InvalidDateException extends RuntimeException{
     public InvalidDateException(String mensagem){
         super(mensagem);

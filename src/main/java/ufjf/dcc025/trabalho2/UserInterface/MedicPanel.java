@@ -4,10 +4,7 @@
  */
 package ufjf.dcc025.trabalho2.UserInterface;
 
-/**
- *
- * @author Italo
- */
+
 public class MedicPanel extends javax.swing.JPanel {
 
     /**

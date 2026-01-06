@@ -3,20 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ufjf.dcc025.trabalho2.UserInterface.ManagementPanels;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Italo
- */
 public class MedicListPanel extends javax.swing.JPanel {
 
+    private JTable tabela;
+    DefaultTableModel table;
     /**
      * Creates new form MedicListPanel
      */
     public MedicListPanel() {
         initComponents();
+        table = new DefaultTableModel();
+        tabela = new JTable(table);
     }
 
+    public void addLinhas(DefaultTableModel tabela){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

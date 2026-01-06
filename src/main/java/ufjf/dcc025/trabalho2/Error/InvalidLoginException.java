@@ -5,8 +5,8 @@
 package ufjf.dcc025.trabalho2.Error;
 
 
-public class InvalidEmailException extends RuntimeException{
-    public InvalidEmailException(String mensagem){
+public class InvalidLoginException extends RuntimeException {
+    public InvalidLoginException(String mensagem){
         super(mensagem);
     }
 }

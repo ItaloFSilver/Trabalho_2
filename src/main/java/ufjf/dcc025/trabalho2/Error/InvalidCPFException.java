@@ -4,10 +4,7 @@
  */
 package ufjf.dcc025.trabalho2.Error;
 
-/**
- *
- * @author Italo
- */
+
 public class InvalidCPFException extends RuntimeException {
     public InvalidCPFException(String mensagem){
         super(mensagem);

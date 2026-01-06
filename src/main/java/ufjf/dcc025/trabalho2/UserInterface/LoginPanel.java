@@ -4,10 +4,7 @@
  */
 package ufjf.dcc025.trabalho2.UserInterface;
 import javax.swing.*;
-/**
- *
- * @author Ircasa
- */
+
 public class LoginPanel extends JPanel {
 
     /**
@@ -38,10 +35,8 @@ public class LoginPanel extends JPanel {
         errorLoginLabel = new javax.swing.JLabel();
 
         jPanel1.setMinimumSize(new java.awt.Dimension(100, 100));
-        jPanel1.setPreferredSize(new java.awt.Dimension(651, 339));
 
         jPasswordField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField2.addActionListener(this::jPasswordField2ActionPerformed);
 
         jButton2.setText("Entrar");
         jButton2.addActionListener(this::jButton2ActionPerformed);
@@ -126,10 +121,6 @@ public class LoginPanel extends JPanel {
         else
         errorLoginLabel.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

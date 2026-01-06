@@ -4,19 +4,30 @@
  */
 package ufjf.dcc025.trabalho2.UserInterface.ManagementPanels;
 
-/**
- *
- * @author Italo
- */
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import ufjf.dcc025.trabalho2.UserInterface.LoginPanel;
+import ufjf.dcc025.trabalho2.UserInterface.SecretaryPanel;
+
+
+
+
 public class SecondFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SecondFrame.class.getName());
+  
+    private static JPanel jPanel;
 
     /**
      * Creates new form SecondFrame
      */
-    public SecondFrame() {
+    public SecondFrame(JPanel jPanel) {
         initComponents();
+        this.jPanel = jPanel;
+        add(jPanel);
+        setContentPane(jPanel);
+       
     }
 
     /**
@@ -34,16 +45,20 @@ public class SecondFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 954, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void limpaCampo(javax.swing.JTextField c){
+        c.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -66,7 +81,7 @@ public class SecondFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new SecondFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new SecondFrame(jPanel).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
