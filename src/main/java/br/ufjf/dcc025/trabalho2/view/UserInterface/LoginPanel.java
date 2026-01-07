@@ -1,17 +1,19 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.*;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import br.ufjf.dcc025.trabalho2.controller.LoginController;
+import br.ufjf.dcc025.trabalho2.model.Error.InvalidLoginException;
 
 public class LoginPanel extends JPanel {
     
@@ -90,11 +92,17 @@ public class LoginPanel extends JPanel {
         }
         else
         {
-            limpaCampo(campoUser);
-            limpaCampo(senhaUser);
-            invalidCredLbl.setVisible(true);
+            try {
+                new LoginController().Login(campoUser.getText(), senhaUser.getText());
+            } catch (InvalidLoginException e) {
+                invalidCredLbl.setVisible(true);
+            }
+            finally {
+                limpaCampo(campoUser);
+                limpaCampo(senhaUser);
+                this.mainFrame.changeScreen("secretary");
+            }
         }
-        
     }
 }
 
