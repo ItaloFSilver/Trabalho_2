@@ -38,4 +38,6 @@ public abstract class User {
     public Telefone getTelefone() {
         return this.telefone;
     }
+    
+    public abstract User loginUser();
 }

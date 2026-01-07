@@ -2,10 +2,8 @@ package br.ufjf.dcc025.trabalho2.model.Users;
 
 public class Secretary extends User{
     
-    public Secretary() {}
-
-    public Secretary(String nome, String email, String cpf) {
-        super(nome, email, cpf);
+    public Secretary(String nome, String email, String cpf, String phoneNmb) {
+        super(nome, email, cpf, phoneNmb);
     }
 
     @Override
