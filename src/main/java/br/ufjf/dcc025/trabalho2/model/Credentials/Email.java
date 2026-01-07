@@ -20,4 +20,21 @@ public class Email {
     private boolean validateEmail(String email) {
         return email.matches(regex);
     }
+
+    private String getEmail() {
+        return email;
+    }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        Email other = (Email) obj;
+        return email.equals(other.getEmail());
+    }
 }

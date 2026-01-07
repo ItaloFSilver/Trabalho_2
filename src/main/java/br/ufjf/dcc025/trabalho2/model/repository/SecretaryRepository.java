@@ -11,41 +11,40 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Pacient;
+import br.ufjf.dcc025.trabalho2.model.Users.Secretary;
 
-public class PacientRepository implements Repository<Pacient> {
+public class SecretaryRepository implements Repository<Secretary> {
 
-    private final String path = dirPath + File.separator + "userData" + File.separator + "pacientData.json"; 
+    private final String path = dirPath + File.separator + "userData" + File.separator + "secretaryData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public void save(Pacient pacient) {
-        List<Pacient> pacients = listAll();
-        pacients.add(pacient);
+    public void save(Secretary secretary) {
+        List<Secretary> secretaries = listAll();
+        secretaries.add(secretary);
         File file = new File(path);
 
         try (FileWriter writer = new FileWriter(file)) {
-            gson.toJson(pacients, writer);
+            gson.toJson(secretaries, writer);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
     @Override
-    public void remove(Pacient pacient) {
-
+    public void remove(Secretary secretary) {
     }
 
     @Override
-    public List<Pacient> listAll() {
+    public List<Secretary> listAll() {
         File file = new File(path);
-        List<Pacient> pacients;
+        List<Secretary> secretaries;
 
         try (FileReader fileReader = new FileReader(file)){
-            Type typeList = new TypeToken<ArrayList<Pacient>>(){}.getType();    
-            pacients = gson.fromJson(fileReader, typeList);
-            return pacients == null ? new ArrayList<>() : pacients;
+            Type typeList = new TypeToken<ArrayList<Secretary>>(){}.getType();    
+            secretaries = gson.fromJson(fileReader, typeList);
+            return secretaries == null ? new ArrayList<>() : secretaries;
 
         } 
         catch (IOException e) {

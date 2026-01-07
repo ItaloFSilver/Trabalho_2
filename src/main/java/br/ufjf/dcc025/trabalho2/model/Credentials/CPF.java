@@ -6,7 +6,16 @@ public class CPF {
 
     private final String cpf;
 
-    private String regex = "^(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})$";
+    private final String regex = "^(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})$";
+
+    public CPF(String cpf) throws InvalidCPFException{
+        if(!validateCPF(cpf)) {
+            throw new InvalidCPFException("CPF invalido");
+        }
+        else {
+            this.cpf = cpf;
+        }
+    }
 
     boolean validateCPFMathematicaly(String cpf) {
         int firstSum = 0;
@@ -29,19 +38,14 @@ public class CPF {
     }
 
     boolean validateCPF(String cpf) throws InvalidCPFException {
-        if(!cpf.matches(regex)) {
+        if(cpf.matches(regex)) {
             return validateCPFMathematicaly(cpf);
         }
         return false;
-    }
+    }    
 
-    public CPF(String cpf) throws InvalidCPFException{
-        if(!validateCPF(cpf)) {
-            throw new InvalidCPFException("CPF invalido");
-        }
-        else {
-            this.cpf = cpf;
-        }
+    private String getCPF() {
+        return cpf;
     }
 
     @Override
@@ -51,4 +55,16 @@ public class CPF {
                 + cpf.charAt(9) + cpf.charAt(10);
     }
 
+    @Override
+    public int hashCode() {
+        return cpf.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        CPF other = (CPF) obj;
+        return cpf.equals(other.getCPF());
+    }
 }
