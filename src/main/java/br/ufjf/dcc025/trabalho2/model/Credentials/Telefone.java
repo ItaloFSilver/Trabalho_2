@@ -16,10 +16,7 @@ public class Telefone {
     }
 
     private boolean validateTelefone(String telefone) {
-        if(!telefone.matches(regex)) {
-            return false;
-        }
-        return true;
+        return telefone.matches(regex);
     }
 
     @Override
@@ -28,5 +25,4 @@ public class Telefone {
                 telefone.charAt(4) + telefone.charAt(5) + telefone.charAt(6) + "-" + telefone.charAt(7) + 
                 telefone.charAt(8) + telefone.charAt(9) + telefone.charAt(10);
     }
-
 }

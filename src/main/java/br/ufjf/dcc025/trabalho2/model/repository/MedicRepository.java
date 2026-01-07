@@ -11,21 +11,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Pacient;
+import br.ufjf.dcc025.trabalho2.model.Users.Medic;
 
-public class PacientRepository implements Repository<Pacient> {
-
-    private final String path = dirPath + File.separator + "userData" + File.separator + "pacientData.json"; 
+public class MedicRepository implements Repository<Medic> {
+    private final String path = dirPath + File.separator + "userData" + File.separator + "medicData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public void save(Pacient pacient) {
-        List<Pacient> pacients = listAll();
-        pacients.add(pacient);
+    public void save(Medic medic) {
+        List<Medic> medics = listAll();
+        medics.add(medic);
         File file = new File(path);
-
         try (FileWriter writer = new FileWriter(file)) {
-            gson.toJson(pacients, writer);
+            gson.toJson(medics, writer);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -33,19 +31,17 @@ public class PacientRepository implements Repository<Pacient> {
     }
 
     @Override
-    public void remove(Pacient pacient) {
-
+    public void remove(Medic medic) {
     }
 
     @Override
-    public List<Pacient> listAll() {
+    public List<Medic> listAll() {
         File file = new File(path);
-        List<Pacient> pacients;
-
+        List<Medic> medics; 
         try (FileReader fileReader = new FileReader(file)){
-            Type typeList = new TypeToken<ArrayList<Pacient>>(){}.getType();    
-            pacients = gson.fromJson(fileReader, typeList);
-            return pacients == null ? new ArrayList<>() : pacients;
+            Type typeList = new TypeToken<ArrayList<Medic>>(){}.getType();    
+            medics = gson.fromJson(fileReader, typeList);
+            return medics == null ? new ArrayList<>() : medics;
 
         } 
         catch (IOException e) {

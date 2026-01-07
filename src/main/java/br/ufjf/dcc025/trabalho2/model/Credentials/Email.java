@@ -8,7 +8,7 @@ public class Email {
     
     private final String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
-    public Email(String email) throws InvalidEmailException{
+    public Email(String email) throws InvalidEmailException {
         if(!validateEmail(email)) {
             throw  new InvalidEmailException("Email invalido");
         }
@@ -19,5 +19,22 @@ public class Email {
 
     private boolean validateEmail(String email) {
         return email.matches(regex);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        Email other = (Email) obj;
+        return email.equals(other.getEmail());
     }
 }
