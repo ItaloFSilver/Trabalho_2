@@ -2,21 +2,20 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 
 import javax.swing.*;
 
-public class RegisterFrame {
-    private static JFrame janelaPrincipal;
+public class RegisterFrame extends JFrame {
     private static JPanel Credentials;
     
     public RegisterFrame(){
-        janelaPrincipal = new JFrame();
-        janelaPrincipal.setSize(640, 400);
+        
+        setSize(640, 400);
         
         Credentials = new RegisterPanel();
-        janelaPrincipal.add(Credentials);
-        janelaPrincipal.setContentPane(Credentials);
+        add(Credentials);
+        setContentPane(Credentials);
         
-        janelaPrincipal.setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         Credentials.setVisible(true);
-        janelaPrincipal.setVisible(true);  
-        janelaPrincipal.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setVisible(true);  
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 }
