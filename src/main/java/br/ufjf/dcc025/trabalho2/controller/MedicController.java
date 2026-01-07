@@ -1,0 +1,44 @@
+package br.ufjf.dcc025.trabalho2.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.ufjf.dcc025.trabalho2.model.Users.Medic;
+import br.ufjf.dcc025.trabalho2.model.Users.User;
+
+public class MedicController extends UserController {
+
+    private static final String path = UserController.dirPath + "medicData.json";
+    private static final File file = new File(path); 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    @Override
+    public void saveUser(User newUser) {
+        try {
+            List<User> medics = listUsers();
+            medics.add(newUser);
+            mapper.writeValue(file, medics);
+        }
+        catch(IOException e) {
+            System.out.println("Impossivel salvar usuario.");
+            return;
+        }
+    }
+
+    @Override
+    protected List<User> listUsers() {
+        if(!file.exists() || file.length() == 0)
+            return new ArrayList<>();
+
+        try{
+            return mapper.readValue(file, new TypeReference<List<User>>() {}); 
+        }
+        catch(IOException e) {
+            return new ArrayList<>();
+        }
+    }
+}
