@@ -8,7 +8,7 @@ public class Email {
     
     private final String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
-    public Email(String email) throws InvalidEmailException{
+    public Email(String email) throws InvalidEmailException {
         if(!validateEmail(email)) {
             throw  new InvalidEmailException("Email invalido");
         }
@@ -21,7 +21,7 @@ public class Email {
         return email.matches(regex);
     }
 
-    private String getEmail() {
+    public String getEmail() {
         return email;
     }
 
