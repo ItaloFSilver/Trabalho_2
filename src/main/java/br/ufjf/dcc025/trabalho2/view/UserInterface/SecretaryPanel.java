@@ -5,11 +5,11 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 import java.awt.CardLayout;
 
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 
-import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.PatientListPanel;
-import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.SecondFrame;
+
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -22,6 +22,12 @@ public class SecretaryPanel extends JPanel {
     public SecretaryPanel(MainFrame main) {
         initComponents();
         mainPage = main;
+        modelo = new DefaultTableModel();  
+        modelo.addColumn("Nome");  
+        modelo.addColumn("Documento");  
+        modelo.addColumn("Telefone");  
+        modelo.addColumn("E-mail");
+        patientTable.setModel(modelo);
     }
 
     /**
@@ -33,121 +39,36 @@ public class SecretaryPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
-        jLabel1 = new javax.swing.JLabel();
-        consultPatients = new javax.swing.JButton();
-        activeMedic = new javax.swing.JButton();
-        AppointBtn = new javax.swing.JButton();
-        LogOutBtn = new javax.swing.JButton();
+        SecretaryTabbedPane = new javax.swing.JTabbedPane();
+        MedicList = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        MedicTable = new javax.swing.JTable();
         AppointsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         AppointTable = new javax.swing.JTable();
         cancelAptBtn = new javax.swing.JButton();
         newAptBtn = new javax.swing.JButton();
         editAppointBtn = new javax.swing.JButton();
-        MedicList = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        MedicTable = new javax.swing.JTable();
+        rPatientPanel = new javax.swing.JPanel();
+        patientList = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        patientTable = new javax.swing.JTable();
+        newPatientBtn1 = new javax.swing.JButton();
+        registerPacientFrame = new javax.swing.JInternalFrame();
+        pNameLabel = new javax.swing.JLabel();
+        pMailLabel = new javax.swing.JLabel();
+        pPhoneLabel = new javax.swing.JLabel();
+        pDocLabel = new javax.swing.JLabel();
+        completeBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
+        pNameField = new javax.swing.JTextField();
+        pMailField = new javax.swing.JTextField();
+        pDocumentField = new javax.swing.JFormattedTextField();
+        pPhoneField = new javax.swing.JFormattedTextField();
+        LogOutBtn = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(1190, 780));
-
-        jToolBar1.setRollover(true);
-
-        jLabel1.setText("Boas vindas, secretaria!");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jToolBar1.add(jLabel1);
-
-        consultPatients.setText("Pacientes");
-        consultPatients.setFocusable(false);
-        consultPatients.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        consultPatients.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        consultPatients.addActionListener(this::consultPatientsActionPerformed);
-        jToolBar1.add(consultPatients);
-
-        activeMedic.setText("Médicos");
-        activeMedic.setFocusable(false);
-        activeMedic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        activeMedic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        activeMedic.addActionListener(this::activeMedicActionPerformed);
-        jToolBar1.add(activeMedic);
-
-        AppointBtn.setText("Agendamentos");
-        AppointBtn.setFocusable(false);
-        AppointBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AppointBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        AppointBtn.addActionListener(this::AppointBtnActionPerformed);
-        jToolBar1.add(AppointBtn);
-
-        LogOutBtn.setText("LogOut");
-        LogOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        LogOutBtn.addActionListener(this::LogOutBtnActionPerformed);
-        jToolBar1.add(LogOutBtn);
-        LogOutBtn.getAccessibleContext().setAccessibleName("LogOutBttn");
-
-        AppointTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Paciente", "Médico", "Data", "Horário"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(AppointTable);
-
-        cancelAptBtn.setText("Cancelar");
-        cancelAptBtn.addActionListener(this::cancelAptBtnActionPerformed);
-
-        newAptBtn.setText("Novo");
-
-        editAppointBtn.setText("Editar");
-
-        javax.swing.GroupLayout AppointsPanelLayout = new javax.swing.GroupLayout(AppointsPanel);
-        AppointsPanel.setLayout(AppointsPanelLayout);
-        AppointsPanelLayout.setHorizontalGroup(
-            AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AppointsPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(editAppointBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newAptBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cancelAptBtn)
-                .addGap(29, 29, 29))
-            .addGroup(AppointsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-        AppointsPanelLayout.setVerticalGroup(
-            AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AppointsPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newAptBtn)
-                    .addComponent(cancelAptBtn)
-                    .addComponent(editAppointBtn))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+        setPreferredSize(new java.awt.Dimension(1100, 500));
 
         MedicTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,37 +103,268 @@ public class SecretaryPanel extends JPanel {
         MedicListLayout.setHorizontalGroup(
             MedicListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MedicListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(422, Short.MAX_VALUE))
         );
         MedicListLayout.setVerticalGroup(
             MedicListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MedicListLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        SecretaryTabbedPane.addTab("Médicos", MedicList);
+        MedicList.setVisible(false);
+
+        AppointTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Paciente", "Médico", "Data", "Horário"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(AppointTable);
+
+        cancelAptBtn.setText("Remover");
+        cancelAptBtn.addActionListener(this::cancelAptBtnActionPerformed);
+
+        newAptBtn.setText("Novo");
+
+        editAppointBtn.setText("Editar");
+
+        javax.swing.GroupLayout AppointsPanelLayout = new javax.swing.GroupLayout(AppointsPanel);
+        AppointsPanel.setLayout(AppointsPanelLayout);
+        AppointsPanelLayout.setHorizontalGroup(
+            AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AppointsPanelLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(newAptBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editAppointBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelAptBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
+        );
+        AppointsPanelLayout.setVerticalGroup(
+            AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AppointsPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(AppointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(AppointsPanelLayout.createSequentialGroup()
+                        .addComponent(newAptBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editAppointBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelAptBtn)))
+                .addContainerGap(322, Short.MAX_VALUE))
+        );
+
+        SecretaryTabbedPane.addTab("Consultas", AppointsPanel);
+        AppointsPanel.setVisible(false);
+
+        patientTable.setAutoCreateRowSorter(true);
+        patientTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Documento", "Telefone", "E-mail"
+            }
+        ));
+        patientTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane2.setViewportView(patientTable);
+
+        javax.swing.GroupLayout patientListLayout = new javax.swing.GroupLayout(patientList);
+        patientList.setLayout(patientListLayout);
+        patientListLayout.setHorizontalGroup(
+            patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1064, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        patientListLayout.setVerticalGroup(
+            patientListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(patientListLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        newPatientBtn1.setText("Novo Paciente");
+        newPatientBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newPatientBtn1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newPatientBtn1.addActionListener(this::newPatientBtn1ActionPerformed);
+
+        registerPacientFrame.setVisible(true);
+
+        pNameLabel.setText("Nome: ");
+
+        pMailLabel.setText("E-Mail:");
+        pMailLabel.setToolTipText("");
+
+        pPhoneLabel.setText("Telefone:");
+
+        pDocLabel.setText("Documento:");
+
+        completeBtn.setText("Concluído");
+        completeBtn.addActionListener(this::completeBtnActionPerformed);
+
+        cancelBtn.setText("Cancelar");
+        cancelBtn.addActionListener(this::cancelBtnActionPerformed);
+
+        try {
+            pDocumentField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            pPhoneField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        javax.swing.GroupLayout registerPacientFrameLayout = new javax.swing.GroupLayout(registerPacientFrame.getContentPane());
+        registerPacientFrame.getContentPane().setLayout(registerPacientFrameLayout);
+        registerPacientFrameLayout.setHorizontalGroup(
+            registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerPacientFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerPacientFrameLayout.createSequentialGroup()
+                        .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pNameLabel)
+                            .addComponent(pPhoneLabel)
+                            .addComponent(pMailLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pMailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(pNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, registerPacientFrameLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(pPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(registerPacientFrameLayout.createSequentialGroup()
+                        .addComponent(pDocLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pDocumentField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPacientFrameLayout.createSequentialGroup()
+                .addContainerGap(555, Short.MAX_VALUE)
+                .addComponent(cancelBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(completeBtn)
+                .addGap(100, 100, 100))
+        );
+        registerPacientFrameLayout.setVerticalGroup(
+            registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerPacientFrameLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pNameLabel)
+                    .addComponent(pNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pDocLabel)
+                    .addComponent(pDocumentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pPhoneLabel)
+                    .addComponent(pPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pMailLabel)
+                    .addComponent(pMailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(registerPacientFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(completeBtn)
+                    .addComponent(cancelBtn))
+                .addGap(25, 25, 25))
+        );
+
+        javax.swing.GroupLayout rPatientPanelLayout = new javax.swing.GroupLayout(rPatientPanel);
+        rPatientPanel.setLayout(rPatientPanelLayout);
+        rPatientPanelLayout.setHorizontalGroup(
+            rPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rPatientPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rPatientPanelLayout.createSequentialGroup()
+                        .addComponent(registerPacientFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rPatientPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(newPatientBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rPatientPanelLayout.createSequentialGroup()
+                        .addComponent(patientList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        rPatientPanelLayout.setVerticalGroup(
+            rPatientPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rPatientPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(patientList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newPatientBtn1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(registerPacientFrame))
+        );
+
+        registerPacientFrame.setVisible(false);
+
+        SecretaryTabbedPane.addTab("Pacientes", rPatientPanel);
+
+        LogOutBtn.setText("LogOut");
+        LogOutBtn.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LogOutBtn.addActionListener(this::LogOutBtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MedicList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(AppointsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(LogOutBtn))
+                    .addComponent(SecretaryTabbedPane))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(LogOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AppointsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MedicList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(SecretaryTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        AppointsPanel.setVisible(false);
-        MedicList.setVisible(false);
+        SecretaryTabbedPane.getAccessibleContext().setAccessibleName("tab");
+        LogOutBtn.getAccessibleContext().setAccessibleName("LogOutBttn");
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
@@ -220,50 +372,67 @@ public class SecretaryPanel extends JPanel {
         this.mainPage.changeScreen("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
     
-    private void consultPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultPatientsActionPerformed
-        // TODO add your handling code here:
-        SecondFrame novaJanela = new SecondFrame(new PatientListPanel());
-        novaJanela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        novaJanela.setVisible(true);
-    }//GEN-LAST:event_consultPatientsActionPerformed
-
-    private void AppointBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppointBtnActionPerformed
-        // TODO add your handling code here:
-        this.AppointsPanel.setVisible(true);
-    }//GEN-LAST:event_AppointBtnActionPerformed
-
     private void cancelAptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAptBtnActionPerformed
         // TODO add your handling code here:
         this.AppointsPanel.setVisible(false);
     }//GEN-LAST:event_cancelAptBtnActionPerformed
 
-    private void activeMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeMedicActionPerformed
+    private void newPatientBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientBtn1ActionPerformed
         // TODO add your handling code here:
-        if(this.MedicList.isVisible())
-            this.MedicList.setVisible(false);
-        else
-            this.MedicList.setVisible(true);
-    }//GEN-LAST:event_activeMedicActionPerformed
+        this.registerPacientFrame.setVisible(true);
+    }//GEN-LAST:event_newPatientBtn1ActionPerformed
+
+    private void completeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completeBtnActionPerformed
+        // TODO add your handling code here:
+        Object[] data = {pNameField.getText(), pDocumentField.getText(), pPhoneField.getText(), pMailField.getText()};
+        modelo.addRow(data);
+        limpaCampo(pNameField);
+        limpaCampo(pDocumentField);
+        limpaCampo(pMailField);
+        limpaCampo(pPhoneField);
+        this.registerPacientFrame.setVisible(false);
+
+    }//GEN-LAST:event_completeBtnActionPerformed
+    private void limpaCampo(javax.swing.JTextField c){
+        c.setText("");
+    }
+    
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        // TODO add your handling code here:
+        this.registerPacientFrame.setVisible(false);
+    }//GEN-LAST:event_cancelBtnActionPerformed
     
     private MainFrame mainPage;
     private CardLayout cardLayout;
-    private javax.swing.JPanel jPanel2;
+    private DefaultTableModel modelo;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AppointBtn;
     private javax.swing.JTable AppointTable;
     private javax.swing.JPanel AppointsPanel;
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JPanel MedicList;
     private javax.swing.JTable MedicTable;
-    private javax.swing.JButton activeMedic;
+    private javax.swing.JTabbedPane SecretaryTabbedPane;
     private javax.swing.JButton cancelAptBtn;
-    private javax.swing.JButton consultPatients;
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton completeBtn;
     private javax.swing.JButton editAppointBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton newAptBtn;
+    private javax.swing.JButton newPatientBtn1;
+    private javax.swing.JLabel pDocLabel;
+    private javax.swing.JFormattedTextField pDocumentField;
+    private javax.swing.JTextField pMailField;
+    private javax.swing.JLabel pMailLabel;
+    private javax.swing.JTextField pNameField;
+    private javax.swing.JLabel pNameLabel;
+    private javax.swing.JFormattedTextField pPhoneField;
+    private javax.swing.JLabel pPhoneLabel;
+    private javax.swing.JPanel patientList;
+    private javax.swing.JTable patientTable;
+    private javax.swing.JPanel rPatientPanel;
+    private javax.swing.JInternalFrame registerPacientFrame;
     // End of variables declaration//GEN-END:variables
 }
