@@ -42,6 +42,10 @@ public class User {
         return this.email;
     }
     
+    public Password getPassword() {
+        return this.password;
+    }
+    
     public CPF getCPF() {
         return this.cpf;
     }
