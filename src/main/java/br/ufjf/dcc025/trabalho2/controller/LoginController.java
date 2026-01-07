@@ -14,7 +14,7 @@ public class LoginController {
 
         List<User> users = new UserRepository().getAllUsers();
 
-        for(User user : users){
+        for(User user : users) {
             if(user.getEmail().equals(new Email(email)) && user.getPassword().equals(new Password(password))){
                 return user; 
             }  

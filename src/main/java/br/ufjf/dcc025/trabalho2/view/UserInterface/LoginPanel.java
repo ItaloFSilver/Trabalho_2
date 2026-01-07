@@ -13,7 +13,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import br.ufjf.dcc025.trabalho2.controller.LoginController;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidLoginException;
 
 public class LoginPanel extends JPanel {
     
@@ -94,14 +93,15 @@ public class LoginPanel extends JPanel {
         {
             try {
                 new LoginController().Login(campoUser.getText(), senhaUser.getText());
-            } catch (InvalidLoginException e) {
+                this.mainFrame.changeScreen("secretary");
+            } 
+            catch (RuntimeException e) {
                 invalidCredLbl.setVisible(true);
-            }
-            finally {
                 limpaCampo(campoUser);
                 limpaCampo(senhaUser);
-                this.mainFrame.changeScreen("secretary");
             }
+            limpaCampo(campoUser);
+            limpaCampo(senhaUser);
         }
     }
 }

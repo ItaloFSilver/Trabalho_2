@@ -16,7 +16,7 @@ import br.ufjf.dcc025.trabalho2.model.Users.Patient;
 
 public class PatientRepository implements Repository<Patient> {
 
-    private final String path = dirPath + File.separator + "userData" + File.separator + "pacientData.json"; 
+    private final String path = dirPath + File.separator + "usersData" + File.separator + "patientData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override

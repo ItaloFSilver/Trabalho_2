@@ -1,21 +1,22 @@
 package br.ufjf.dcc025.trabalho2.model.repository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import br.ufjf.dcc025.trabalho2.model.Users.Secretary;
 
 public class SecretaryRepository implements Repository<Secretary> {
 
-    private final String path = dirPath + File.separator + "userData" + File.separator + "secretaryData.json"; 
+    private final String path = dirPath + File.separator + "usersData" + File.separator + "secretaryData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
