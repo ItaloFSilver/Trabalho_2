@@ -1,26 +1,27 @@
 package br.ufjf.dcc025.trabalho2.model.repository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Pacient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-public class PacientRepository implements Repository<Pacient> {
+import br.ufjf.dcc025.trabalho2.model.Users.Patient;
+
+public class PacientRepository implements Repository<Patient> {
 
     private final String path = dirPath + File.separator + "userData" + File.separator + "pacientData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public void save(Pacient pacient) {
-        List<Pacient> pacients = listAll();
+    public void save(Patient pacient) {
+        List<Patient> pacients = listAll();
         pacients.add(pacient);
         File file = new File(path);
 
@@ -33,17 +34,17 @@ public class PacientRepository implements Repository<Pacient> {
     }
 
     @Override
-    public void remove(Pacient pacient) {
+    public void remove(Patient pacient) {
 
     }
 
     @Override
-    public List<Pacient> listAll() {
+    public List<Patient> listAll() {
         File file = new File(path);
-        List<Pacient> pacients;
+        List<Patient> pacients;
 
         try (FileReader fileReader = new FileReader(file)){
-            Type typeList = new TypeToken<ArrayList<Pacient>>(){}.getType();    
+            Type typeList = new TypeToken<ArrayList<Patient>>(){}.getType();    
             pacients = gson.fromJson(fileReader, typeList);
             return pacients == null ? new ArrayList<>() : pacients;
 
