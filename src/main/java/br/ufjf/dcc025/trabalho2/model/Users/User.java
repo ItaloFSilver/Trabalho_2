@@ -1,40 +1,41 @@
 package br.ufjf.dcc025.trabalho2.model.Users;
 
 import br.ufjf.dcc025.trabalho2.model.Credentials.*;
+import java.util.UUID;
 
 public abstract class User {
-
-    protected String id;
+    
+    protected UUID id = UUID.randomUUID();
     protected String name;
     protected Email email;
     protected CPF cpf;
+    protected Telefone telefone;
 
-    public User() {}
-    
-    public User(String name, String email, String cpf) {
+    /**
+    * @throws InvalidEmailException se o email for invalido
+    * @throws InvalidCPFException se o CPF for invalido
+    * @throws InvalidTelefoneException se o telefone for invalido
+    */
+    public User(String name, String email, String cpf, String telefone) {
         this.name = name;
         this.email = new Email(email);
         this.cpf = new CPF(cpf);
+        this.telefone = new Telefone(telefone);
     }
 
-    // @return email do usuário
-    public String getEmail() {
-        String tempEmail = this.email;
-        return tempEmail;
-    }
-
-    // @return cpf do usuário
-    public String getCpf() {
-        String tempCpf = this.cpf;
-        return tempCpf;
-    }
-
-    // @return nome do usuário
     public String getName() {
-        String tempName = this.name;
-        return tempName;
+        return this.name;
     }
 
-    // Adiciona o usuário no arquivo json correspondente ao seu tipo de login
-    protected abstract User loginUser();
+    public Email getEmail() {
+        return this.email;
+    }
+    
+    public CPF getCPF() {
+        return this.cpf;
+    }
+
+    public Telefone getTelefone() {
+        return this.telefone;
+    }
 }
