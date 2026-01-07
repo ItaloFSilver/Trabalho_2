@@ -1,2 +1,9 @@
-/.vscode/
 target/
+*.class
+.vscode/
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+bin/
