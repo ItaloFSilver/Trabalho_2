@@ -34,8 +34,23 @@ public class PatientRepository implements Repository<Patient> {
     }
 
     @Override
-    public void remove(Patient pacient) {
+    public void remove(Patient patient) {
+        List<Patient> patients = listAll();
 
+        for(Patient p : patients) {
+            if(p.getId() == patient.getId()) {
+                patients.remove(p);
+                break;
+            }
+        }
+        File file = new File(path);
+        
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(patients, writer);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

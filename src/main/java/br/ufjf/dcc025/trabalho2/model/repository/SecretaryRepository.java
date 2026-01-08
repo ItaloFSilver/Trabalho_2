@@ -35,6 +35,22 @@ public class SecretaryRepository implements Repository<Secretary> {
     
     @Override
     public void remove(Secretary secretary) {
+        List<Secretary> secretaries = listAll();
+
+        for(Secretary s : secretaries) {
+            if(s.getId() == secretary.getId()) {
+                secretaries.remove(s);
+                break;
+            }
+        }
+        File file = new File(path);
+        
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(secretaries, writer);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
