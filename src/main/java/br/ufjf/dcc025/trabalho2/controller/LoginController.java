@@ -14,7 +14,7 @@ public class LoginController {
     
     public User login(String email, String password) throws InvalidLoginException {
 
-        List<User> users = new UserRepository().getAllUsers();
+        List<User> users = new UserRepository().listAllUsers();
         Email emailObj;
         Password passwordObj;
 
