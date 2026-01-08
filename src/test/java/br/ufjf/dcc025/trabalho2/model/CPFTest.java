@@ -15,7 +15,7 @@ public class CPFTest {
     @Test
     @DisplayName("Deve criar um CPF válido sem lançar exceções")
     void shouldNotThrowWhenCreatingValidCPF() {
-        String validCPF = "11111111111";
+        String validCPF = "168.698.416-24";
         assertDoesNotThrow(() -> new CPF(validCPF));
     }
 

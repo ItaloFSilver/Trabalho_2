@@ -30,6 +30,14 @@ public class User {
         this.password = new Password(password);
     }
 
+    public User(String nameString, Email emailObj, CPF cpfObj, Telefone telefoneObj, Password passwordObj) {
+        this.name = nameString;
+        this.email = emailObj;
+        this.cpf = cpfObj;
+        this.telefone = telefoneObj;
+        this.password = passwordObj;
+    }
+
     public UUID getId() {
         return this.id;
     }

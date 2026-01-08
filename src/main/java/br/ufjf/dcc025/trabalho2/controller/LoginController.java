@@ -12,7 +12,7 @@ import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class LoginController {
     
-    public User Login(String email, String password) throws InvalidLoginException {
+    public User login(String email, String password) throws InvalidLoginException {
 
         List<User> users = new UserRepository().getAllUsers();
         Email emailObj;

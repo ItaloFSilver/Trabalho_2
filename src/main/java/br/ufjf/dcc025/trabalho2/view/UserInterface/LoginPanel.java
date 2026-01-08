@@ -78,7 +78,7 @@ public class LoginPanel extends JPanel {
         campoUser.requestFocusInWindow();
     }
     
-    private void limpaCampo(javax.swing.JTextField c){
+    private void limpaCampo(javax.swing.JTextField c) {
         c.setText("");
     }
     
@@ -93,7 +93,7 @@ public class LoginPanel extends JPanel {
         else
         {
             try {
-                new LoginController().Login(campoUser.getText(), senhaUser.getText());
+                new LoginController().login(campoUser.getText(), senhaUser.getText());
                 this.mainFrame.changeScreen("secretary");
             } 
             catch (InvalidLoginException e) {
