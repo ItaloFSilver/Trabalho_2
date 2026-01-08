@@ -9,7 +9,7 @@ public class RegisterFrame extends JFrame {
         
         setSize(640, 400);
         
-        Credentials = new RegisterPanel();
+        Credentials = new RegisterPanel(this);
         add(Credentials);
         setContentPane(Credentials);
         

@@ -135,8 +135,7 @@ public class SecretaryPanel extends JPanel{
 
     
     private void abrirJanelaCadastro() {
-        JFrame dialog = new JFrame("Cadastro de Usuário");
-        dialog.add(new RegisterPanel()); 
+        RegisterFrame dialog = new RegisterFrame();
         
         dialog.pack(); 
         dialog.setLocationRelativeTo(null); 

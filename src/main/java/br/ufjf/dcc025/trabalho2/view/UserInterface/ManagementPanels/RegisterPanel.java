@@ -18,8 +18,10 @@ public class RegisterPanel extends JPanel{
     private JTextField txtEspecializacao;
     private JFormattedTextField campoCPF;
     private JFormattedTextField campoTelefone;
+    private RegisterFrame frame;
     
-    public RegisterPanel() {
+    public RegisterPanel(RegisterFrame main) {
+        this.frame = main;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); 
@@ -66,13 +68,11 @@ public class RegisterPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 String selecionado = (String) cbTipoUsuario.getSelectedItem();
                 
-                // Se for "Médico", mostra os campos. Senão, esconde.
                 boolean isMedico = "Médico".equals(selecionado);
                 
                 lblEspecializacao.setVisible(isMedico);
                 txtEspecializacao.setVisible(isMedico);
 
-                // Revalida o layout para ajustar os espaços
                 revalidate();
                 repaint();
             }
@@ -81,6 +81,15 @@ public class RegisterPanel extends JPanel{
         
         JButton btnCadastrar = new JButton("Cadastrar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));
+        btnCadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //chama o repositorio e registra o novo usuario
+                
+                hideWindow();
+            }
+        });
+        
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 2; // Ocupa a largura toda
@@ -92,6 +101,9 @@ public class RegisterPanel extends JPanel{
         setBorder(BorderFactory.createTitledBorder("Novo Usuário"));
     }
 
+    private void hideWindow(){
+        this.frame.setVisible(false);
+    }
     
     private void adicionarCampo(String rotulo, Component campo, int linha, GridBagConstraints gbc) {
         gbc.gridwidth = 1;
