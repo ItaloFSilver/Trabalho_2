@@ -14,5 +14,21 @@
     "phoneNumber": {
       "phoneNumber": "32987026493"
     }
+  },
+  {
+    "id": "9910681d-4d58-4634-b9f0-6da69245fe42",
+    "name": "pedro cacete",
+    "email": {
+      "email": "pedro@email.com"
+    },
+    "cpf": {
+      "cpf": "11111111111"
+    },
+    "password": {
+      "password": "senhasenha"
+    },
+    "phoneNumber": {
+      "phoneNumber": "32987026493"
+    }
   }
 ]

@@ -50,7 +50,5 @@ public class RegisterController {
             default -> throw new InvalidRegisterException("Tipo de usuário inválido.");
         }
 
-
     }
-
 }

@@ -13,10 +13,12 @@ public class Medic extends User {
 
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
+        this.profile = Profile.MEDICO;
     }
 
     public Medic(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
         super(name, email, cpf, phoneNumber, password);
+        this.profile = Profile.MEDICO;
     }
     
     public void setAppointment() {
