@@ -35,20 +35,19 @@ public class RegisterController {
         }
 
         switch (userType) {
-            case "Paciente":
+            case "Paciente" -> {
                 Patient patient = new Patient(name, emailObj, cpfObj, telefoneObj, passwordObj);
                 new PatientRepository().save(patient);
-                break;
-            case "Médico":
+            }
+            case "Médico" -> {
                 Medic medic = new Medic(name, emailObj, cpfObj, telefoneObj, passwordObj);
                 new MedicRepository().save(medic);
-                break;
-            case "Secretário":
+            }
+            case "Secretário" -> {
                 Secretary secretary = new Secretary(name, emailObj, cpfObj, telefoneObj, passwordObj);
                 new SecretaryRepository().save(secretary);
-                break;
-            default:
-                throw new InvalidRegisterException("Tipo de usuário inválido.");
+            }
+            default -> throw new InvalidRegisterException("Tipo de usuário inválido.");
         }
 
 
