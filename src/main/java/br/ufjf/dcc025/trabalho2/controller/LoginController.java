@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidEmailException;
 import br.ufjf.dcc025.trabalho2.model.error.InvalidLoginException;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidPasswordException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
@@ -13,9 +15,19 @@ public class LoginController {
     public User Login(String email, String password) throws InvalidLoginException {
 
         List<User> users = new UserRepository().getAllUsers();
+        Email emailObj;
+        Password passwordObj;
+
+        try {
+            emailObj = new Email(email);
+            passwordObj = new Password(password);
+        } 
+        catch (InvalidEmailException | InvalidPasswordException e) {
+            throw new InvalidLoginException("Email ou senha invalidos.");
+        }
 
         for(User user : users) {
-            if(user.getEmail().equals(new Email(email)) && user.getPassword().equals(new Password(password))){
+            if(user.getEmail().equals(emailObj) && user.getPassword().equals(passwordObj)){
                 return user; 
             }  
         }
