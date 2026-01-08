@@ -1,6 +1,6 @@
-package br.ufjf.dcc025.trabalho2.model.Credentials;
+package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidTelefoneException;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidTelefoneException;
 
 public class Telefone {
 

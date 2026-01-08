@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Patient;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class PatientRepository implements Repository<Patient> {
 

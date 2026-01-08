@@ -1,11 +1,11 @@
-package br.ufjf.dcc025.trabalho2.model.Users;
+package br.ufjf.dcc025.trabalho2.model.users;
 
 import java.util.UUID;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.Credentials.Email;
-import br.ufjf.dcc025.trabalho2.model.Credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.Credentials.Telefone;
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.credentials.Email;
+import br.ufjf.dcc025.trabalho2.model.credentials.Password;
+import br.ufjf.dcc025.trabalho2.model.credentials.Telefone;
 
 public class User {
     
@@ -41,7 +41,7 @@ public class User {
     public Email getEmail() {
         return this.email;
     }
-    
+
     public Password getPassword() {
         return this.password;
     }

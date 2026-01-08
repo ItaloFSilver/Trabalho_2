@@ -2,8 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.ufjf.dcc025.trabalho2.model.Credentials;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidDateException;
+package br.ufjf.dcc025.trabalho2.model.credentials;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidDateException;
 /**
  *
  * @author Ircasa

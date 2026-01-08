@@ -2,11 +2,11 @@ package br.ufjf.dcc025.trabalho2.controller;
 
 import java.util.List;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.Email;
-import br.ufjf.dcc025.trabalho2.model.Credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidLoginException;
-import br.ufjf.dcc025.trabalho2.model.Users.User;
+import br.ufjf.dcc025.trabalho2.model.credentials.Email;
+import br.ufjf.dcc025.trabalho2.model.credentials.Password;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidLoginException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class LoginController {
     

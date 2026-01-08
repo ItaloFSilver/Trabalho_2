@@ -1,4 +1,4 @@
-package br.ufjf.dcc025.trabalho2.model.Users;
+package br.ufjf.dcc025.trabalho2.model.users;
 
 public class Medic extends User{    
 

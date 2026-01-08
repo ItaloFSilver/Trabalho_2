@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Medic;
-import br.ufjf.dcc025.trabalho2.model.Users.Patient;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class Appointment {
    

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.Telefone;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidTelefoneException;
+import br.ufjf.dcc025.trabalho2.model.credentials.Telefone;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidTelefoneException;
 
 public class SenhaTest {
     

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.Email;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.credentials.Email;
+import br.ufjf.dcc025.trabalho2.model.error.InvalidEmailException;
 
 public class EmailTest {
     
