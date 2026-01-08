@@ -19,7 +19,7 @@ public class PhoneTest {
     }
 
     @Test
-    @DisplayName("Deve lançar exceção ao criar um CPF inválido")
+    @DisplayName("Deve lançar exceção ao criar um phoneNumber inválido")
     void shouldThrowWhenCreatingInvalidphoneNumber() {
         String invalidPhone = "12AphoneNumber0";
         InvalidphoneNumberException e = assertThrows(InvalidphoneNumberException.class, () -> {new PhoneNumber(invalidPhone);});
