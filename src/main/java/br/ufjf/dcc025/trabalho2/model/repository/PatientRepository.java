@@ -38,7 +38,7 @@ public class PatientRepository implements Repository<Patient> {
         List<Patient> patients = listAll();
 
         for(Patient p : patients) {
-            if(p.getId() == patient.getId()) {
+            if(p.getId().equals(patient.getId())) {
                 patients.remove(p);
                 break;
             }

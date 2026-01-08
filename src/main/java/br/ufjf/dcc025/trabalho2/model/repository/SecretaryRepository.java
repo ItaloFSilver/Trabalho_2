@@ -38,7 +38,7 @@ public class SecretaryRepository implements Repository<Secretary> {
         List<Secretary> secretaries = listAll();
 
         for(Secretary s : secretaries) {
-            if(s.getId() == secretary.getId()) {
+            if(s.getId().equals(secretary.getId())) {
                 secretaries.remove(s);
                 break;
             }

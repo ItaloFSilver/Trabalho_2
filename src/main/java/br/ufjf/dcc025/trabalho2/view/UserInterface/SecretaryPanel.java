@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 
@@ -26,7 +26,7 @@ public class SecretaryPanel extends JPanel{
     
     private JButton logOutBtn;
     private MainFrame mainPage;
-    private UserRepository userController;
+    private SecretaryController controller;
     private DefaultTableModel model;
     
     public SecretaryPanel(MainFrame main){
@@ -105,9 +105,9 @@ public class SecretaryPanel extends JPanel{
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
         
-        userController = new UserRepository();
+        controller = new SecretaryController();
         
-        List<User> listaUsuarios = userController.listAllUsers();
+        List<User> listaUsuarios = controller.listAllUsers();
         
         for(User u : listaUsuarios){
             String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail().getEmail(), u.getphoneNumber().toString()};
@@ -141,8 +141,10 @@ public class SecretaryPanel extends JPanel{
         
         btnExcluir.addActionListener(new ActionListener() {
         @Override
-            public void actionPerformed(ActionEvent evt){
-                model.removeRow(tabela.getSelectedRow());
+            public void actionPerformed(ActionEvent evt) {
+                String cpf = tabela.getValueAt(tabela.getSelectedRow(), 1).toString();
+                controller.removeByCPF(cpf);
+                model.removeRow(tabela.getSelectedRow());     
             }
             });
         

@@ -36,7 +36,7 @@ public class MedicRepository implements Repository<Medic> {
         List<Medic> medics = listAll();
 
         for(Medic m : medics) {
-            if(m.getId() == medic.getId()) {
+            if(m.getId().equals(medic.getId())) {
                 medics.remove(m);
                 break;
             }
