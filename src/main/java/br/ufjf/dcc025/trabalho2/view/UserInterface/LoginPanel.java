@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 
 import br.ufjf.dcc025.trabalho2.controller.LoginController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidLoginException;
+import br.ufjf.dcc025.trabalho2.model.users.Profile;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class LoginPanel extends JPanel {
     
@@ -93,7 +95,22 @@ public class LoginPanel extends JPanel {
         else
         {
             try {
-                new LoginController().login(campoUser.getText(), senhaUser.getText());
+                User user = new LoginController().login(campoUser.getText(), senhaUser.getText());
+                switch (user.getProfile()) {
+                    case Profile.SECRETARIO -> {
+                        this.mainFrame.changeScreen("secretary");
+                    }
+                    case Profile.MEDICO -> {
+                        this.mainFrame.changeScreen("medic");
+                    }
+                    case Profile.PACIENTE -> {
+                        this.mainFrame.changeScreen("patient");
+                        break;
+                    }
+                    default -> {
+                        break;
+                    }
+                }
                 this.mainFrame.changeScreen("secretary");
             } 
             catch (InvalidLoginException e) {

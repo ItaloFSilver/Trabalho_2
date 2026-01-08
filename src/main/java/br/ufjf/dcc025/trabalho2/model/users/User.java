@@ -9,6 +9,7 @@ import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 
 public class User {
     
+    protected Profile profile;
     protected UUID id = UUID.randomUUID();
     protected String name;
     protected Email email;
@@ -60,5 +61,9 @@ public class User {
 
     public PhoneNumber getphoneNumber() {
         return this.phoneNumber;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
     }
 }

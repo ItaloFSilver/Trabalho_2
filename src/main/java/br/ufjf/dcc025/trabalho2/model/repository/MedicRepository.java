@@ -33,6 +33,22 @@ public class MedicRepository implements Repository<Medic> {
 
     @Override
     public void remove(Medic medic) {
+        List<Medic> medics = listAll();
+
+        for(Medic m : medics) {
+            if(m.getId() == medic.getId()) {
+                medics.remove(m);
+                break;
+            }
+        }
+        File file = new File(path);
+        
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(medics, writer);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
