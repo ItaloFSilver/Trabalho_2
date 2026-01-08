@@ -14,27 +14,27 @@ public class User {
     protected Email email;
     protected CPF cpf;
     protected Password password;
-    protected PhoneNumber telefone;
+    protected PhoneNumber phoneNumber;
 
     /**
     * @throws InvalidEmailException se o email for invalido
     * @throws InvalidCPFException se o CPF for invalido
-    * @throws InvalidTelefoneException se o telefone for invalido
+    * @throws InvalidphoneNumberException se o phoneNumber for invalido
     * @throws InvalidPasswordException se a senha for invalida
     */
-    public User(String name, String email, String cpf, String telefone, String password) {
+    public User(String name, String email, String cpf, String phoneNumber, String password) {
         this.name = name;
         this.email = new Email(email);
         this.cpf = new CPF(cpf);
-        this.telefone = new PhoneNumber(telefone);
+        this.phoneNumber = new PhoneNumber(phoneNumber);
         this.password = new Password(password);
     }
 
-    public User(String name, Email email, CPF cpf, PhoneNumber telefone, Password password) {
+    public User(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
-        this.telefone = telefone;
+        this.phoneNumber = phoneNumber;
         this.password = password;
     }
 
@@ -58,7 +58,7 @@ public class User {
         return this.cpf;
     }
 
-    public PhoneNumber getTelefone() {
-        return this.telefone;
+    public PhoneNumber getphoneNumber() {
+        return this.phoneNumber;
     }
 }

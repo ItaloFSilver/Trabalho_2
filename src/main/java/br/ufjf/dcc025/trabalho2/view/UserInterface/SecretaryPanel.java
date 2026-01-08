@@ -81,7 +81,7 @@ public class SecretaryPanel extends JPanel{
         JPanel painel = new JPanel(new BorderLayout());
 
        
-        String[] colunas = { "Nome", "Documento", "Tipo", "Email", "Telefone"};
+        String[] colunas = { "Nome", "Documento", "Tipo", "Email", "phoneNumber"};
         Object[][] dados = {
             { "Ana Costa", "", "Paciente", "ana@email.com", "(11) 99999-0000"},
             {"Dr. House", "", "Médico", "house@hospital.com", "(11) 98888-1111"},
