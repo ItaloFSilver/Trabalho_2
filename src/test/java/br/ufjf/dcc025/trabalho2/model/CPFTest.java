@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidCPFException;
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import ufjf.dcc025.trabalho2.Error.InvalidCPFException;
 
 public class CPFTest {
     
     @Test
     @DisplayName("Deve criar um CPF válido sem lançar exceções")
     void shouldNotThrowWhenCreatingValidCPF() {
-        String validCPF = "11111111111";
+        String validCPF = "168.698.416-24";
         assertDoesNotThrow(() -> new CPF(validCPF));
     }
 

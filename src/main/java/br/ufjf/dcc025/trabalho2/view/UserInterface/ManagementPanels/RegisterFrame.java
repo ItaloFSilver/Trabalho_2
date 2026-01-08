@@ -1,6 +1,7 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class RegisterFrame extends JFrame {
     private static JPanel Credentials;

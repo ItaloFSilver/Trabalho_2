@@ -135,8 +135,8 @@ public class SecretaryPanel extends JPanel{
 
     
     private void abrirJanelaCadastro() {
+
         RegisterFrame dialog = new RegisterFrame();
-        
         dialog.pack(); 
         dialog.setLocationRelativeTo(null); 
         dialog.setSize(640, 480);

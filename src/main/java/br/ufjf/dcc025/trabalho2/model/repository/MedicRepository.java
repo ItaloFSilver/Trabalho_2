@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
 
 public class MedicRepository implements Repository<Medic> {
     private final String path = dirPath + File.separator + "usersData" + File.separator + "medicData.json"; 

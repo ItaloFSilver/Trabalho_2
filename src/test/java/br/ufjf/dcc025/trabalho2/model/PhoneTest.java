@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.ufjf.dcc025.trabalho2.model.Credentials.Telefone;
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidTelefoneException;
+import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidTelefoneException;
 
 public class PhoneTest {
     
@@ -16,14 +16,14 @@ public class PhoneTest {
     @DisplayName("Deve criar um Telefone válido sem lançar exceções")
     void shouldNotThrowWhenCreatingValidTelefone() {
         String validPhone = "32999239026";
-        assertDoesNotThrow(() -> new Telefone(validPhone));
+        assertDoesNotThrow(() -> new PhoneNumber(validPhone));
     }
 
     @Test
     @DisplayName("Deve lançar exceção ao criar um CPF inválido")
     void shouldThrowWhenCreatingInvalidTelefone() {
         String invalidPhone = "12ATELEFONE0";
-        InvalidTelefoneException e = assertThrows(InvalidTelefoneException.class, () -> {new Telefone(invalidPhone);});
+        InvalidTelefoneException e = assertThrows(InvalidTelefoneException.class, () -> {new PhoneNumber(invalidPhone);});
         assertEquals("Telefone invalido", e.getMessage());
     }
 

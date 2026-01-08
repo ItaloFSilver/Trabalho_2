@@ -3,7 +3,7 @@ package br.ufjf.dcc025.trabalho2.model.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufjf.dcc025.trabalho2.model.Users.User;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class UserRepository {
 

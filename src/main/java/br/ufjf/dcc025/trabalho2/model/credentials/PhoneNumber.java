@@ -1,14 +1,16 @@
-package br.ufjf.dcc025.trabalho2.model.Credentials;
+package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidTelefoneException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidTelefoneException;
 
-public class Telefone {
+public class PhoneNumber {
 
     private final String telefone;
 
-    private static final String regex = "^(\\(?\\d{2}\\)?\\s?)?9\\d{4}-?\\d{4}$";
+    private static transient final String regex = "^(\\(?\\d{2}\\)?\\s?)?9\\d{4}-?\\d{4}$";
 
-    public Telefone(String telefone) throws InvalidTelefoneException{
+    public PhoneNumber(String telefone) throws InvalidTelefoneException {
+        telefone = this.normalize(telefone);
+
         if(!validateTelefone(telefone)) {
             throw new InvalidTelefoneException("Telefone invalido");
         }
@@ -17,6 +19,10 @@ public class Telefone {
 
     private boolean validateTelefone(String telefone) {
         return telefone.matches(regex);
+    }
+
+    private String normalize(String telefone) {
+        return telefone.replaceAll("[^0-9]", ""); // Remove tudo que não for número
     }
 
     @Override

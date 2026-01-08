@@ -7,8 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import br.ufjf.dcc025.trabalho2.controller.RegisterController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 
 
 public class RegisterPanel extends JPanel{
@@ -18,22 +30,29 @@ public class RegisterPanel extends JPanel{
     private JTextField txtEspecializacao;
     private JFormattedTextField campoCPF;
     private JFormattedTextField campoTelefone;
-    private RegisterFrame frame;
+    private JTextField campoNome;
+    private JTextField campoEmail;
+    private JPasswordField campoSenha;
+    private RegisterFrame mainPage;
     
     public RegisterPanel(RegisterFrame main) {
-        this.frame = main;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); 
+        this.mainPage = main;
 
+
+        campoNome = new JTextField(20);
+        campoEmail = new JTextField(20);
+        campoSenha = new JPasswordField(20);
         campoTelefone = criarCampoFormatado("(##)#####-####");
         campoCPF = criarCampoFormatado("###.###.###-##");
         
-        adicionarCampo("Nome Completo:", new JTextField(20), 0, gbc);
-        adicionarCampo("Email:", new JTextField(20), 1, gbc);
+        adicionarCampo("Nome Completo:", campoNome, 0, gbc);
+        adicionarCampo("Email:", campoEmail, 1, gbc);
         adicionarCampo("Telefone:", campoTelefone, 2, gbc); 
         adicionarCampo("CPF:", campoCPF, 3, gbc);     
-        adicionarCampo("Senha:", new JPasswordField(20), 4, gbc);
+        adicionarCampo("Senha:", campoSenha, 4, gbc);
 
         
         JLabel lblTipo = new JLabel("Tipo de Usuário:");
@@ -95,6 +114,27 @@ public class RegisterPanel extends JPanel{
         gbc.gridwidth = 2; // Ocupa a largura toda
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 5, 5, 5); // Mais espaço acima do botão
+
+        btnCadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    new RegisterController().registerUser(
+                        campoNome.getText(),
+                        campoEmail.getText(),
+                        campoCPF.getText(),
+                        campoTelefone.getText(),
+                        new String(campoSenha.getPassword()),
+                        (String) cbTipoUsuario.getSelectedItem()
+                    );
+                } catch (InvalidRegisterException e) {
+                    JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage() + (String) cbTipoUsuario.getSelectedItem(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                mainPage.setVisible(false);
+            }
+        });
         add(btnCadastrar, gbc);
         
         
@@ -102,7 +142,7 @@ public class RegisterPanel extends JPanel{
     }
 
     private void hideWindow(){
-        this.frame.setVisible(false);
+        this.mainPage.setVisible(false);
     }
     
     private void adicionarCampo(String rotulo, Component campo, int linha, GridBagConstraints gbc) {

@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Secretary;
+import br.ufjf.dcc025.trabalho2.model.users.Secretary;
 
 public class SecretaryRepository implements Repository<Secretary> {
 

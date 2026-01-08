@@ -1,11 +1,11 @@
-package br.ufjf.dcc025.trabalho2.model;
+package br.ufjf.dcc025.trabalho2.model.services;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
-import br.ufjf.dcc025.trabalho2.model.Users.Medic;
-import br.ufjf.dcc025.trabalho2.model.Users.Patient;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class Appointment {
    
@@ -19,5 +19,13 @@ public class Appointment {
         this.patientID = patient.getId();
         this.date = date;
         this.time = time;
+    }
+
+    public UUID getMedicId() {
+        return this.medicID;
+    }
+
+    public UUID getPatientId() {
+        return this.patientID;
     }
 }

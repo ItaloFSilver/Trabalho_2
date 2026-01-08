@@ -1,14 +1,15 @@
-package br.ufjf.dcc025.trabalho2.model.Credentials;
+package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidCPFException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
 
 public class CPF {
 
     private final String cpf;
-
-    private final String regex = "^(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})$";
+    private final static transient String regex = "^(\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2})$";
 
     public CPF(String cpf) throws InvalidCPFException{
+        cpf = this.normalize(cpf);
+
         if(!validateCPF(cpf)) {
             throw new InvalidCPFException("CPF invalido");
         }
@@ -39,7 +40,7 @@ public class CPF {
                (secondSum * 10) % 11 == Character.getNumericValue(cpf.charAt(10));
     }
 
-    boolean validateCPF(String cpf) throws InvalidCPFException {
+    boolean validateCPF(String cpf) {
         if(cpf.matches(regex)) {
             return validateCPFMathematicaly(cpf);
         }
@@ -48,6 +49,10 @@ public class CPF {
 
     private String getCPF() {
         return cpf;
+    }
+
+    public String normalize(String cpf) {
+        return cpf.replaceAll("[^0-9]", ""); // Remove tudo que não for número
     }
 
     @Override

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "c6f9f43a-8380-4808-b516-dbd5fc72b51d",
+    "name": "Arthur",
+    "email": {
+      "email": "arthur@email.com"
+    },
+    "cpf": {
+      "cpf": "22222222222"
+    },
+    "password": {
+      "password": "senhasenha"
+    },
+    "telefone": {
+      "telefone": "32987026493"
+    }
+  }
+]

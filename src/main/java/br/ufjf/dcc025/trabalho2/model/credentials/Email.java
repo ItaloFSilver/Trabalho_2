@@ -1,12 +1,12 @@
-package br.ufjf.dcc025.trabalho2.model.Credentials;
+package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.Error.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
 
 public class Email {
 
     private final String email;
     
-    private final String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private final static transient String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     public Email(String email) throws InvalidEmailException {
         if(!validateEmail(email)) {
