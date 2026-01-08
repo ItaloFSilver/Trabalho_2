@@ -17,17 +17,17 @@ import br.ufjf.dcc025.trabalho2.model.users.Secretary;
 
 public class RegisterController {
     
-    public void registerUser(String name, String email, String cpf, String telefone, String password, String userType) throws InvalidRegisterException {
+    public void registerUser(String name, String email, String cpf, String phoneNumber, String password, String userType) throws InvalidRegisterException {
 
         Email emailObj;
         CPF cpfObj;
-        PhoneNumber telefoneObj;
+        PhoneNumber phoneNumberObj;
         Password passwordObj;
 
         try {
             emailObj = new Email(email);
             cpfObj = new CPF(cpf);
-            telefoneObj = new PhoneNumber(telefone);
+            phoneNumberObj = new PhoneNumber(phoneNumber);
             passwordObj = new Password(password);
         } 
         catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException e) {
@@ -36,15 +36,15 @@ public class RegisterController {
 
         switch (userType) {
             case "Paciente" -> {
-                Patient patient = new Patient(name, emailObj, cpfObj, telefoneObj, passwordObj);
+                Patient patient = new Patient(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
                 new PatientRepository().save(patient);
             }
             case "Médico" -> {
-                Medic medic = new Medic(name, emailObj, cpfObj, telefoneObj, passwordObj);
+                Medic medic = new Medic(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
                 new MedicRepository().save(medic);
             }
             case "Secretário" -> {
-                Secretary secretary = new Secretary(name, emailObj, cpfObj, telefoneObj, passwordObj);
+                Secretary secretary = new Secretary(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
                 new SecretaryRepository().save(secretary);
             }
             default -> throw new InvalidRegisterException("Tipo de usuário inválido.");

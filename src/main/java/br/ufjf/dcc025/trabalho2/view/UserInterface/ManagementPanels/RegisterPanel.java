@@ -29,7 +29,7 @@ public class RegisterPanel extends JPanel{
     private JLabel lblEspecializacao;
     private JTextField txtEspecializacao;
     private JFormattedTextField campoCPF;
-    private JFormattedTextField campoTelefone;
+    private JFormattedTextField campophoneNumber;
     private JTextField campoNome;
     private JTextField campoEmail;
     private JPasswordField campoSenha;
@@ -45,12 +45,12 @@ public class RegisterPanel extends JPanel{
         campoNome = new JTextField(20);
         campoEmail = new JTextField(20);
         campoSenha = new JPasswordField(20);
-        campoTelefone = criarCampoFormatado("(##)#####-####");
+        campophoneNumber = criarCampoFormatado("(##)#####-####");
         campoCPF = criarCampoFormatado("###.###.###-##");
         
         adicionarCampo("Nome Completo:", campoNome, 0, gbc);
         adicionarCampo("Email:", campoEmail, 1, gbc);
-        adicionarCampo("Telefone:", campoTelefone, 2, gbc); 
+        adicionarCampo("phoneNumber:", campophoneNumber, 2, gbc); 
         adicionarCampo("CPF:", campoCPF, 3, gbc);     
         adicionarCampo("Senha:", campoSenha, 4, gbc);
 
@@ -123,7 +123,7 @@ public class RegisterPanel extends JPanel{
                         campoNome.getText(),
                         campoEmail.getText(),
                         campoCPF.getText(),
-                        campoTelefone.getText(),
+                        campophoneNumber.getText(),
                         new String(campoSenha.getPassword()),
                         (String) cbTipoUsuario.getSelectedItem()
                     );
