@@ -111,9 +111,9 @@ public class RegisterPanel extends JPanel{
         JFormattedTextField campo = null;
         try {
             MaskFormatter format = new MaskFormatter(mascara);
-            format.setPlaceholderCharacter('_'); // Mostra ___.___ para guiar o usuário
+            format.setPlaceholderCharacter('_'); 
             campo = new JFormattedTextField(format);
-            campo.setColumns(20); // Tamanho visual do campo
+            campo.setColumns(20);
         }catch (Exception e) {
             e.printStackTrace();
         }
