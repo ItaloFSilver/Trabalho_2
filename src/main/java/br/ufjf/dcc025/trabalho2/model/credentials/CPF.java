@@ -1,6 +1,6 @@
 package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.error.InvalidCPFException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
 
 public class CPF {
 

@@ -5,7 +5,7 @@ import java.util.UUID;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.credentials.Telefone;
+import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 
 public class User {
     
@@ -14,7 +14,7 @@ public class User {
     protected Email email;
     protected CPF cpf;
     protected Password password;
-    protected Telefone telefone;
+    protected PhoneNumber telefone;
 
     /**
     * @throws InvalidEmailException se o email for invalido
@@ -26,16 +26,16 @@ public class User {
         this.name = name;
         this.email = new Email(email);
         this.cpf = new CPF(cpf);
-        this.telefone = new Telefone(telefone);
+        this.telefone = new PhoneNumber(telefone);
         this.password = new Password(password);
     }
 
-    public User(String nameString, Email emailObj, CPF cpfObj, Telefone telefoneObj, Password passwordObj) {
-        this.name = nameString;
-        this.email = emailObj;
-        this.cpf = cpfObj;
-        this.telefone = telefoneObj;
-        this.password = passwordObj;
+    public User(String name, Email email, CPF cpf, PhoneNumber telefone, Password password) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.password = password;
     }
 
     public UUID getId() {
@@ -58,7 +58,7 @@ public class User {
         return this.cpf;
     }
 
-    public Telefone getTelefone() {
+    public PhoneNumber getTelefone() {
         return this.telefone;
     }
 }

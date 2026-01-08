@@ -3,7 +3,7 @@ package br.ufjf.dcc025.trabalho2.model.users;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.credentials.Telefone;
+import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 
 public class Secretary extends User {
 
@@ -11,7 +11,7 @@ public class Secretary extends User {
         super(name, email, cpf, telefone, password);
     } 
 
-    public Secretary(String name, Email email, CPF cpf, Telefone telefone, Password password) {
+    public Secretary(String name, Email email, CPF cpf, PhoneNumber telefone, Password password) {
         super(name, email, cpf, telefone, password);
     }
 }

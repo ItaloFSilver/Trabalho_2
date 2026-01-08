@@ -13,7 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import br.ufjf.dcc025.trabalho2.controller.LoginController;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidLoginException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidLoginException;
 
 public class LoginPanel extends JPanel {
     

@@ -3,11 +3,11 @@ package br.ufjf.dcc025.trabalho2.controller;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.credentials.Telefone;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidCPFException;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidEmailException;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidPasswordException;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidRegisterException;
+import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.PatientRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.SecretaryRepository;
@@ -21,13 +21,13 @@ public class RegisterController {
 
         Email emailObj;
         CPF cpfObj;
-        Telefone telefoneObj;
+        PhoneNumber telefoneObj;
         Password passwordObj;
 
         try {
             emailObj = new Email(email);
             cpfObj = new CPF(cpf);
-            telefoneObj = new Telefone(telefone);
+            telefoneObj = new PhoneNumber(telefone);
             passwordObj = new Password(password);
         } 
         catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException e) {

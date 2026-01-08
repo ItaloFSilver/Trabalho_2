@@ -1,6 +1,6 @@
 package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.error.InvalidPasswordException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
 
 public class Password {
     private final String password;

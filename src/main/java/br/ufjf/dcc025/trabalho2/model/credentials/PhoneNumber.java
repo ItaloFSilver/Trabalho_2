@@ -1,14 +1,14 @@
 package br.ufjf.dcc025.trabalho2.model.credentials;
 
-import br.ufjf.dcc025.trabalho2.model.error.InvalidTelefoneException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidTelefoneException;
 
-public class Telefone {
+public class PhoneNumber {
 
     private final String telefone;
 
     private static transient final String regex = "^(\\(?\\d{2}\\)?\\s?)?9\\d{4}-?\\d{4}$";
 
-    public Telefone(String telefone) throws InvalidTelefoneException {
+    public PhoneNumber(String telefone) throws InvalidTelefoneException {
         telefone = this.normalize(telefone);
 
         if(!validateTelefone(telefone)) {

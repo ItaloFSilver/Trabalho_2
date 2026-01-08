@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidRegisterException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 
 
 public class RegisterPanel extends JPanel{

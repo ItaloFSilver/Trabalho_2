@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidEmailException;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidLoginException;
-import br.ufjf.dcc025.trabalho2.model.error.InvalidPasswordException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidLoginException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
