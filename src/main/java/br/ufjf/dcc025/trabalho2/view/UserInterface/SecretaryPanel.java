@@ -1,5 +1,7 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
+import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +12,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +20,8 @@ public class SecretaryPanel extends JPanel{
     
     private JButton logOutBtn;
     private MainFrame mainPage;
+    private UserRepository userController;
+    private DefaultTableModel model;
     
     public SecretaryPanel(MainFrame main){
         this.mainPage = main;
@@ -80,15 +85,9 @@ public class SecretaryPanel extends JPanel{
     private JPanel criarTabUsuarios() {
         JPanel painel = new JPanel(new BorderLayout());
 
-       
         String[] colunas = { "Nome", "Documento", "Tipo", "Email", "phoneNumber"};
-        Object[][] dados = {
-            { "Ana Costa", "", "Paciente", "ana@email.com", "(11) 99999-0000"},
-            {"Dr. House", "", "Médico", "house@hospital.com", "(11) 98888-1111"},
-            {"Julia Roberts", "", "Recepcionista", "julia@clinica.com", "(11) 97777-2222"}
-        };
 
-        DefaultTableModel model = new DefaultTableModel(dados, colunas) {
+        model = new DefaultTableModel(colunas,0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -99,7 +98,16 @@ public class SecretaryPanel extends JPanel{
         
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
-
+        
+        userController = new UserRepository();
+        
+        List<User> listaUsuarios = userController.getAllUsers();
+        
+        for(User u : listaUsuarios){
+            String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail().getEmail(), u.getphoneNumber().toString()};
+            model.addRow(data);
+        }
+        
         JPanel pnlBotoes = new JPanel();
         JButton btnNovo = new JButton("Cadastrar Novo Usuário");
         JButton btnEditar = new JButton("Editar Selecionado");
@@ -110,6 +118,7 @@ public class SecretaryPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 abrirJanelaCadastro();
+                
             }
         });
         btnEditar.addActionListener(new ActionListener() {
@@ -124,6 +133,13 @@ public class SecretaryPanel extends JPanel{
             }
         });
         
+        btnExcluir.addActionListener(new ActionListener() {
+        @Override
+            public void actionPerformed(ActionEvent evt){
+                model.removeRow(tabela.getSelectedRow());
+            }
+            });
+        
         pnlBotoes.add(btnNovo);
         pnlBotoes.add(btnEditar);
         pnlBotoes.add(btnExcluir);
@@ -135,8 +151,8 @@ public class SecretaryPanel extends JPanel{
 
     
     private void abrirJanelaCadastro() {
-        JFrame dialog = new RegisterFrame();
-        
+
+        RegisterFrame dialog = new RegisterFrame(model);
         dialog.pack(); 
         dialog.setLocationRelativeTo(null); 
         dialog.setSize(640, 480);

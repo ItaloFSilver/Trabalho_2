@@ -1,18 +1,34 @@
 [
   {
-    "id": "c6f9f43a-8380-4808-b516-dbd5fc72b51d",
-    "name": "Arthur",
+    "id": "02cd2fe1-43f2-4b44-804f-13dcb5952785",
+    "name": "Italo Fagundes SIlverio",
+    "email": {
+      "email": "fagundes.italo@estudante.ufjf.br"
+    },
+    "cpf": {
+      "cpf": "02355209693"
+    },
+    "password": {
+      "password": "minhasenha"
+    },
+    "phoneNumber": {
+      "phoneNumber": "32999239026"
+    }
+  },
+  {
+    "id": "d2e5e66c-33eb-4558-91bb-e3cabe6f652f",
+    "name": "Arthur de Souza Marques",
     "email": {
       "email": "arthur@email.com"
     },
     "cpf": {
-      "cpf": "22222222222"
+      "cpf": "11111111111"
     },
     "password": {
-      "password": "senhasenha"
+      "password": "senhasecreta"
     },
     "phoneNumber": {
-      "phoneNumber": "32987026493"
+      "phoneNumber": "32999999999"
     }
   },
   {

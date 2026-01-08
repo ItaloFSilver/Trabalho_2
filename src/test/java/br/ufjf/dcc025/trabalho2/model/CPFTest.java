@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
+import ufjf.dcc025.trabalho2.Error.InvalidCPFException;
 
 public class CPFTest {
     

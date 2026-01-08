@@ -21,6 +21,7 @@ import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
+import javax.swing.table.DefaultTableModel;
 
 
 public class RegisterPanel extends JPanel{
@@ -33,14 +34,15 @@ public class RegisterPanel extends JPanel{
     private JTextField campoNome;
     private JTextField campoEmail;
     private JPasswordField campoSenha;
-    private RegisterFrame mainPage;
+    private RegisterFrame regPage;
+    private DefaultTableModel main;
     
-    public RegisterPanel(RegisterFrame main) {
+    public RegisterPanel(RegisterFrame main, DefaultTableModel model) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); 
-        this.mainPage = main;
-
+        this.regPage = main;
+        this.main = model;
 
         campoNome = new JTextField(20);
         campoEmail = new JTextField(20);
@@ -87,13 +89,11 @@ public class RegisterPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 String selecionado = (String) cbTipoUsuario.getSelectedItem();
                 
-                // Se for "Médico", mostra os campos. Senão, esconde.
                 boolean isMedico = "Médico".equals(selecionado);
                 
                 lblEspecializacao.setVisible(isMedico);
                 txtEspecializacao.setVisible(isMedico);
 
-                // Revalida o layout para ajustar os espaços
                 revalidate();
                 repaint();
             }
@@ -102,6 +102,7 @@ public class RegisterPanel extends JPanel{
         
         JButton btnCadastrar = new JButton("Cadastrar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));
+         
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 2; // Ocupa a largura toda
@@ -120,12 +121,14 @@ public class RegisterPanel extends JPanel{
                         new String(campoSenha.getPassword()),
                         (String) cbTipoUsuario.getSelectedItem()
                     );
+                    String [] data = {campoNome.getText(),campoCPF.getText(),"", campoEmail.getText(),campophoneNumber.getText()};
+                    model.addRow(data);
                 } catch (InvalidRegisterException e) {
-                    JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage() + (String) cbTipoUsuario.getSelectedItem(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-                mainPage.setVisible(false);
+                regPage.setVisible(false);
             }
         });
         add(btnCadastrar, gbc);
@@ -162,3 +165,4 @@ public class RegisterPanel extends JPanel{
         return campo;
     }
 }
+
