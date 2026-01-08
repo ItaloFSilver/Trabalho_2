@@ -1,20 +1,26 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
-import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
-import br.ufjf.dcc025.trabalho2.model.users.User;
-import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.model.users.User;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 
 public class SecretaryPanel extends JPanel{
     
@@ -101,7 +107,7 @@ public class SecretaryPanel extends JPanel{
         
         userController = new UserRepository();
         
-        List<User> listaUsuarios = userController.getAllUsers();
+        List<User> listaUsuarios = userController.listAllUsers();
         
         for(User u : listaUsuarios){
             String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail().getEmail(), u.getphoneNumber().toString()};

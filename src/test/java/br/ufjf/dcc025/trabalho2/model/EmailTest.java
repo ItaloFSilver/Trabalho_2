@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
-import ufjf.dcc025.trabalho2.Error.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
 
 public class EmailTest {
     
