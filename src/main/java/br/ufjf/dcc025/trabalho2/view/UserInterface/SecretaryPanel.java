@@ -88,12 +88,18 @@ public class SecretaryPanel extends JPanel{
             {"Julia Roberts", "", "Recepcionista", "julia@clinica.com", "(11) 97777-2222"}
         };
 
-        DefaultTableModel model = new DefaultTableModel(dados, colunas);
+        DefaultTableModel model = new DefaultTableModel(dados, colunas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable tabela = new JTable(model);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
 
-        
         JPanel pnlBotoes = new JPanel();
         JButton btnNovo = new JButton("Cadastrar Novo Usuário");
         JButton btnEditar = new JButton("Editar Selecionado");
@@ -106,7 +112,18 @@ public class SecretaryPanel extends JPanel{
                 abrirJanelaCadastro();
             }
         });
-
+        btnEditar.addActionListener(new ActionListener() {
+        @Override
+            public void actionPerformed(ActionEvent e) {
+                int linha = tabela.getSelectedRow();
+                if (linha != -1) {
+                    String nome = tabela.getValueAt(linha, 0).toString();
+                    JOptionPane.showMessageDialog(null, "Editar: " + nome);
+                // Lógica de abrir janela aqui...
+                }
+            }
+        });
+        
         pnlBotoes.add(btnNovo);
         pnlBotoes.add(btnEditar);
         pnlBotoes.add(btnExcluir);
