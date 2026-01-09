@@ -6,6 +6,8 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.PatientRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class SecretaryController {

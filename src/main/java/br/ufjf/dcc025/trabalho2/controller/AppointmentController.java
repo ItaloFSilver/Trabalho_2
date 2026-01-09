@@ -2,6 +2,7 @@ package br.ufjf.dcc025.trabalho2.controller;
 
 import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import java.util.List;
 
 public class AppointmentController {
     
@@ -11,5 +12,9 @@ public class AppointmentController {
 
     public void removeAppointment(Appointment appointment) {
         new AppointmentRepository().remove(appointment);
+    }
+
+    public List<Appointment> listAll(){
+        return new AppointmentRepository().listAll();
     }
 }

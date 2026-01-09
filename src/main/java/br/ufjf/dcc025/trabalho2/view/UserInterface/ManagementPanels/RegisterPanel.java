@@ -129,8 +129,6 @@ public class RegisterPanel extends JPanel{
                         removePerIndex(index, model, campoCPF.getText());
                     model.addRow(data);
                     
-                       
-                    
                 } catch (InvalidRegisterException e) {
                     JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -185,9 +183,9 @@ public class RegisterPanel extends JPanel{
     public void removePerIndex(int index, DefaultTableModel model, String c){
         if(index >= 0) {
             model.removeRow(index);
+            SecretaryController nova = new SecretaryController();
+            nova.removeUserByCPF(c);
         }
-        SecretaryController nova = new SecretaryController();
-        nova.removeUserByCPF(c);
     }
 }
 

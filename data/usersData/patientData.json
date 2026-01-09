@@ -1,26 +1,8 @@
 [
   {
     "profile": "PACIENTE",
-    "id": "2f63f504-835e-4569-a46c-41e1f2e52407",
-    "name": "Arthur",
-    "email": {
-      "email": "arthur@email.com"
-    },
-    "cpf": {
-      "cpf": "222.222.222-22"
-    },
-    "password": {
-      "password": "senhasenha"
-    },
-    "phoneNumber": {
-      "phoneNumber": "(32)92323-2324"
-    }
-  },
-  {
-    "profile": "PACIENTE",
-    "id": "21bdaf3a-8c95-42de-9ad1-43930b242ae2",
-    "name": "Bersan",
-
+    "id": "4708f0bb-bcb1-4786-b6c2-05543efe9d44",
+    "name": "Italo",
     "email": {
       "email": "email@email.com"
     },
@@ -32,23 +14,6 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)91111-1111"
-    }
-  },
-  {
-    "profile": "PACIENTE",
-    "id": "c3ff9ef5-e5d4-49ea-9e95-7e6117e2cdde",
-    "name": "BBBBBBBBBBBBBBBBBB",
-    "email": {
-      "email": "arthur@email.com"
-    },
-    "cpf": {
-      "cpf": "222.222.222-22"
-    },
-    "password": {
-      "password": "senhasenha"
-    },
-    "phoneNumber": {
-      "phoneNumber": "(32)92323-2324"
     }
   }
 ]

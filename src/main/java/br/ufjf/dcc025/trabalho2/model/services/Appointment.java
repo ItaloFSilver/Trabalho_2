@@ -1,34 +1,54 @@
 package br.ufjf.dcc025.trabalho2.model.services;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class Appointment {
    
-    private CPF medicCPF;
-    private CPF patientCPF;
-    private Date date;
+    private final CPF medicCPF;
+    private final CPF patientCPF;
+    private final Date date;
+    private final String patientName;
+    private final String medicName;
+    private boolean Confirmed;
 
-    public Appointment(Medic medic, Patient patient, LocalDate date) {
+    public Appointment(User medic, User patient, Date date, boolean check) {
         this.medicCPF = medic.getCPF();
         this.patientCPF = patient.getCPF();
-        this.date = Date.valueOf(date);
+        this.date = date;
+        this.medicName = medic.getName();
+        this.patientName = patient.getName();
+        this.Confirmed = check;
     }
 
+    public String getMedicName(){
+        return this.medicName;
+    }
+    
     public CPF getMedicCPF() {
         return this.medicCPF;
     }
-
+    
+    public String getPatientName(){
+        return this.patientName;
+    }
     public CPF getPatientCPF() {
         return this.patientCPF;
     }
     
     public String getDate(){
         return date.toString();
+    }
+    
+    public String getCheck(){
+        if(Confirmed)
+            return "Confirmada";
+        return "Aguardando Confirmação";
     }
     
     @Override

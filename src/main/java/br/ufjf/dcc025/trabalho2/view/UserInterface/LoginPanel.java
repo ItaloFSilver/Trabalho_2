@@ -22,10 +22,12 @@ public class LoginPanel extends JPanel {
     private static JTextField campoUser;
     private static JPasswordField senhaUser;
     private static JButton enterBtn;
+    private static JButton exitBtn;
     private static JLabel userLabel;
     private static JLabel passwordLabel;
     private static JLabel invalidCredLbl;
     private MainFrame mainFrame;
+    
     
     public LoginPanel(MainFrame main){
         
@@ -63,11 +65,20 @@ public class LoginPanel extends JPanel {
         enterBtn = new JButton("Entrar");
         enterBtn.addActionListener(this::enterBtnActionPerformed);
         enterBtn.setPreferredSize(new Dimension(100, 30));
-        centralizator.gridx = 0;
+        centralizator.gridx = 1;
         centralizator.gridy = 3;
         centralizator.gridwidth = 2;
         centralizator.anchor = GridBagConstraints.CENTER;
         add(enterBtn, centralizator);
+        
+        exitBtn = new JButton("Sair");
+        exitBtn.addActionListener(this::exitBtnActionPerformed);
+        exitBtn.setPreferredSize(new Dimension(60, 30));
+        centralizator.gridx = 1;
+        centralizator.gridy = 5;
+        centralizator.gridwidth = 2;
+        centralizator.anchor = GridBagConstraints.CENTER;
+        add(exitBtn, centralizator);
         
         invalidCredLbl = new JLabel("*Usuário e/ou senha inválido!");
         centralizator.gridx = 0;
@@ -121,6 +132,10 @@ public class LoginPanel extends JPanel {
             limpaCampo(campoUser);
             limpaCampo(senhaUser);
         }
+    }
+    
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt){
+        System.exit(0);
     }
 }
 

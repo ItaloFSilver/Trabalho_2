@@ -1,5 +1,6 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
+import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -19,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
+import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointPanel;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
@@ -64,32 +66,49 @@ public class SecretaryPanel extends JPanel{
 
     
     private JPanel criarTabAgenda() {
+        
         JPanel painel = new JPanel(new BorderLayout());
         JButton appointAddBtn = new JButton("Novo Agendamento");
+        JButton deleteBtn = new JButton("Desmarcar Consulta");
+        AppointmentController controller = new AppointmentController();
+        List<Appointment> agenda = controller.listAll();
         
-        String[] colunas = {"Data", "Hora", "Paciente", "Médico", "Status"};
+        String[] colunas = {"Data", "Paciente", "Médico", "Status"};
         
         DefaultTableModel appoint = new DefaultTableModel(colunas, 0);
         JTable tabela = new JTable(appoint);
         
+        for(Appointment a : agenda){
+            String [] data = {a.getDate(), a.getPatientName(), a.getMedicName(), a.getCheck()};
+            appoint.addRow(data);
+        }
+        
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
-
+        
         
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         toolbar.add(appointAddBtn);
-        toolbar.add(new JButton("Filtrar por Médico"));
+        toolbar.add(deleteBtn);
         painel.add(toolbar, BorderLayout.NORTH);
 
         appointAddBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame appointmentFrame = new JFrame();
-                appointmentFrame.add(new AppointPanel());
+                appointmentFrame.add(new AppointPanel(appoint,appointmentFrame));
                 
                 appointmentFrame.pack();
                 appointmentFrame.setLocationRelativeTo(null);
                 appointmentFrame.setVisible(true);
+            }
+        });
+        
+        deleteBtn.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                controller.removeAppointment(agenda.get(tabela.getSelectedRow()));
+                appoint.removeRow(tabela.getSelectedRow());
             }
         });
         
@@ -158,8 +177,6 @@ public class SecretaryPanel extends JPanel{
                     edit.setSize(640, 480);
                     edit.setVisible(true);
                     
-                    //model.removeRow(tabela.getSelectedRow());
-                    //controller.removeUserByCPF(user.getCPF().toString());
                 }
             }
         });
