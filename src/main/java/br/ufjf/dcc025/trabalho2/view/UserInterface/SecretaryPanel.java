@@ -147,14 +147,10 @@ public class SecretaryPanel extends JPanel{
                     JOptionPane.showMessageDialog(null, "Editar: " + nome);
                     
                     int line = tabela.getSelectedRow();
-                    int modelRow = tabela.convertRowIndexToModel(line);
-                    String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
+                    //int modelRow = tabela.convertRowIndexToModel(line);
+                    //String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
                     
                     User user = listaUsuarios.get(tabela.getSelectedRow());
-                    
-                    model.removeRow(tabela.getSelectedRow());
-                    controller.removeUserByCPF(cpf);
-                    
                     
                     RegisterFrame edit = new RegisterFrame(model);
                     RegisterPanel editar = new RegisterPanel(edit, model);
@@ -165,6 +161,9 @@ public class SecretaryPanel extends JPanel{
                     edit.setLocationRelativeTo(null);
                     edit.setSize(640, 480);
                     edit.setVisible(true);
+                    
+                    model.removeRow(tabela.getSelectedRow());
+                    controller.removeUserByCPF(user.getCPF().toString());
                 }
             }
         });
