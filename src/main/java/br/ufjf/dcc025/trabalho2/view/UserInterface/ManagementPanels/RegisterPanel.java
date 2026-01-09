@@ -126,7 +126,7 @@ public class RegisterPanel extends JPanel{
                         Profile.fromString((String) cbTipoUsuario.getSelectedItem())
                     );
                     String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
-                    if(index > 0)
+                    if(index >= 0)
                         removePerIndex(index, model, campoCPF.getText());
                     model.addRow(data);
                     

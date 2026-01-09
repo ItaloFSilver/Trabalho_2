@@ -1,23 +1,6 @@
 [
   {
     "profile": "PACIENTE",
-    "id": "68a58920-c57f-4088-a652-5c77bb5fa886",
-    "name": "Italo Fagundes",
-    "email": {
-      "email": "email@email.com"
-    },
-    "cpf": {
-      "cpf": "111.111.111-11"
-    },
-    "password": {
-      "password": "senhasenha"
-    },
-    "phoneNumber": {
-      "phoneNumber": "(32)91111-1111"
-    }
-  },
-  {
-    "profile": "PACIENTE",
     "id": "2f63f504-835e-4569-a46c-41e1f2e52407",
     "name": "Arthur",
     "email": {
@@ -31,6 +14,23 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)92323-2324"
+    }
+  },
+  {
+    "profile": "PACIENTE",
+    "id": "4eb4c603-abda-421d-8c5c-efc471f3e1b4",
+    "name": "Bersan",
+    "email": {
+      "email": "email@email.com"
+    },
+    "cpf": {
+      "cpf": "111.111.111-11"
+    },
+    "password": {
+      "password": "senhasenha"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)91111-1111"
     }
   }
 ]
