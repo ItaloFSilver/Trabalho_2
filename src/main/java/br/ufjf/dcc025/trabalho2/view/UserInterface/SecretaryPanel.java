@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
 
 public class SecretaryPanel extends JPanel{
     
@@ -110,7 +111,7 @@ public class SecretaryPanel extends JPanel{
         List<User> listaUsuarios = controller.listAllUsers();
         
         for(User u : listaUsuarios){
-            String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail().getEmail(), u.getphoneNumber().toString()};
+            String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail(), u.getphoneNumber().toString()};
             model.addRow(data);
         }
         
@@ -134,7 +135,26 @@ public class SecretaryPanel extends JPanel{
                 if (linha != -1) {
                     String nome = tabela.getValueAt(linha, 0).toString();
                     JOptionPane.showMessageDialog(null, "Editar: " + nome);
-                // Lógica de abrir janela aqui...
+                    
+                    int line = tabela.getSelectedRow();
+                    int modelRow = tabela.convertRowIndexToModel(line);
+                    String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
+                    
+                    User user = listaUsuarios.get(tabela.getSelectedRow());
+                    
+                    model.removeRow(tabela.getSelectedRow());
+                    controller.removeUserByCPF(cpf);
+                    
+                    
+                    RegisterFrame edit = new RegisterFrame(model);
+                    RegisterPanel editar = new RegisterPanel(edit, model);
+                    edit.add(editar);
+                    editar.setText(user);
+                    edit.setContentPane(editar);
+                    edit.pack();
+                    edit.setLocationRelativeTo(null);
+                    edit.setSize(640, 480);
+                    edit.setVisible(true);
                 }
             }
         });

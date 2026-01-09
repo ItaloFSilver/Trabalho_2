@@ -22,6 +22,7 @@ import javax.swing.text.MaskFormatter;
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -46,9 +47,9 @@ public class RegisterPanel extends JPanel{
         this.regPage = main;
         this.main = model;
 
-        campoNome = new JTextField(20);
-        campoEmail = new JTextField(20);
-        campoSenha = new JPasswordField(20);
+        campoNome = new JTextField(20); 
+        campoEmail = new JTextField(20); 
+        campoSenha = new JPasswordField(20); 
         campophoneNumber = criarCampoFormatado("(##)#####-####");
         campoCPF = criarCampoFormatado("###.###.###-##");
         
@@ -123,7 +124,7 @@ public class RegisterPanel extends JPanel{
                         new String(campoSenha.getPassword()),
                         Profile.fromString((String) cbTipoUsuario.getSelectedItem())
                     );
-                    String [] data = {campoNome.getText(),campoCPF.getText(),"", campoEmail.getText(),campophoneNumber.getText()};
+                    String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
                     model.addRow(data);
                 } catch (InvalidRegisterException e) {
                     JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -152,6 +153,15 @@ public class RegisterPanel extends JPanel{
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
         add(campo, gbc);
+    }
+    
+    public void setText(User user){
+        campoNome.setText(user.getName());
+        campoEmail.setText(user.getEmail());
+        campoSenha.setText(user.getPassword().toString());
+        campophoneNumber.setText(user.getphoneNumber().toString());
+        campoCPF.setText(user.getCPF().toString());
+        campoCPF.setEditable(false);
     }
     
     private JFormattedTextField criarCampoFormatado(String mascara) {

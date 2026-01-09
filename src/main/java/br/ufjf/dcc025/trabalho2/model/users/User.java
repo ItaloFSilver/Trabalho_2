@@ -47,12 +47,12 @@ public class User {
         return this.name;
     }
 
-    public Email getEmail() {
-        return this.email;
+    public String getEmail() {
+        return this.email.getEmail();
     }
 
-    public Password getPassword() {
-        return this.password;
+    public String getPassword() {
+        return this.password.getPassword();
     }
     
     public CPF getCPF() {

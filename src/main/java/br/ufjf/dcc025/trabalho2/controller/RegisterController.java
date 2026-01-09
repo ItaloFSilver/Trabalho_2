@@ -8,6 +8,7 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidphoneNumberException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 
@@ -26,7 +27,7 @@ public class RegisterController {
             phoneNumberObj = new PhoneNumber(phoneNumber);
             passwordObj = new Password(password);
         } 
-        catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException e) {
+        catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException | InvalidphoneNumberException e) {
             throw new InvalidRegisterException(e.getMessage());
         }
 
