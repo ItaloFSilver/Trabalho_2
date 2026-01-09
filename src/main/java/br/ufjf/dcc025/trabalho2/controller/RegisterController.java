@@ -8,16 +8,12 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
-import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
-import br.ufjf.dcc025.trabalho2.model.repository.PatientRepository;
-import br.ufjf.dcc025.trabalho2.model.repository.SecretaryRepository;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
-import br.ufjf.dcc025.trabalho2.model.users.Secretary;
+import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
+import br.ufjf.dcc025.trabalho2.model.users.Profile;
 
 public class RegisterController {
     
-    public void registerUser(String name, String email, String cpf, String phoneNumber, String password, String userType) throws InvalidRegisterException {
+    public void registerUser(String name, String email, String cpf, String phoneNumber, String password, Profile userType) throws InvalidRegisterException {
 
         Email emailObj;
         CPF cpfObj;
@@ -34,21 +30,6 @@ public class RegisterController {
             throw new InvalidRegisterException(e.getMessage());
         }
 
-        switch (userType) {
-            case "Paciente" -> {
-                Patient patient = new Patient(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
-                new PatientRepository().save(patient);
-            }
-            case "Médico" -> {
-                Medic medic = new Medic(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
-                new MedicRepository().save(medic);
-            }
-            case "Secretário" -> {
-                Secretary secretary = new Secretary(name, emailObj, cpfObj, phoneNumberObj, passwordObj);
-                new SecretaryRepository().save(secretary);
-            }
-            default -> throw new InvalidRegisterException("Tipo de usuário inválido.");
-        }
-
+        new UserRepository().saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType);
     }
 }

@@ -28,6 +28,9 @@ public class BaseRepository<T extends User> implements Repository<User> {
 
     @Override
     public void save(User user) {
+        if(!(user.getClass().equals(type))) {
+            return;
+        }
         List<User> users = listAll();
         users.add(user);
         File file = new File(path);
@@ -56,7 +59,7 @@ public class BaseRepository<T extends User> implements Repository<User> {
         }
         catch (IOException e) {
             e.printStackTrace();
-            throw new InvalidRemoveException("Erro ao remover usuario: ");
+            throw new InvalidRemoveException("Erro ao remover usuario");
         }
     }
 

@@ -21,6 +21,8 @@ import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
+import br.ufjf.dcc025.trabalho2.model.users.Profile;
+
 import javax.swing.table.DefaultTableModel;
 
 
@@ -119,7 +121,7 @@ public class RegisterPanel extends JPanel{
                         campoCPF.getText(),
                         campophoneNumber.getText(),
                         new String(campoSenha.getPassword()),
-                        (String) cbTipoUsuario.getSelectedItem()
+                        Profile.fromString((String) cbTipoUsuario.getSelectedItem())
                     );
                     String [] data = {campoNome.getText(),campoCPF.getText(),"", campoEmail.getText(),campophoneNumber.getText()};
                     model.addRow(data);

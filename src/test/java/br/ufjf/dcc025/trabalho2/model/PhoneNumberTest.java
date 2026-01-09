@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidphoneNumberException;
 
-public class PhoneTest {
+public class PhoneNumberTest {
     
     @Test
     @DisplayName("Deve criar um phoneNumber válido sem lançar exceções")

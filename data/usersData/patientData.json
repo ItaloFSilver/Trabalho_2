@@ -15,5 +15,22 @@
     "phoneNumber": {
       "phoneNumber": "(32)98702-6493"
     }
+  },
+  {
+    "profile": "PACIENTE",
+    "id": "ef991654-6193-4e85-8175-ed249e437cda",
+    "name": "arthur",
+    "email": {
+      "email": "arthur@email.com"
+    },
+    "cpf": {
+      "cpf": "168.698.416-24"
+    },
+    "password": {
+      "password": "senhabacana"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)98402-6493"
+    }
   }
 ]
