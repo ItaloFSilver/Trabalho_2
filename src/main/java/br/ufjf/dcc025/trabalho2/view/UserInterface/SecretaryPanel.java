@@ -145,11 +145,7 @@ public class SecretaryPanel extends JPanel{
                 if (linha != -1) {
                     String nome = tabela.getValueAt(linha, 0).toString();
                     JOptionPane.showMessageDialog(null, "Editar: " + nome);
-                    
-                    int line = tabela.getSelectedRow();
-                    //int modelRow = tabela.convertRowIndexToModel(line);
-                    //String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
-                    
+
                     User user = listaUsuarios.get(tabela.getSelectedRow());
                     
                     RegisterFrame edit = new RegisterFrame(model);

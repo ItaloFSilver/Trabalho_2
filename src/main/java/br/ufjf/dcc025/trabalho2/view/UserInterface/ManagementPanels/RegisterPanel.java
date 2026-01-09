@@ -103,9 +103,9 @@ public class RegisterPanel extends JPanel{
         });
 
         
-        JButton btnCadastrar = new JButton("Cadastrar");
+        JButton btnCadastrar = new JButton("Confirmar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));
-         
+        
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 2; // Ocupa a largura toda

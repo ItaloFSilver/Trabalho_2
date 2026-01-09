@@ -1,7 +1,24 @@
 [
   {
     "profile": "PACIENTE",
-    "id": "b9f60472-6bf9-4d88-b037-25d46f79f6a8",
+    "id": "7b39fe55-30cd-4e62-a012-4f4c834361e0",
+    "name": "Arthur",
+    "email": {
+      "email": "arthur@email.com"
+    },
+    "cpf": {
+      "cpf": "111.111.111-11"
+    },
+    "password": {
+      "password": "12345678"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)99999-2323"
+    }
+  },
+  {
+    "profile": "PACIENTE",
+    "id": "237ee9f1-5e64-4838-a92c-97be45a31e78",
     "name": "Italo Fagundes",
     "email": {
       "email": "email@email.com"
