@@ -95,14 +95,14 @@ public class RegisterPanel extends JPanel{
                 
                 boolean isMedico = "Médico".equals(selecionado);
                 
-                lblEspecializacao.setVisible(isMedico);
-                txtEspecializacao.setVisible(isMedico);
+                //lblEspecializacao.setVisible(isMedico);
+                //txtEspecializacao.setVisible(isMedico);
 
-                revalidate();
-                repaint();
+                //revalidate();
+                //repaint();
             }
         });
-
+        
         
         JButton btnCadastrar = new JButton("Confirmar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));

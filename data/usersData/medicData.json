@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "profile": "MEDICO",
+    "id": "669bc414-ef14-4385-b643-564168154206",
+    "name": "Italo Fagundes",
+    "email": {
+      "email": "fagundes@email.com"
+    },
+    "cpf": {
+      "cpf": "023.552.096-93"
+    },
+    "password": {
+      "password": "12345678"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)98888-8888"
+    }
+  }
+]
