@@ -184,10 +184,11 @@ public class RegisterPanel extends JPanel{
     }
     
     public void removePerIndex(int index, DefaultTableModel model, String c){
-        if(index > 0)
+        if(index >= 0){
             model.removeRow(index);
-        SecretaryController nova = new SecretaryController();
-        nova.removeUserByCPF(c);
+            SecretaryController nova = new SecretaryController();
+            nova.removeUserByCPF(c);
+        }
     }
 }
 

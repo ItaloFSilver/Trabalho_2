@@ -120,7 +120,7 @@ public class SecretaryPanel extends JPanel{
         List<User> listaUsuarios = controller.listAllUsers();
         
         for(User u : listaUsuarios){
-            String [] data = {u.getName(), u.getCPF().toString(), " ", u.getEmail(), u.getphoneNumber().toString()};
+            String [] data = {u.getName(), u.getCPF().toString(), u.getProfile().toString(), u.getEmail(), u.getphoneNumber().toString()};
             model.addRow(data);
         }
         
