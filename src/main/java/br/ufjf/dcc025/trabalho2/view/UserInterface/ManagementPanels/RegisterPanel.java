@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
+import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
@@ -40,7 +41,7 @@ public class RegisterPanel extends JPanel{
     private RegisterFrame regPage;
     private DefaultTableModel main;
     
-    public RegisterPanel(RegisterFrame main, DefaultTableModel model) {
+    public RegisterPanel(RegisterFrame main, DefaultTableModel model, int index) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); 
@@ -125,7 +126,12 @@ public class RegisterPanel extends JPanel{
                         Profile.fromString((String) cbTipoUsuario.getSelectedItem())
                     );
                     String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
+                    if(index > 0)
+                        removePerIndex(index, model, campoCPF.getText());
                     model.addRow(data);
+                    
+                       
+                    
                 } catch (InvalidRegisterException e) {
                     JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -175,6 +181,13 @@ public class RegisterPanel extends JPanel{
             e.printStackTrace();
         }
         return campo;
+    }
+    
+    public void removePerIndex(int index, DefaultTableModel model, String c){
+        if(index > 0)
+            model.removeRow(index);
+        SecretaryController nova = new SecretaryController();
+        nova.removeUserByCPF(c);
     }
 }
 

@@ -7,11 +7,11 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterFrame extends JFrame {
     private static JPanel Credentials;
     
-    public RegisterFrame(DefaultTableModel main){
+    public RegisterFrame(DefaultTableModel main, int index){
         
         setSize(640, 400);
         
-        Credentials = new RegisterPanel(this, main);
+        Credentials = new RegisterPanel(this, main, index);
         add(Credentials);
         setContentPane(Credentials);
         
