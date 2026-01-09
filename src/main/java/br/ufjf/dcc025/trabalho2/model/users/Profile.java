@@ -6,16 +6,29 @@ public enum Profile {
     SECRETARIO("Secretário");
 
     private final String label;
-    Profile(String label) { this.label = label; }
-    @Override public String toString() { return label; }
+
+    Profile(String label) { 
+        this.label = label; 
+    }
+
+    @Override 
+    public String toString() {
+         return label; 
+    }
 
     public static Profile fromString(String s) {
         if (s == null) throw new IllegalArgumentException("Tipo nulo");
         switch (s) {
-            case "Paciente": return PACIENTE;
-            case "Médico": return MEDICO;
-            case "Secretário": return SECRETARIO;
-            default: throw new IllegalArgumentException("Tipo de usuário inválido: " + s);
+            case "Paciente" -> {
+                return PACIENTE;
+            }
+            case "Médico" -> {
+                return MEDICO;
+            }
+            case "Secretário" -> {
+                return SECRETARIO;
+            }
+            default -> throw new IllegalArgumentException("Tipo de usuário inválido: " + s);
         }
     }
 }

@@ -21,8 +21,16 @@ public class Medic extends User {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
     }
-    
-    public void setAppointment() {
 
+    public void setAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+    }
+
+    public void removeAppointment(Appointment appointment) {
+        this.appointments.remove(appointment);
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
     }
 }

@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
@@ -24,8 +25,6 @@ import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-
-import javax.swing.table.DefaultTableModel;
 
 
 public class RegisterPanel extends JPanel{
@@ -184,11 +183,11 @@ public class RegisterPanel extends JPanel{
     }
     
     public void removePerIndex(int index, DefaultTableModel model, String c){
-        if(index >= 0){
+        if(index >= 0) {
             model.removeRow(index);
-            SecretaryController nova = new SecretaryController();
-            nova.removeUserByCPF(c);
         }
+        SecretaryController nova = new SecretaryController();
+        nova.removeUserByCPF(c);
     }
 }
 

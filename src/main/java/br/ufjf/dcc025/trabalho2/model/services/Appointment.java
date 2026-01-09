@@ -1,42 +1,50 @@
 package br.ufjf.dcc025.trabalho2.model.services;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
-
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class Appointment {
    
-    private String medicID;
-    private String patientID;
-    private LocalDate date;
-    private LocalTime time;
+    private CPF medicCPF;
+    private CPF patientCPF;
+    private Date date;
 
-    public Appointment(Medic medic, Patient patient, LocalDate date, LocalTime time) {
-        this.medicID = medic.getCPF().toString();
-        this.patientID = patient.getCPF().toString();
-        this.date = date;
-        this.time = time;
+    public Appointment(Medic medic, Patient patient, LocalDate date) {
+        this.medicCPF = medic.getCPF();
+        this.patientCPF = patient.getCPF();
+        this.date = Date.valueOf(date);
     }
 
-    public String getMedicId() {
-        String ID = this.medicID;
-        return ID;
+    public CPF getMedicCPF() {
+        return this.medicCPF;
     }
 
-    public String getPatientId() {
-        String ID = this.patientID;
-        return ID;
+    public CPF getPatientCPF() {
+        return this.patientCPF;
     }
     
     public String getDate(){
         return date.toString();
     }
     
-    public String getTime(){
-        return time.toString();
+    @Override
+    public int hashCode() {
+        return Appointment.class.hashCode();
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Appointment other = (Appointment) obj;
+        return medicCPF.equals(other.medicCPF) && patientCPF.equals(other.patientCPF) && date.equals(other.date);
+    }
 }
