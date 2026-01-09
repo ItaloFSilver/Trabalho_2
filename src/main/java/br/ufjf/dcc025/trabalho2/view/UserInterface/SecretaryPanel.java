@@ -20,8 +20,10 @@ import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointPanel;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
+import javax.swing.JFrame;
 
 public class SecretaryPanel extends JPanel{
     
@@ -63,28 +65,35 @@ public class SecretaryPanel extends JPanel{
     
     private JPanel criarTabAgenda() {
         JPanel painel = new JPanel(new BorderLayout());
-
+        JButton appointAddBtn = new JButton("Novo Agendamento");
         
         String[] colunas = {"Data", "Hora", "Paciente", "Médico", "Status"};
-        Object[][] dados = {
-            {"08/01/2026", "09:00", "João Silva", "Dr. House", "Confirmado"},
-            {"08/01/2026", "10:30", "Maria Oliveira", "Dra. Grey", "Pendente"},
-            {"08/01/2026", "14:00", "Carlos Souza", "Dr. House", "Cancelado"}
-        };
-
-        DefaultTableModel model = new DefaultTableModel(dados, colunas);
-        JTable tabela = new JTable(model);
         
+        DefaultTableModel appoint = new DefaultTableModel(colunas, 0);
+        JTable tabela = new JTable(appoint);
         
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
 
         
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        toolbar.add(new JButton("Novo Agendamento"));
+        toolbar.add(appointAddBtn);
         toolbar.add(new JButton("Filtrar por Médico"));
         painel.add(toolbar, BorderLayout.NORTH);
 
+        appointAddBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame appointmentFrame = new JFrame();
+                appointmentFrame.add(new AppointPanel());
+                
+                appointmentFrame.pack();
+                appointmentFrame.setLocationRelativeTo(null);
+                appointmentFrame.setVisible(true);
+            }
+        });
+        
+        
         return painel;
     }
 
@@ -124,10 +133,11 @@ public class SecretaryPanel extends JPanel{
         btnNovo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                abrirJanelaCadastro();
+                openRegisterWindow();
                 
             }
         });
+        
         btnEditar.addActionListener(new ActionListener() {
         @Override
             public void actionPerformed(ActionEvent e) {
@@ -180,7 +190,7 @@ public class SecretaryPanel extends JPanel{
     }
 
     
-    private void abrirJanelaCadastro() {
+    private void openRegisterWindow() {
 
         RegisterFrame dialog = new RegisterFrame(model);
         dialog.pack(); 
