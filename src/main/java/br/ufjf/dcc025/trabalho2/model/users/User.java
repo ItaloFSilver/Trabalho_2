@@ -66,4 +66,17 @@ public class User {
     public Profile getProfile() {
         return this.profile;
     }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User other = (User) obj;
+        return id.equals(other.id);
+    }
 }

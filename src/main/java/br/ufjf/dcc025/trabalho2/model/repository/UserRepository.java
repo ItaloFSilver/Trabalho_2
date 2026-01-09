@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class UserRepository {
+
+    private List<BaseRepository<? extends User>> repositories = List.of(
+        new SecretaryRepository(),
+        new PatientRepository(),
+        new MedicRepository()
+    );
 
     public User findByCPF(String cpf) {
         List<User> users = listAllUsers();
@@ -26,5 +33,11 @@ public class UserRepository {
         users.addAll(new MedicRepository().listAll());
 
         return users;
+    }
+
+    public void removeUser(User user) throws InvalidRemoveException{
+        for(BaseRepository<? extends User> repo : repositories) {
+            repo.remove(user);
+        }
     }
 }

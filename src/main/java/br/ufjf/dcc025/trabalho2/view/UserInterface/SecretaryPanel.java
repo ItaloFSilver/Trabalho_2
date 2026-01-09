@@ -142,8 +142,10 @@ public class SecretaryPanel extends JPanel{
         btnExcluir.addActionListener(new ActionListener() {
         @Override
             public void actionPerformed(ActionEvent evt) {
-                String cpf = tabela.getValueAt(tabela.getSelectedRow(), 1).toString();
-                controller.removeByCPF(cpf);
+                int line = tabela.getSelectedRow();
+                int modelRow = tabela.convertRowIndexToModel(line);
+                String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
+                controller.removeUserByCPF(cpf);
                 model.removeRow(tabela.getSelectedRow());     
             }
             });
