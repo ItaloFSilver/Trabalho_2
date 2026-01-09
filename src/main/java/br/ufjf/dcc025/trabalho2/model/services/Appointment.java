@@ -1,7 +1,7 @@
 package br.ufjf.dcc025.trabalho2.model.services;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
@@ -11,14 +11,12 @@ public class Appointment {
    
     private CPF medicCPF;
     private CPF patientCPF;
-    private LocalDate date;
-    private LocalTime time;
+    private Date date;
 
-    public Appointment(Medic medic, Patient patient, LocalDate date, LocalTime time) {
+    public Appointment(Medic medic, Patient patient, LocalDate date) {
         this.medicCPF = medic.getCPF();
         this.patientCPF = patient.getCPF();
-        this.date = date;
-        this.time = time;
+        this.date = Date.valueOf(date);
     }
 
     public CPF getMedicCPF() {
@@ -33,10 +31,6 @@ public class Appointment {
         return date.toString();
     }
     
-    public String getTime(){
-        return time.toString();
-    }
- 
     @Override
     public int hashCode() {
         return Appointment.class.hashCode();
@@ -51,6 +45,6 @@ public class Appointment {
         if (getClass() != obj.getClass())
             return false;
         Appointment other = (Appointment) obj;
-        return medicCPF.equals(other.medicCPF) && patientCPF.equals(other.patientCPF) && date.equals(other.date) && time.equals(other.time);
+        return medicCPF.equals(other.medicCPF) && patientCPF.equals(other.patientCPF) && date.equals(other.date);
     }
 }
