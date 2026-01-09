@@ -17,7 +17,7 @@ import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class AppointmentRepository implements Repository<Appointment> {
-    private final String path = dirPath + File.separator + "servicesData" + File.separator + "appointments.json"; 
+    private final String path = dirPath + File.separator + "servicesData" + File.separator + "appointmentsData.json"; 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
@@ -53,20 +53,20 @@ public class AppointmentRepository implements Repository<Appointment> {
         }
     }    
     
-    public Appointment serachById(Medic medic) {
+    public Appointment searchByCPF(Medic medic) {
         List<Appointment> appointments = listAll();
         for (Appointment appointment : appointments) {
-            if (appointment.getMedicId().equals(medic.getId())) {
+            if (appointment.getMedicCPF().equals(medic.getCPF())) {
                 return appointment;
             }
         }
         return null;
     }
 
-    public Appointment serachById(Patient patient) {
+    public Appointment searchByCPF(Patient patient) {
         List<Appointment> appointments = listAll();
         for (Appointment appointment : appointments) {
-            if (appointment.getPatientId().equals(patient.getId())) {
+            if (appointment.getPatientCPF().equals(patient.getCPF())) {
                 return appointment;
             }
         }
