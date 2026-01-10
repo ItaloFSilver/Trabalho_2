@@ -1,13 +1,10 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
-import br.ufjf.dcc025.trabalho2.model.users.Secretary;
-import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class MainFrame extends javax.swing.JFrame {
     
@@ -34,18 +31,12 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
     
-    public void changeScreen(String name, User user){ //essa função é só pro login passar o User pra main,
+    public void changeScreen(String name, User user) { //essa função é só pro login passar o User pra main,
         this.user = user;                             //e os painés poderem acessar os dados do user mais facilmente
         
-        secretary = new SecretaryPanel(this);
-        patient = new PatientPanel(this);
-        medic = new MedicPanel(this);
-        jPanel.add(medic, "Medico");
-        jPanel.add(secretary, "Secretario");
-        jPanel.add(patient, "Paciente");
-        
-        cardLayout.show(jPanel, name);
-        
+        jPanel.add(user.createPanel(this), name);
+
+        cardLayout.show(jPanel, name);        
     }
     public void changeScreen(String name){          //essa é só pro botão LogOut
         SecretaryPanel secret = new SecretaryPanel(this);

@@ -1,11 +1,15 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.JPanel;
+
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
-import java.util.Date;
-import java.util.List;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.MedicPanel;
 
 public class Medic extends User {    
     private Specialization specialization;
@@ -24,6 +28,11 @@ public class Medic extends User {
 
     public Specialization getSpecialization() {
         return specialization;
+    }
+
+    @Override
+    public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
+        return new MedicPanel(mainframe);
     }
     
 }
