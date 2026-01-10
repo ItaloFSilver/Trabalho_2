@@ -16,7 +16,7 @@ public class Medic extends User {
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
-        this.active = false;
+        this.active = true;
     }
 
     public Medic(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
@@ -29,7 +29,12 @@ public class Medic extends User {
     }
 
     public void removeAppointment(Appointment appointment) {
-        this.appointments.remove(appointment);
+        for(Appointment a : this.appointments) {
+            if(a.equals(appointment)) {
+                this.appointments.remove(a);
+                break;
+            }
+        }
     }
 
     public Specialization getSpecialization() {

@@ -1,13 +1,9 @@
 package br.ufjf.dcc025.trabalho2.model.services;
 
 import java.util.Date;
-import java.time.LocalDate;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-import java.util.Calendar;
 
 public class Appointment {
    
@@ -16,7 +12,7 @@ public class Appointment {
     private final Date date;
     private final String patientName;
     private final String medicName;
-    private boolean Confirmed;
+    private boolean confirmed;
     //private final User medic; // <- não sei se vai precisar disso aqui
 
     public Appointment(User medic, User patient, Date date, boolean check) {
@@ -25,7 +21,7 @@ public class Appointment {
         this.date = date;
         this.medicName = medic.getName();
         this.patientName = patient.getName();
-        this.Confirmed = check;
+        this.confirmed = check;
         //this.medic = medic; // <- idem
     }
 
@@ -62,7 +58,7 @@ public class Appointment {
     }
     
     public String getCheck(){
-        if(Confirmed)
+        if(confirmed)
             return "Confirmada";
         return "Aguardando Confirmação";
     }
