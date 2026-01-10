@@ -27,6 +27,7 @@ public class LoginPanel extends JPanel {
     private static JLabel passwordLabel;
     private static JLabel invalidCredLbl;
     private MainFrame mainFrame;
+    private User user;
     
     
     public LoginPanel(MainFrame main){
@@ -106,22 +107,23 @@ public class LoginPanel extends JPanel {
         else
         {
             try {
-                User user = new LoginController().login(campoUser.getText(), senhaUser.getText());
+                user = new LoginController().login(campoUser.getText(), senhaUser.getText());
                 switch (user.getProfile()) {
                     case Profile.SECRETARIO -> {
-                        this.mainFrame.changeScreen("secretary");
+                        this.mainFrame.changeScreen("secretary", user);
                     }
                     case Profile.MEDICO -> {
-                        this.mainFrame.changeScreen("medic");
+                        this.mainFrame.changeScreen("medic", user);
                     }
                     case Profile.PACIENTE -> {
-                        this.mainFrame.changeScreen("patient");
+                        this.mainFrame.changeScreen("patient", user);
                         break;
                     }
                     default -> {
                         break;
                     }
                 }
+                invalidCredLbl.setVisible(false);
                 //this.mainFrame.changeScreen("secretary");
             } 
             catch (InvalidLoginException e) {

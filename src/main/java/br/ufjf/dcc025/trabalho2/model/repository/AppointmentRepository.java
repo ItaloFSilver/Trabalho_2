@@ -88,5 +88,13 @@ public class AppointmentRepository implements Repository<Appointment> {
         }
         return null;
     }
-
+    public Appointment searchByCPF(CPF medic) {
+        List<Appointment> appointments = listAll();
+        for (Appointment appointment : appointments) {
+            if (appointment.getMedicCPF().equals(medic)) {
+                return appointment;
+            }
+        }
+        return null;
+    }
 }

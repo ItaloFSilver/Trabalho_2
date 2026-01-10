@@ -36,9 +36,9 @@ public class SecretaryPanel extends JPanel{
     
     public SecretaryPanel(MainFrame main){
         this.mainPage = main;
+        
         setLayout(new BorderLayout());
 
-        
         JPanel pnlHeader = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pnlHeader.setBackground(new Color(60, 100, 180)); 
         JLabel lblBemVindo = new JLabel("Olá, Secretária. Bem-vinda ao sistema.");
@@ -52,13 +52,9 @@ public class SecretaryPanel extends JPanel{
         
         add(pnlHeader, BorderLayout.NORTH);
 
-        
         JTabbedPane tabbedPane = new JTabbedPane();
         
-        
         tabbedPane.addTab("Agendamentos", criarTabAgenda());
-        
-        
         tabbedPane.addTab("Gerenciar Usuários", criarTabUsuarios());
 
         add(tabbedPane, BorderLayout.CENTER);

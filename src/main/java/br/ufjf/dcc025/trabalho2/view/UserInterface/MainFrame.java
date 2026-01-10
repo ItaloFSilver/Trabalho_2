@@ -1,5 +1,6 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
+import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.CardLayout;
 
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private CardLayout cardLayout;
     private JPanel jPanel;
+    protected User user;
     
     public MainFrame() {
         initComponents();
@@ -31,10 +33,18 @@ public class MainFrame extends javax.swing.JFrame {
         setContentPane(jPanel);
     }
     
+    public void changeScreen(String name, User user){
+        this.user = user;
+        System.out.println(this.user.getName());
+        cardLayout.show(jPanel, name);
+    }
     public void changeScreen(String name){
         cardLayout.show(jPanel, name);
     }
 
+    public User getUser(){
+        return this.user;
+    }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

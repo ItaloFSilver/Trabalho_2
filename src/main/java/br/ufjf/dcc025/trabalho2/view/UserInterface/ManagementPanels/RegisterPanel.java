@@ -66,7 +66,7 @@ public class RegisterPanel extends JPanel{
         gbc.anchor = GridBagConstraints.LINE_END;
         add(lblTipo, gbc);
 
-        String[] tipos = {"Paciente", "Recepcionista", "Médico"};
+        String[] tipos = {"Paciente", "Secretário", "Médico"};
         cbTipoUsuario = new JComboBox<>(tipos);
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -161,7 +161,7 @@ public class RegisterPanel extends JPanel{
     public void setText(User user){
         campoNome.setText(user.getName());
         campoEmail.setText(user.getEmail());
-        campoSenha.setText(user.getPassword().toString());
+        campoSenha.setText(user.getPassword());
         campophoneNumber.setText(user.getphoneNumber().toString());
         campoCPF.setText(user.getCPF().toString());
         campoCPF.setEditable(false);

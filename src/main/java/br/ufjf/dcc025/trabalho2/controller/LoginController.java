@@ -27,8 +27,9 @@ public class LoginController {
         }
 
         for(User user : users) {
-            if(user.getEmail().equals(emailObj) && user.getPassword().equals(passwordObj)){
-                return user; 
+            if(user.getEmail().equals(emailObj.getEmail()) && user.getPassword().equals(passwordObj.getPassword())){ 
+                return user;
+            } else {
             }  
         }
 
