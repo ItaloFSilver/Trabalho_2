@@ -1,19 +1,36 @@
 [
   {
     "profile": "MEDICO",
-    "id": "a852d76c-130b-447e-99fe-281d426bbae4",
-    "name": "Arthur",
+    "id": "e0506334-5a12-469b-83a5-d78f09dfccc1",
+    "name": "Arthur de Souza",
     "email": {
       "email": "arthur@email.com"
+    },
+    "cpf": {
+      "cpf": "111.111.111-11"
+    },
+    "password": {
+      "password": "senha1234"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)99934-9023"
+    }
+  },
+  {
+    "profile": "MEDICO",
+    "id": "a710ffa2-5498-4c19-bef1-8f86d340e43d",
+    "name": "Bernardo M Barbosa",
+    "email": {
+      "email": "b@email.com"
     },
     "cpf": {
       "cpf": "222.222.222-22"
     },
     "password": {
-      "password": "senhasenha"
+      "password": "12345678"
     },
     "phoneNumber": {
-      "phoneNumber": "(32)92323-2324"
+      "phoneNumber": "(32)99999-9999"
     }
   }
 ]

@@ -13,12 +13,20 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame() {
         initComponents();
+        
         cardLayout = new CardLayout();
         jPanel = new JPanel(cardLayout);
+        
         SecretaryPanel secretary = new SecretaryPanel(this);
         LoginPanel login = new LoginPanel(this);
+        PatientPanel patient = new PatientPanel(this);
+        MedicPanel medic = new MedicPanel(this);
+        
         jPanel.add(login, "login");
         jPanel.add(secretary, "secretary");
+        jPanel.add(patient, "patient");
+        jPanel.add(medic, "medic");
+        
         add(jPanel);
         setContentPane(jPanel);
     }

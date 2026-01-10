@@ -16,6 +16,7 @@ public class Appointment {
     private final String patientName;
     private final String medicName;
     private boolean Confirmed;
+    //private final User medic;
 
     public Appointment(User medic, User patient, Date date, boolean check) {
         this.medicCPF = medic.getCPF();
@@ -24,6 +25,7 @@ public class Appointment {
         this.medicName = medic.getName();
         this.patientName = patient.getName();
         this.Confirmed = check;
+        //this.medic = medic;
     }
 
     public String getMedicName(){

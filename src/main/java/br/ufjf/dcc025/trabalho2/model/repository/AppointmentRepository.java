@@ -1,5 +1,7 @@
 package br.ufjf.dcc025.trabalho2.model.repository;
 
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -35,6 +37,30 @@ public class AppointmentRepository implements Repository<Appointment> {
 
     @Override
     public void remove(Appointment appointment) {
+        List<Appointment> appointments = listAll();
+
+        for(int i=0; i<appointments.size(); i++) {
+            Appointment u = appointments.get(i);
+            if(u.getMedicCPF().equals(appointment.getMedicCPF()) && u.getDate().equals(appointment.getDate())) {
+                appointments.remove(u);
+                break;
+            }
+            if(u.getPatientCPF().equals(appointment.getPatientCPF()) && u.getDate().equals(appointment.getDate())){
+                appointments.remove(u);
+                break;
+            }
+        }
+        
+        File file = new File(path);
+        
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(appointments, writer);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            throw new InvalidRemoveException("Erro ao remover Agendamento");
+        }
+    
     }
 
     @Override
@@ -53,23 +79,14 @@ public class AppointmentRepository implements Repository<Appointment> {
         }
     }    
     
-    public Appointment searchByCPF(Medic medic) {
+    public Appointment searchByCPF(CPF medic, CPF patient) {
         List<Appointment> appointments = listAll();
         for (Appointment appointment : appointments) {
-            if (appointment.getMedicCPF().equals(medic.getCPF())) {
+            if (appointment.getMedicCPF().equals(medic) && appointment.getPatientCPF().equals(patient)) {
                 return appointment;
             }
         }
         return null;
     }
 
-    public Appointment searchByCPF(Patient patient) {
-        List<Appointment> appointments = listAll();
-        for (Appointment appointment : appointments) {
-            if (appointment.getPatientCPF().equals(patient.getCPF())) {
-                return appointment;
-            }
-        }
-        return null;
-    }
 }

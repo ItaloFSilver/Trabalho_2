@@ -122,7 +122,7 @@ public class LoginPanel extends JPanel {
                         break;
                     }
                 }
-                this.mainFrame.changeScreen("secretary");
+                //this.mainFrame.changeScreen("secretary");
             } 
             catch (InvalidLoginException e) {
                 invalidCredLbl.setVisible(true);

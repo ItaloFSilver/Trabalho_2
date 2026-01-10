@@ -24,8 +24,9 @@ public class AppointPanel extends JPanel {
     private DefaultTableModel model;
     private JFrame frame;
 
-    public AppointPanel(DefaultTableModel tableAppoint, JFrame frame) {
+    public AppointPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
         // Layout principal do Painel
+       
         this.frame = frame;
         this.model = tableAppoint;
         setLayout(new BorderLayout());
@@ -61,9 +62,8 @@ public class AppointPanel extends JPanel {
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton btnSalvar = new JButton("Agendar");
         JButton btnLimpar = new JButton("Limpar"); 
-        int indMed = comboMedico.getSelectedIndex();
-        int indPac = comboPaciente.getSelectedIndex();
-        btnSalvar.addActionListener(e -> saveAppointment(medics.get(indMed), patients.get(indPac)));
+        
+        btnSalvar.addActionListener(e -> saveAppointment(medics, patients, agenda));
         btnLimpar.addActionListener(e -> clearFields());
 
         //panelBotoes.add(btnLimpar);
@@ -72,7 +72,7 @@ public class AppointPanel extends JPanel {
         add(panelBotoes, BorderLayout.SOUTH);
     }
 
-    private void saveAppointment(User m, User p) {
+    private void saveAppointment(List<User> m, List<User> p, List<Appointment> agenda) {
         
         AppointmentController control = new AppointmentController();
         
@@ -82,13 +82,16 @@ public class AppointPanel extends JPanel {
         else
             checar = "Aguardando Confirmação";
         
-        Date data = (Date) spinnerDataHora.getValue();
+        int indMed = comboMedico.getSelectedIndex();
+        int indPac = comboPaciente.getSelectedIndex();
         
-        control.saveAppointment(new Appointment(m, p, data, checkConfirmada.isSelected()));
-        String [] dados = {data.toString(), p.getName(), m.getName(), checar};
+        Date data = (Date) spinnerDataHora.getValue();
+        agenda.add(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+        control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+        String [] dados = {data.toString(), p.get(indPac).getName(), m.get(indMed).getName(), checar};
         model.addRow(dados);
         
-        JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.getName() + " com Dr. " + m.getName());
+        JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.get(indPac).getName() + " com Dr. " + m.get(indMed).getName());
         
         clearFields();
         closeWindow();

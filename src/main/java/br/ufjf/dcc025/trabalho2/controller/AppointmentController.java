@@ -11,6 +11,7 @@ public class AppointmentController {
     }
 
     public void removeAppointment(Appointment appointment) {
+        Appointment a = new AppointmentRepository().searchByCPF(appointment.getMedicCPF(), appointment.getPatientCPF());
         new AppointmentRepository().remove(appointment);
     }
 

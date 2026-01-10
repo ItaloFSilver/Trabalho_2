@@ -40,7 +40,7 @@ public class SecretaryPanel extends JPanel{
 
         
         JPanel pnlHeader = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        pnlHeader.setBackground(new Color(60, 100, 180)); // Azul profissional
+        pnlHeader.setBackground(new Color(60, 100, 180)); 
         JLabel lblBemVindo = new JLabel("Olá, Secretária. Bem-vinda ao sistema.");
         lblBemVindo.setForeground(Color.WHITE);
         lblBemVindo.setFont(new Font("Arial", Font.BOLD, 14));
@@ -70,8 +70,10 @@ public class SecretaryPanel extends JPanel{
         JPanel painel = new JPanel(new BorderLayout());
         JButton appointAddBtn = new JButton("Novo Agendamento");
         JButton deleteBtn = new JButton("Desmarcar Consulta");
-        AppointmentController controller = new AppointmentController();
-        List<Appointment> agenda = controller.listAll();
+        
+        AppointmentController appController = new AppointmentController();
+        
+        List<Appointment> agenda = appController.listAll();
         
         String[] colunas = {"Data", "Paciente", "Médico", "Status"};
         
@@ -92,22 +94,23 @@ public class SecretaryPanel extends JPanel{
         toolbar.add(deleteBtn);
         painel.add(toolbar, BorderLayout.NORTH);
 
-        appointAddBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame appointmentFrame = new JFrame();
-                appointmentFrame.add(new AppointPanel(appoint,appointmentFrame));
-                
-                appointmentFrame.pack();
-                appointmentFrame.setLocationRelativeTo(null);
-                appointmentFrame.setVisible(true);
-            }
+        appointAddBtn.addActionListener((ActionEvent e) -> {
+            JFrame appointmentFrame = new JFrame();
+            appointmentFrame.add(new AppointPanel(agenda, appoint,appointmentFrame));
+            
+            appointmentFrame.pack();
+            appointmentFrame.setLocationRelativeTo(null);
+            appointmentFrame.setVisible(true);
         });
         
-        deleteBtn.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                controller.removeAppointment(agenda.get(tabela.getSelectedRow()));
+        deleteBtn.addActionListener((ActionEvent e) -> {
+            if(tabela.getSelectedRow()>=0){
+                int index = tabela.getSelectedRow();
+                Appointment a = agenda.get(index);
+                agenda.remove(index);
+                
+                System.out.println(tabela.getSelectedRow());
+                appController.removeAppointment(a);
                 appoint.removeRow(tabela.getSelectedRow());
             }
         });
@@ -120,7 +123,7 @@ public class SecretaryPanel extends JPanel{
     private JPanel criarTabUsuarios() {
         JPanel painel = new JPanel(new BorderLayout());
 
-        String[] colunas = { "Nome", "Documento", "Tipo", "Email", "phoneNumber"};
+        String[] colunas = {"Nome", "Documento", "Tipo", "Email", "phoneNumber"};
 
         model = new DefaultTableModel(colunas,0) {
             @Override
@@ -156,7 +159,7 @@ public class SecretaryPanel extends JPanel{
                 
             }
         });
-        
+        //Se a ação é confirmada, o usuário passado é deletado e registra-se um novo em cima do anterior. CPF não editável
         btnEditar.addActionListener(new ActionListener() {
         @Override
             public void actionPerformed(ActionEvent e) {
