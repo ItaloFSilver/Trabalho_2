@@ -17,8 +17,6 @@
     "active": false
   },
   {
-    "hospitalized": false,
-    "visitable": false,
     "profile": "PACIENTE",
     "name": "Italo Fagundes Silverio",
     "email": {

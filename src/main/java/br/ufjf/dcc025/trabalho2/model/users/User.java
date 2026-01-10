@@ -15,7 +15,6 @@ public class User {
     protected CPF cpf;
     protected Password password;
     protected PhoneNumber phoneNumber;
-    protected boolean active;
 
     /**
     * @throws InvalidEmailException se o email for invalido
@@ -29,7 +28,6 @@ public class User {
         this.cpf = new CPF(cpf);
         this.phoneNumber = new PhoneNumber(phoneNumber);
         this.password = new Password(password);
-        this.active = false;
     }
 
     public User(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
@@ -62,16 +60,5 @@ public class User {
 
     public Profile getProfile() {
         return this.profile;
-    }
-    
-    public boolean getStatus(){
-        return this.active;
-    }
-    
-    public void toggleActive(){
-        if(this.active)
-            active = false;
-        else
-            active = true;
     }
 }

@@ -37,10 +37,8 @@ public class MedicPanel extends UserPanel {
         centralizator.insets = new Insets(10, 10, 10, 10);
         
         JToggleButton active = new JToggleButton();
-        if (this.mainPage.getUser().getStatus())
-            active.setText(" Ativo ");
-        else
-            active.setText("Ausente");
+        active.setText(" Ativo ");
+            
             
         centralizator.gridwidth = 2;
         centralizator.gridx = 2;
@@ -51,11 +49,10 @@ public class MedicPanel extends UserPanel {
         active.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                mainPage.getUser().toggleActive();
-                if(active.getText().equals(" Ativo "))
-                    active.setText("Ausente");
-                else
-                    active.setText(" Ativo ");
+            if(active.getText().equals(" Ativo "))
+                active.setText("Ausente");
+            else
+                active.setText(" Ativo ");
             }
         });
         

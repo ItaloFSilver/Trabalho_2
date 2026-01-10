@@ -1,9 +1,9 @@
 [
   {
     "profile": "MEDICO",
-    "name": "Bernardo M Barbosa",
+    "name": "Arthur de Souza Marques",
     "email": {
-      "email": "b@email.com"
+      "email": "arthur@gmail.com"
     },
     "cpf": {
       "cpf": "222.222.222-22"
@@ -12,7 +12,7 @@
       "password": "12345678"
     },
     "phoneNumber": {
-      "phoneNumber": "(32)99999-9999"
+      "phoneNumber": "(32)99922-1122"
     },
     "active": false
   }

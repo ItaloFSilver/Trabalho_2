@@ -4,6 +4,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -26,7 +27,7 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
         super(main);
         
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
-        this.tabbedPane.addTab("Exames", new JPanel(new BorderLayout()));
+        this.tabbedPane.addTab("Exames e atestados", new JPanel(new BorderLayout()));
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
         
         add(tabbedPane, BorderLayout.CENTER);
@@ -50,8 +51,6 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
         
         JTable tabela = new JTable(appoint);
         
-        
-        
         JScrollPane scroll = new JScrollPane(tabela);
         appPanel.add(scroll, BorderLayout.CENTER);
         
@@ -62,7 +61,47 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
         updateBtn.addActionListener(this::updateBtnActionListener);
         
         JButton editBtn = new JButton("Editar");
-        editBtn.addActionListener(this::editBtnActionListener);
+        editBtn.addActionListener(e -> {
+            int linha = tabela.getSelectedRow();
+            if (linha == -1) return;
+
+            // 1. Pega os dados da linha selecionada
+            String nomeMedico = (String) tabela.getValueAt(linha, 1); // ex: Coluna 1 é médico
+            String dataAtual = (String) tabela.getValueAt(linha, 0);  // ex: Coluna 2 é data
+
+            // 2. BUSCA HORÁRIOS DISPONÍVEIS (Isso viria do seu Controller)
+            // Exemplo simulado:
+            //List<String> horariosLivres = controller.getHorariosDisponiveis(nomeMedico);
+    
+                // Se o controller ainda não existir, simule assim para testar:
+            List<String> horariosLivres = List.of("12/01/2026 14:00", "12/01/2026 15:30", "13/01/2026 09:00");
+
+                // 3. Abre a Janela passando a lista
+            EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, dataAtual, horariosLivres);
+            dialog.setVisible(true);
+
+            // 4. Processa o resultado
+            if (dialog.isDesmarcou()) {
+                agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
+                for(Appointment a : agenda){  
+                    if(a.getDate().equals(appoint.getValueAt(linha, 0))){
+                        consultController.removeAppointment(a);
+                        break;
+                    }
+                }
+                
+                appoint.removeRow(linha);
+        
+            } else if (dialog.isSalvou()) {
+                String novaData = dialog.getNovoHorario();
+        
+            // Atualiza no Backend
+                //controller.atualizarConsulta(linha, novaData);
+        
+            //  Atualiza na Tabela
+                appoint.setValueAt(novaData, linha, 0);
+    }
+        });
         
         toolbar.add(updateBtn);
         toolbar.add(editBtn);
@@ -83,42 +122,7 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
             }
         }
     }
-    private void editBtnActionListener(ActionEvent evt){
-        /*
-        int linha = tabelaConsultas.getSelectedRow();
-        if (linha == -1) return;
-
-        // 1. Pega os dados da linha selecionada
-        String nomeMedico = (String) tabelaConsultas.getValueAt(linha, 1); // ex: Coluna 1 é médico
-        String dataAtual = (String) tabelaConsultas.getValueAt(linha, 2);  // ex: Coluna 2 é data
-
-        // 2. BUSCA HORÁRIOS DISPONÍVEIS (Isso viria do seu Controller)
-        // Exemplo simulado:
-        List<String> horariosLivres = controller.getHorariosDisponiveis(nomeMedico);
     
-        // Se o controller ainda não existir, simule assim para testar:
-        // List<String> horariosLivres = List.of("12/01/2026 14:00", "12/01/2026 15:30", "13/01/2026 09:00");
-
-        // 3. Abre a Janela passando a lista
-        EditAppointmentDialog dialog = new EditAppointmentDialog(this, nomeMedico, dataAtual, horariosLivres);
-        dialog.setVisible(true);
-
-        // 4. Processa o resultado
-        if (dialog.isDesmarcou()) {
-            controller.cancelarConsulta(linha);
-            modelTabela.removeRow(linha);
-        
-        } else if (dialog.isSalvou()) {
-            String novaData = dialog.getNovoHorario();
-        
-        // Atualiza no Backend
-            controller.atualizarConsulta(linha, novaData);
-        
-        // Atualiza na Tabela
-            tabelaConsultas.setValueAt(novaData, linha, 2);
-    }
-        */
-    }
     
     public void hideWindow(JFrame frame){
         frame.setVisible(false);

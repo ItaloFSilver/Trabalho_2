@@ -6,9 +6,9 @@
     "patientCPF": {
       "cpf": "023.552.096-93"
     },
-    "date": "Jan 10, 2026, 5:00:00 PM",
+    "date": "Jan 10, 2026, 8:30:00 PM",
     "patientName": "Italo Fagundes Silverio",
-    "medicName": "Bernardo M Barbosa",
+    "medicName": "Arthur de Souza Marques",
     "confirmed": false
   },
   {
@@ -16,23 +16,11 @@
       "cpf": "222.222.222-22"
     },
     "patientCPF": {
-      "cpf": "023.552.096-93"
+      "cpf": "111.111.111-11"
     },
-    "date": "Jan 10, 2026, 5:30:00 PM",
-    "patientName": "Italo Fagundes Silverio",
-    "medicName": "Bernardo M Barbosa",
-    "confirmed": false
-  },
-  {
-    "medicCPF": {
-      "cpf": "222.222.222-22"
-    },
-    "patientCPF": {
-      "cpf": "023.552.096-93"
-    },
-    "date": "Jan 10, 2026, 5:00:23 PM",
-    "patientName": "Italo Fagundes Silverio",
-    "medicName": "Bernardo M Barbosa",
-    "confirmed": false
+    "date": "Jan 11, 2026, 11:00:00 AM",
+    "patientName": "Bersan",
+    "medicName": "Arthur de Souza Marques",
+    "confirmed": true
   }
 ]
