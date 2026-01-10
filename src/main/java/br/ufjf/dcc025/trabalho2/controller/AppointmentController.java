@@ -20,7 +20,7 @@ public class AppointmentController {
         return new AppointmentRepository().listAll();
     }
     
-    public List<Appointment> listThis(String cpf){
+    public List<Appointment> listThis(String cpf){  //Pesquisa os agendamentos do CPF, assim a gente puxa só as de cada usuário pra eles mesmos
         List<Appointment> appointments = new AppointmentRepository().listAll(), hisAppointments = new ArrayList<>();
         for(Appointment a : appointments)
             if(a.getPatientCPF().toString().equals(cpf))

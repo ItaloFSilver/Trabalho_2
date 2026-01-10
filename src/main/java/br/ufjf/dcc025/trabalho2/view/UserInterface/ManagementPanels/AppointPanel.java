@@ -16,17 +16,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class AppointPanel extends JPanel {
 
-    private JComboBox<String> comboMedico;
-    private JComboBox<String> comboPaciente;
-    private JSpinner spinnerDataHora;
-    private JCheckBox checkConfirmada;
-    private SecretaryController controller;
-    private DefaultTableModel model;
+    private JComboBox<String> comboMedico;      //**************************SOCORRO*************************
+    private JComboBox<String> comboPaciente;    //**************************SOCORRO*************************
+    private JSpinner spinnerDataHora;           //**************************SOCORRO*************************
+    private JCheckBox checkConfirmada;          //**************************SOCORRO*************************
+    private SecretaryController controller;     //**************************SOCORRO*************************
+    private DefaultTableModel model;            //**************************SOCORRO*************************
     private JFrame frame;
 
     public AppointPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
-        // Layout principal do Painel
-       
+      
         this.frame = frame;
         this.model = tableAppoint;
         setLayout(new BorderLayout());

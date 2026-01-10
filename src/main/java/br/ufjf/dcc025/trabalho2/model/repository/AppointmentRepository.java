@@ -36,7 +36,7 @@ public class AppointmentRepository implements Repository<Appointment> {
     }
 
     @Override
-    public void remove(Appointment appointment) {
+    public void remove(Appointment appointment) {   //To me questionando se isso tá ok, mas funciona
         List<Appointment> appointments = listAll();
 
         for(int i=0; i<appointments.size(); i++) {
@@ -79,8 +79,8 @@ public class AppointmentRepository implements Repository<Appointment> {
         }
     }    
     
-    public Appointment searchByCPF(CPF medic, CPF patient) {
-        List<Appointment> appointments = listAll();
+    public Appointment searchByCPF(CPF medic, CPF patient) {    //Usando os dois CPFs pra poder excluir a consulta "certa"
+        List<Appointment> appointments = listAll();             //Tá apagando o mais próximo, mas nn sei se é um problema
         for (Appointment appointment : appointments) {
             if (appointment.getMedicCPF().equals(medic) && appointment.getPatientCPF().equals(patient)) {
                 return appointment;

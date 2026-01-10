@@ -110,9 +110,9 @@ public class LoginPanel extends JPanel {
                 user = new LoginController().login(campoUser.getText(), senhaUser.getText());
                 switch (user.getProfile()) {
                     case Profile.SECRETARIO -> {
-                        this.mainFrame.changeScreen("secretary", user);
-                    }
-                    case Profile.MEDICO -> {
+                        this.mainFrame.changeScreen("secretary", user); //passa o usuário criado pro painel poder
+                    }                                                       //acessar os dados dele, assim fica mais facil
+                    case Profile.MEDICO -> {                                //(não sei se é boa pratica)
                         this.mainFrame.changeScreen("medic", user);
                     }
                     case Profile.PACIENTE -> {
@@ -124,7 +124,7 @@ public class LoginPanel extends JPanel {
                     }
                 }
                 invalidCredLbl.setVisible(false);
-                //this.mainFrame.changeScreen("secretary");
+                
             } 
             catch (InvalidLoginException e) {
                 invalidCredLbl.setVisible(true);
@@ -136,7 +136,7 @@ public class LoginPanel extends JPanel {
         }
     }
     
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt){
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt){    //charme apenas
         System.exit(0);
     }
 }

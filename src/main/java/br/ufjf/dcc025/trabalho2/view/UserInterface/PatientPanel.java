@@ -11,7 +11,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class PatientPanel extends UserPanel {
+public class PatientPanel extends UserPanel { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
             
     private AppointmentController consultController;
     private List<Appointment> agenda;
@@ -20,7 +20,7 @@ public class PatientPanel extends UserPanel {
     public PatientPanel(MainFrame main) {
         super(main);
         
-        this.tabbedPane.addTab("Agendamentos", createAppointmentPage());
+        this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  //por enquanto só tem essa funcionando
         this.tabbedPane.addTab("Exames", new JPanel(new BorderLayout()));
         this.tabbedPane.addTab("Dados Pessoais", new JPanel(new BorderLayout()));
         
@@ -28,7 +28,7 @@ public class PatientPanel extends UserPanel {
     }
     
     
-    private JPanel createAppointmentPage(){
+    private JPanel createAppointmentPage(){ //cria uma tabela e puxa o user armazenado pela mainPage pra poder ver as consultas
         JPanel appPanel = new JPanel(new BorderLayout());
         
         consultController = new AppointmentController();
@@ -56,13 +56,13 @@ public class PatientPanel extends UserPanel {
         
         return appPanel;
     }
-    
-    private void updateBtnActionListener(java.awt.event.ActionEvent evt){
-        this.user = this.mainPage.getUser();
+                    //Vou precisar de ajuda pra acertar essa função aqui dps
+    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
+        this.user = this.mainPage.getUser();    //puxa o User armazenado na main pra acessar os dados
         if(agenda == null){
-            agenda = consultController.listThis(user.getCPF().toString());
+            agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
             for(Appointment a : agenda){
-                String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};
+                String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};   
                 System.out.println(a.getMedicName());
                 appoint.addRow(data);
             }

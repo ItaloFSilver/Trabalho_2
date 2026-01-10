@@ -26,7 +26,7 @@ public class LoginController {
             throw new InvalidLoginException("Email ou senha invalidos.");
         }
 
-        for(User user : users) {
+        for(User user : users) {       //Eu precisei mudar aqui, porque fiz os getters retornarem String, mas é fácil voltar
             if(user.getEmail().equals(emailObj.getEmail()) && user.getPassword().equals(passwordObj.getPassword())){ 
                 return user;
             } else {

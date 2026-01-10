@@ -25,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
         MedicPanel medic = new MedicPanel(this);
         
         jPanel.add(login, "login");
-        jPanel.add(secretary, "secretary");
+        jPanel.add(secretary, "secretary"); //adicionei os frames que faltavam aqui
         jPanel.add(patient, "patient");
         jPanel.add(medic, "medic");
         
@@ -33,8 +33,8 @@ public class MainFrame extends javax.swing.JFrame {
         setContentPane(jPanel);
     }
     
-    public void changeScreen(String name, User user){
-        this.user = user;
+    public void changeScreen(String name, User user){ //essa função é só pro login passar o User pra main,
+        this.user = user;                             //e os painés poderem acessar os dados do user mais facilmente
         System.out.println(this.user.getName());
         cardLayout.show(jPanel, name);
     }
@@ -42,7 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
         cardLayout.show(jPanel, name);
     }
 
-    public User getUser(){
+    public User getUser(){      //pra retornar o User pros painéis
         return this.user;
     }
     

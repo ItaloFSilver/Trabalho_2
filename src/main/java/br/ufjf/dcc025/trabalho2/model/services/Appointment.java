@@ -16,7 +16,7 @@ public class Appointment {
     private final String patientName;
     private final String medicName;
     private boolean Confirmed;
-    //private final User medic;
+    //private final User medic; // <- não sei se vai precisar disso aqui
 
     public Appointment(User medic, User patient, Date date, boolean check) {
         this.medicCPF = medic.getCPF();
@@ -25,7 +25,7 @@ public class Appointment {
         this.medicName = medic.getName();
         this.patientName = patient.getName();
         this.Confirmed = check;
-        //this.medic = medic;
+        //this.medic = medic; // <- idem
     }
 
     public String getMedicName(){
