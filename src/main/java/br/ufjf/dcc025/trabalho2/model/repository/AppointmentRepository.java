@@ -41,11 +41,7 @@ public class AppointmentRepository implements Repository<Appointment> {
 
         for(int i=0; i<appointments.size(); i++) {
             Appointment u = appointments.get(i);
-            if(u.getMedicCPF().equals(appointment.getMedicCPF()) && u.getDate().equals(appointment.getDate())) {
-                appointments.remove(u);
-                break;
-            }
-            if(u.getPatientCPF().equals(appointment.getPatientCPF()) && u.getDate().equals(appointment.getDate())){
+            if(u.getMedicCPF().equals(appointment.getMedicCPF()) && u.getDate().equals(appointment.getDate()) && u.getPatientCPF().equals(appointment.getPatientCPF())) {
                 appointments.remove(u);
                 break;
             }

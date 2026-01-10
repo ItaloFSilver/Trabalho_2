@@ -43,7 +43,10 @@ public class Appointment {
     public String getDate(){
         String day = "";
         String month = "";
-        
+        String year = ""+(date.getYear()-100);
+        String hour = "";
+        String minute = "";
+                
         if(this.date.getDate() < 10)
             day += "0";
         day += "" + (this.date.getDate());
@@ -51,8 +54,15 @@ public class Appointment {
         if(this.date.getMonth()+1 < 10)
             month += "0";
         month += "" + (this.date.getMonth()+1);
+        if(this.date.getHours() < 10)
+            hour += "0";
+        hour += "" + (this.date.getHours());
         
-        String fullDate = day + "/"+ month;
+        if(this.date.getMinutes()+1 < 10)
+            minute += "0";
+        minute += "" + (this.date.getMinutes());
+        
+        String fullDate = day + "/"+ month + "/" + year + " " + hour + ":" + minute;
         
         return fullDate;
     }
