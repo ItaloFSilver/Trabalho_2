@@ -1,9 +1,12 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
+import javax.swing.JPanel;
+
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.PatientPanel;
 
 public class Patient extends User {
     boolean hospitalized;
@@ -17,5 +20,10 @@ public class Patient extends User {
     public Patient(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.PACIENTE;
+    }
+
+    @Override
+    public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
+        return new PatientPanel(mainframe);
     }
 }

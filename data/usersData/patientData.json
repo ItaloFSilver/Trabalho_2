@@ -1,7 +1,7 @@
 [
   {
     "profile": "PACIENTE",
-    "name": "Bersan",
+    "name": "Gustaco",
     "email": {
       "email": "bersan@email.com"
     },
@@ -13,12 +13,13 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)92323-2323"
-    },
-    "active": false
+    }
   },
   {
+    "hospitalized": false,
+    "visitable": false,
     "profile": "PACIENTE",
-    "name": "Italo Fagundes Silverio",
+    "name": "Italo",
     "email": {
       "email": "fagundes@gmail.com"
     },
@@ -30,7 +31,6 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)99923-9026"
-    },
-    "active": false
+    }
   }
 ]

@@ -1,13 +1,14 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
-import java.util.UUID;
+import javax.swing.JPanel;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame;
 
-public class User {
+public abstract class User {
     
     protected Profile profile;
     protected String name;
@@ -37,6 +38,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
+
+    public abstract JPanel createPanel(MainFrame mainframe);
 
     public String getName() {
         return this.name;

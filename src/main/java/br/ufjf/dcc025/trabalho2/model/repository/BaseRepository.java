@@ -22,7 +22,11 @@ public class BaseRepository<T extends User> implements Repository<User> {
 
     public BaseRepository(String filename, Class<T> type) {
         this.path = dirPath + File.separator + "usersData" + File.separator + filename;
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new GsonBuilder()
+                    .registerTypeAdapter(User.class, new UserAdapter())
+                    .setDateFormat("dd/MM/yyyy HH:mm:ss")
+                    .setPrettyPrinting()
+                    .create();
         this.type = type;
     }
 
