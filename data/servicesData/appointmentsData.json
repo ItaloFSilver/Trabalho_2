@@ -10,5 +10,17 @@
     "patientName": "Italo Fagundes Silverio",
     "medicName": "Bernardo M Barbosa",
     "Confirmed": false
+  },
+  {
+    "medicCPF": {
+      "cpf": "222.222.222-22"
+    },
+    "patientCPF": {
+      "cpf": "023.552.096-93"
+    },
+    "date": "Jan 10, 2026, 4:00:30 PM",
+    "patientName": "Italo Fagundes Silverio",
+    "medicName": "Bernardo M Barbosa",
+    "Confirmed": true
   }
 ]

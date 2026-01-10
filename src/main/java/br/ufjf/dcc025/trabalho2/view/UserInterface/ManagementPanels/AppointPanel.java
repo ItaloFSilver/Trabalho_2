@@ -60,12 +60,12 @@ public class AppointPanel extends JPanel {
 
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton btnSalvar = new JButton("Agendar");
-        JButton btnLimpar = new JButton("Limpar"); 
+        JButton btnCancelar = new JButton("Limpar"); 
         
         btnSalvar.addActionListener(e -> saveAppointment(medics, patients, agenda));
-        btnLimpar.addActionListener(e -> clearFields());
+        btnCancelar.addActionListener(e -> cancelSaving());
 
-        //panelBotoes.add(btnLimpar);
+        panelBotoes.add(btnCancelar);
         panelBotoes.add(btnSalvar);
 
         add(panelBotoes, BorderLayout.SOUTH);
@@ -92,6 +92,11 @@ public class AppointPanel extends JPanel {
         
         JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.get(indPac).getName() + " com Dr. " + m.get(indMed).getName());
         
+        clearFields();
+        closeWindow();
+    }
+    
+    private void cancelSaving(){
         clearFields();
         closeWindow();
     }

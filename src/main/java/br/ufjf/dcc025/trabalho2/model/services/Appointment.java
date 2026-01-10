@@ -7,6 +7,7 @@ import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.util.Calendar;
 
 public class Appointment {
    
@@ -44,7 +45,20 @@ public class Appointment {
     }
     
     public String getDate(){
-        return date.toString();
+        String day = "";
+        String month = "";
+        
+        if(this.date.getDate() < 10)
+            day += "0";
+        day += "" + (this.date.getDate());
+        
+        if(this.date.getMonth()+1 < 10)
+            month += "0";
+        month += "" + (this.date.getMonth()+1);
+        
+        String fullDate = day + "/"+ month;
+        
+        return fullDate;
     }
     
     public String getCheck(){
