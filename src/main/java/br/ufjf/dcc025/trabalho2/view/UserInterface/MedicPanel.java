@@ -7,6 +7,8 @@ public class MedicPanel extends UserPanel {
     
     public MedicPanel(MainFrame main) {
         super(main);
+        
+        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab());
     }
     
 }

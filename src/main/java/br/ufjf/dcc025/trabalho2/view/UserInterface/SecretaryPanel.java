@@ -187,7 +187,8 @@ public class SecretaryPanel extends JPanel{
                 int modelRow = tabela.convertRowIndexToModel(line);
                 String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
                 controller.removeUserByCPF(cpf);
-                model.removeRow(tabela.getSelectedRow());     
+                model.removeRow(tabela.getSelectedRow());
+                deleteAppointments(cpf);
             }
             });
         
@@ -202,7 +203,6 @@ public class SecretaryPanel extends JPanel{
 
     
     private void openRegisterWindow() {
-
         RegisterFrame dialog = new RegisterFrame(model, -1);
         dialog.pack(); 
         dialog.setLocationRelativeTo(null); 
@@ -212,6 +212,12 @@ public class SecretaryPanel extends JPanel{
     
     private void logOutBtnActionPerformed(ActionEvent evt){
         this.mainPage.changeScreen("login");
+    }
+    
+    private void deleteAppointments(String cpf){
+        AppointmentController controller = new AppointmentController();
+        controller.removeAllOfUser(cpf);
+        
     }
 }
 

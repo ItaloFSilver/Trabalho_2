@@ -54,13 +54,13 @@ public class LoginPanel extends JPanel {
         passwordLabel = new JLabel("Senha: ");
         centralizator.gridx = 0;
         centralizator.gridy = 2;
-        centralizator.anchor = GridBagConstraints.LINE_END;
+        centralizator.anchor = GridBagConstraints.LINE_START;
         add(passwordLabel, centralizator);
         
         senhaUser = new JPasswordField(15);
         centralizator.gridx = 1;
         centralizator.gridy = 2;
-        centralizator.anchor = GridBagConstraints.LINE_START;
+        centralizator.anchor = GridBagConstraints.LINE_END;
         add(senhaUser, centralizator);
         
         enterBtn = new JButton("Entrar");

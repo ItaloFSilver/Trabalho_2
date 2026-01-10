@@ -20,10 +20,18 @@ public class AppointmentController {
         return new AppointmentRepository().listAll();
     }
     
+    public void removeAllOfUser(String cpf){
+        List<Appointment> list = listThis(cpf);
+        while(!list.isEmpty()){
+            new AppointmentRepository().remove(list.getLast());
+            list.removeLast();
+        }
+    }
+    
     public List<Appointment> listThis(String cpf){  //Pesquisa os agendamentos do CPF, assim a gente puxa só as de cada usuário pra eles mesmos
         List<Appointment> appointments = new AppointmentRepository().listAll(), hisAppointments = new ArrayList<>();
         for(Appointment a : appointments)
-            if(a.getPatientCPF().toString().equals(cpf))
+            if(a.getPatientCPF().toString().equals(cpf) || a.getMedicCPF().toString().equals(cpf))
                 hisAppointments.add(a);
         return hisAppointments;
     }

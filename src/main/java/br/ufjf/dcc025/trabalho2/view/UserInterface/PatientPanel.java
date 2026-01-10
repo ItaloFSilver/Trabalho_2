@@ -22,7 +22,7 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain√
         
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  //por enquanto s√≥ tem essa funcionando
         this.tabbedPane.addTab("Exames", new JPanel(new BorderLayout()));
-        this.tabbedPane.addTab("Dados Pessoais", new JPanel(new BorderLayout()));
+        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab());
         
         add(tabbedPane, BorderLayout.CENTER);
     }
@@ -36,7 +36,13 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain√
         
         String[] colunas = {"Data", "M√©dico", "Status"};
         
-        appoint = new DefaultTableModel(colunas, 0);
+        appoint = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
         JTable tabela = new JTable(appoint);
         
         
@@ -69,3 +75,4 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain√
         }
     }
 }
+

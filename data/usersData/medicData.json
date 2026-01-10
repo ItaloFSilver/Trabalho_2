@@ -1,23 +1,6 @@
 [
   {
     "profile": "MEDICO",
-    "id": "e0506334-5a12-469b-83a5-d78f09dfccc1",
-    "name": "Arthur de Souza",
-    "email": {
-      "email": "arthur@email.com"
-    },
-    "cpf": {
-      "cpf": "111.111.111-11"
-    },
-    "password": {
-      "password": "senha1234"
-    },
-    "phoneNumber": {
-      "phoneNumber": "(32)99934-9023"
-    }
-  },
-  {
-    "profile": "MEDICO",
     "id": "a710ffa2-5498-4c19-bef1-8f86d340e43d",
     "name": "Bernardo M Barbosa",
     "email": {
