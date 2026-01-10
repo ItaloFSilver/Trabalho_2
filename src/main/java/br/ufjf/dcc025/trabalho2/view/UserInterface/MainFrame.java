@@ -1,5 +1,8 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
+import br.ufjf.dcc025.trabalho2.model.users.Secretary;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.CardLayout;
 
@@ -9,9 +12,12 @@ import javax.swing.JPanel;
 public class MainFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
-    private CardLayout cardLayout;
-    private JPanel jPanel;
+    private final CardLayout cardLayout;
+    private final JPanel jPanel;
     protected User user;
+    private SecretaryPanel secretary;
+    private PatientPanel patient;
+    private MedicPanel medic;
     
     public MainFrame() {
         initComponents();
@@ -29,22 +35,39 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void changeScreen(String name, User user){ //essa função é só pro login passar o User pra main,
         this.user = user;                             //e os painés poderem acessar os dados do user mais facilmente
+        switch(user.getProfile()){
+            case PACIENTE -> { 
+                this.user = new Patient(this.user.getName(), this.user.getEmail(), this.user.getCPF().toString(), this.user.getphoneNumber().toString(),this.user.getPassword());
+                patient = new PatientPanel(this);
+                jPanel.add(patient, "patient");
+            }
+            
+            case MEDICO -> { 
+                this.user = new Medic(this.user.getName(), this.user.getEmail(), this.user.getCPF().toString(), this.user.getphoneNumber().toString(),this.user.getPassword());
+                medic = new MedicPanel(this);
+                jPanel.add(medic, "medic");
+            }
+            
+            case SECRETARIO -> { 
+                this.user = new Secretary(this.user.getName(), this.user.getEmail(), this.user.getCPF().toString(), this.user.getphoneNumber().toString(),this.user.getPassword());
+                secretary = new SecretaryPanel(this);
+                jPanel.add(secretary, "secretary");
+            }
+            
+            default -> {}
+        }
         System.out.println(this.user.getName());
         
-        SecretaryPanel secretary = new SecretaryPanel(this);
-        PatientPanel patient = new PatientPanel(this);
-        MedicPanel medic = new MedicPanel(this);
-        
-        jPanel.add(secretary, "secretary"); //adicionei os frames que faltavam aqui
-        jPanel.add(patient, "patient");
-        jPanel.add(medic, "medic");
+        //SecretaryPanel secretary = new SecretaryPanel(this);
+        //PatientPanel patient = new PatientPanel(this);
+        //MedicPanel medic = new MedicPanel(this);
         
         cardLayout.show(jPanel, name);
         
     }
     public void changeScreen(String name){
-        SecretaryPanel secretary = new SecretaryPanel(this);
-         jPanel.add(secretary, "secretary");
+        SecretaryPanel secret = new SecretaryPanel(this);
+         jPanel.add(secret, "secretary");
         
         cardLayout.show(jPanel, name);
     }

@@ -6,6 +6,9 @@ import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,12 +23,13 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
     public PatientPanel(MainFrame main) {
         super(main);
         
-        this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  //por enquanto só tem essa funcionando
+        this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
         this.tabbedPane.addTab("Exames", new JPanel(new BorderLayout()));
-        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab());
+        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
         
         add(tabbedPane, BorderLayout.CENTER);
     }
+    
     
     
     private JPanel createAppointmentPage(){ //cria uma tabela e puxa o user armazenado pela mainPage pra poder ver as consultas

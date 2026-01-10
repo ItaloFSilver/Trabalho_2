@@ -1,7 +1,6 @@
 [
   {
     "profile": "MEDICO",
-    "id": "5297fbc3-2ae5-41a7-8907-edebd4664238",
     "name": "Bernardo M Barbosa",
     "email": {
       "email": "b@email.com"
@@ -14,6 +13,7 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)99999-9999"
-    }
+    },
+    "active": false
   }
 ]

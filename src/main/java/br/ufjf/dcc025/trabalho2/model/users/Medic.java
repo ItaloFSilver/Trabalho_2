@@ -11,10 +11,12 @@ import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 public class Medic extends User {    
     private Specialization specialization;
     private List<Appointment> appointments;
+    private boolean active;
 
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
+        this.active = false;
     }
 
     public Medic(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
@@ -33,4 +35,5 @@ public class Medic extends User {
     public Specialization getSpecialization() {
         return specialization;
     }
+    
 }

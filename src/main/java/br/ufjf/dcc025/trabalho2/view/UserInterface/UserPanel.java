@@ -49,7 +49,7 @@ public class UserPanel extends JPanel {
     }
     
     
-    private JPanel initDataComponents(){        //Inicializa todos os campos na página de dados pessoais
+    protected JPanel initDataComponents(){        //Inicializa todos os campos na página de dados pessoais
         this.user = mainPage.getUser();
         JPanel painel = new JPanel();
         painel.setLayout(new GridBagLayout());

@@ -47,7 +47,7 @@ public class BaseRepository<T extends User> implements Repository<User> {
          List<User> users = listAll();
 
         for(User u : users) {
-            if(u.getId().equals(user.getId())) {
+            if(u.getCPF().equals(user.getCPF())) {
                 users.remove(u);
                 break;
             }

@@ -10,12 +10,12 @@ import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 public class User {
     
     protected Profile profile;
-    protected UUID id = UUID.randomUUID();
     protected String name;
     protected Email email;
     protected CPF cpf;
     protected Password password;
     protected PhoneNumber phoneNumber;
+    protected boolean active;
 
     /**
     * @throws InvalidEmailException se o email for invalido
@@ -29,6 +29,7 @@ public class User {
         this.cpf = new CPF(cpf);
         this.phoneNumber = new PhoneNumber(phoneNumber);
         this.password = new Password(password);
+        this.active = false;
     }
 
     public User(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
@@ -37,10 +38,6 @@ public class User {
         this.cpf = cpf;
         this.phoneNumber = phoneNumber;
         this.password = password;
-    }
-
-    public UUID getId() {
-        return this.id;
     }
 
     public String getName() {
@@ -66,17 +63,15 @@ public class User {
     public Profile getProfile() {
         return this.profile;
     }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
+    
+    public boolean getStatus(){
+        return this.active;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        User other = (User) obj;
-        return id.equals(other.id);
+    
+    public void toggleActive(){
+        if(this.active)
+            active = false;
+        else
+            active = true;
     }
 }
