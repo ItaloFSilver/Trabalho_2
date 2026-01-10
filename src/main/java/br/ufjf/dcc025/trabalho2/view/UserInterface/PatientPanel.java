@@ -9,6 +9,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +39,6 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois painÃ
         
         consultController = new AppointmentController();
         
-        
         String[] colunas = {"Data", "MÃ©dico", "Status"};
         
         appoint = new DefaultTableModel(colunas, 0){
@@ -60,7 +61,11 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois painÃ
         JButton updateBtn = new JButton("Atualizar");
         updateBtn.addActionListener(this::updateBtnActionListener);
         
+        JButton editBtn = new JButton("Editar");
+        editBtn.addActionListener(this::editBtnActionListener);
+        
         toolbar.add(updateBtn);
+        toolbar.add(editBtn);
         
         appPanel.add(toolbar, BorderLayout.NORTH);
         
@@ -77,6 +82,35 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois painÃ
                 appoint.addRow(data);
             }
         }
+    }
+    private void editBtnActionListener(ActionEvent evt){
+        JPanel editPanel = new JPanel(new BorderLayout());
+        JFrame edit = new JFrame();
+        
+        GridBagConstraints centralizator = new GridBagConstraints();
+        centralizator.insets = new Insets(10, 10, 10, 10);
+        
+        JComboBox comboDias = new JComboBox();
+        
+        JComboBox comboHorario = new JComboBox();
+        
+        JButton cancelBtn = new JButton("Cancelar");
+        cancelBtn.addActionListener(e->hideWindow(edit));
+        editPanel.add(cancelBtn);
+        
+        JButton confirmBtn = new JButton("Confirmar");
+        
+        edit.add(editPanel);
+        edit.setContentPane(editPanel);
+        edit.setTitle("Dados do Agendamento");
+        edit.setSize(640, 480);
+        edit.setResizable(false);
+        edit.setVisible(true);
+        
+    }
+    
+    public void hideWindow(JFrame frame){
+        frame.setVisible(false);
     }
 }
 

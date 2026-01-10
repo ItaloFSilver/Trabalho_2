@@ -102,27 +102,14 @@ public class LoginPanel extends JPanel {
             invalidCredLbl.setVisible(false);
             limpaCampo(campoUser);
             limpaCampo(senhaUser);
-            this.mainFrame.changeScreen("secretary");
+            this.mainFrame.changeScreen("Secretario");
         }
         else
         {
             try {
                 user = new LoginController().login(campoUser.getText(), senhaUser.getText());
-                switch (user.getProfile()) {
-                    case Profile.SECRETARIO -> {
-                        this.mainFrame.changeScreen("secretary", user); //passa o usuário criado pro painel poder
-                    }                                                       //acessar os dados dele, assim fica mais facil
-                    case Profile.MEDICO -> {                                //(não sei se é boa pratica)
-                        this.mainFrame.changeScreen("medic", user);
-                    }
-                    case Profile.PACIENTE -> {
-                        this.mainFrame.changeScreen("patient", user);
-                        break;
-                    }
-                    default -> {
-                        break;
-                    }
-                }
+                this.mainFrame.changeScreen(user.getProfile().toString(), user);
+                
                 invalidCredLbl.setVisible(false);
                 
             } 

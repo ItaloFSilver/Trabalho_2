@@ -68,7 +68,6 @@ public class MedicPanel extends UserPanel {
         
         consultController = new AppointmentController();
         
-        
         String[] colunas = {"Data", "Paciente", "Status"};
         
         appoint = new DefaultTableModel(colunas, 0){
@@ -80,16 +79,14 @@ public class MedicPanel extends UserPanel {
         
         JTable tabela = new JTable(appoint);
         
-        
-        
         JScrollPane scroll = new JScrollPane(tabela);
         appPanel.add(scroll, BorderLayout.CENTER);
-        
         
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         JButton updateBtn = new JButton("Atualizar");
         updateBtn.addActionListener(this::updateBtnActionListener);
+        
         
         toolbar.add(updateBtn);
         

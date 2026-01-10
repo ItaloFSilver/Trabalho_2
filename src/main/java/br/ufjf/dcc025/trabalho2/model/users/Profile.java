@@ -2,8 +2,8 @@ package br.ufjf.dcc025.trabalho2.model.users;
 
 public enum Profile {
     PACIENTE("Paciente"),
-    MEDICO("Médico"),
-    SECRETARIO("Secretário");
+    MEDICO("Medico"),
+    SECRETARIO("Secretario");
 
     private final String label;
 
