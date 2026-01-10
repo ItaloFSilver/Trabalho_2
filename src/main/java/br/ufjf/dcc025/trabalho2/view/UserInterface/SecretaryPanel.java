@@ -27,7 +27,7 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFram
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
 import javax.swing.JFrame;
 
-public class SecretaryPanel extends JPanel{
+public class SecretaryPanel extends UserPanel{
     
     private JButton logOutBtn;
     private MainFrame mainPage;
@@ -35,25 +35,7 @@ public class SecretaryPanel extends JPanel{
     private DefaultTableModel model;
     
     public SecretaryPanel(MainFrame main){
-        this.mainPage = main;
-        
-        setLayout(new BorderLayout());
-
-        JPanel pnlHeader = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        pnlHeader.setBackground(new Color(60, 100, 180)); 
-        JLabel lblBemVindo = new JLabel("Olá, Secretária. Bem-vinda ao sistema.");
-        lblBemVindo.setForeground(Color.WHITE);
-        lblBemVindo.setFont(new Font("Arial", Font.BOLD, 14));
-        pnlHeader.add(lblBemVindo);
-        
-        logOutBtn = new JButton("LogOut");
-        logOutBtn.addActionListener(this::logOutBtnActionPerformed);
-        pnlHeader.add(logOutBtn);
-        
-        add(pnlHeader, BorderLayout.NORTH);
-
-        JTabbedPane tabbedPane = new JTabbedPane();
-        
+        super(main);
         tabbedPane.addTab("Agendamentos", criarTabAgenda());
         tabbedPane.addTab("Gerenciar Usuários", criarTabUsuarios());
 
@@ -208,10 +190,6 @@ public class SecretaryPanel extends JPanel{
         dialog.setLocationRelativeTo(null); 
         dialog.setSize(640, 480);
         dialog.setVisible(true);
-    }
-    
-    private void logOutBtnActionPerformed(ActionEvent evt){
-        this.mainPage.changeScreen("login");
     }
     
     private void deleteAppointments(String cpf){

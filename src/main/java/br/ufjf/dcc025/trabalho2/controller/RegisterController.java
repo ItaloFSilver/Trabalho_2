@@ -11,6 +11,8 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidphoneNumberException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
+import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.util.List;
 
 public class RegisterController {
     
@@ -20,17 +22,21 @@ public class RegisterController {
         CPF cpfObj;
         PhoneNumber phoneNumberObj;
         Password passwordObj;
-
+        UserRepository repository = new UserRepository();
+        List<User> users = repository.listAllUsers();
         try {
             emailObj = new Email(email);
             cpfObj = new CPF(cpf);
             phoneNumberObj = new PhoneNumber(phoneNumber);
             passwordObj = new Password(password);
+            for(User u : users)
+                if(cpfObj.equals(u.getCPF()))
+                    throw new InvalidCPFException("CPF já cadastrado");
         } 
         catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException | InvalidphoneNumberException e) {
             throw new InvalidRegisterException(e.getMessage());
         }
 
-        new UserRepository().saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType);
+        repository.saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType);
     }
 }

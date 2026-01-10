@@ -41,7 +41,6 @@ public class UserPanel extends JPanel {
         
         tabbedPane = new JTabbedPane();
         
-        
     }
     protected JPanel createPersonalDataTab(){   //fiz esse método pra poder adicionar 
         JPanel painel = initDataComponents();   //o que o médico tiver de diferente na página de dados
@@ -156,9 +155,9 @@ public class UserPanel extends JPanel {
         
         centralizator.gridwidth = 2;
         centralizator.gridx = 0;
-        centralizator.gridy = 0;
+        centralizator.gridy = 6;
         centralizator.anchor = GridBagConstraints.SOUTH;
-        painel.add(confirmBtn);
+        painel.add(confirmBtn, centralizator);
         
         return painel;
     }
