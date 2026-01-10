@@ -1,18 +1,27 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import javax.swing.table.DefaultTableModel;
+
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-
-import java.util.List;
-import javax.swing.*;
-import java.awt.*;
-import java.time.LocalDate;
-import java.util.Date;
-import javax.swing.table.DefaultTableModel;
 
 public class AppointPanel extends JPanel {
 
@@ -86,7 +95,12 @@ public class AppointPanel extends JPanel {
         
         Date data = (Date) spinnerDataHora.getValue();
         agenda.add(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
-        control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+        try{
+            control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return;
+        }
         String [] dados = {data.toString(), p.get(indPac).getName(), m.get(indMed).getName(), checar};
         model.addRow(dados);
         
