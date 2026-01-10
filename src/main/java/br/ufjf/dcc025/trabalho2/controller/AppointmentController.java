@@ -1,13 +1,25 @@
 package br.ufjf.dcc025.trabalho2.controller;
 
-import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
-import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
+import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
+import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+
 public class AppointmentController {
     
-    public void saveAppointment(Appointment appointment) {
+    public void saveAppointment(Appointment appointment) throws InvalidAppointmentException {
+        List<Appointment> appointments = new AppointmentRepository().listAll();
+        for(Appointment a : appointments) {
+            if(a.getMedicCPF().equals(appointment.getMedicCPF()) && a.getDate().equals(appointment.getDate())) {
+                throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
+            }
+            if(a.getPatientCPF().equals(appointment.getPatientCPF()) && a.getDate().equals(appointment.getDate())){
+                throw new InvalidAppointmentException("Paciente já possui uma consulta nessa data");
+            }
+        }
+
         new AppointmentRepository().save(appointment);
     }
 
