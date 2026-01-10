@@ -1,15 +1,11 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
-import java.util.List;
-
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
-import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 
 public class Patient extends User {
-    private List<Appointment> appointments;
     boolean hospitalized;
     boolean visitable;
 
