@@ -25,13 +25,13 @@ import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class AppointPanel extends JPanel {
 
-    private JComboBox<String> comboMedico;      //**************************SOCORRO*************************
-    private JComboBox<String> comboPaciente;    //**************************SOCORRO*************************
-    private JSpinner spinnerDataHora;           //**************************SOCORRO*************************
-    private JCheckBox checkConfirmada;          //**************************SOCORRO*************************
-    private SecretaryController controller;     //**************************SOCORRO*************************
-    private DefaultTableModel model;            //**************************SOCORRO*************************
-    private JFrame frame;
+    private final JComboBox<String> comboMedico;      //**************************SOCORRO*************************
+    private final JComboBox<String> comboPaciente;    //**************************SOCORRO*************************
+    private final JSpinner spinnerDataHora;           //**************************SOCORRO*************************
+    private final JCheckBox checkConfirmada;          //**************************SOCORRO*************************
+    private final SecretaryController controller;     //**************************SOCORRO*************************
+    private final DefaultTableModel model;            //**************************SOCORRO*************************
+    private final JFrame frame;
 
     public AppointPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
       
@@ -69,7 +69,7 @@ public class AppointPanel extends JPanel {
 
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton btnSalvar = new JButton("Agendar");
-        JButton btnCancelar = new JButton("Limpar"); 
+        JButton btnCancelar = new JButton("Cancelar"); 
         
         btnSalvar.addActionListener(e -> saveAppointment(medics, patients, agenda));
         btnCancelar.addActionListener(e -> cancelSaving());

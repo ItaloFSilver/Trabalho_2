@@ -40,7 +40,7 @@ public class Appointment {
         return this.patientCPF;
     }
     
-    public String getDate(){
+    public String getDate(){        //retorna a data formatada corretamente
         String day = "";
         String month = "";
         String year = ""+(date.getYear()-100);
@@ -58,7 +58,7 @@ public class Appointment {
             hour += "0";
         hour += "" + (this.date.getHours());
         
-        if(this.date.getMinutes()+1 < 10)
+        if(this.date.getMinutes() < 10)
             minute += "0";
         minute += "" + (this.date.getMinutes());
         
