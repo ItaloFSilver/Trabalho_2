@@ -84,29 +84,40 @@ public class PatientPanel extends UserPanel { //resolvi padronizar os dois pain�
         }
     }
     private void editBtnActionListener(ActionEvent evt){
-        JPanel editPanel = new JPanel(new BorderLayout());
-        JFrame edit = new JFrame();
+        /*
+        int linha = tabelaConsultas.getSelectedRow();
+        if (linha == -1) return;
+
+        // 1. Pega os dados da linha selecionada
+        String nomeMedico = (String) tabelaConsultas.getValueAt(linha, 1); // ex: Coluna 1 é médico
+        String dataAtual = (String) tabelaConsultas.getValueAt(linha, 2);  // ex: Coluna 2 é data
+
+        // 2. BUSCA HORÁRIOS DISPONÍVEIS (Isso viria do seu Controller)
+        // Exemplo simulado:
+        List<String> horariosLivres = controller.getHorariosDisponiveis(nomeMedico);
+    
+        // Se o controller ainda não existir, simule assim para testar:
+        // List<String> horariosLivres = List.of("12/01/2026 14:00", "12/01/2026 15:30", "13/01/2026 09:00");
+
+        // 3. Abre a Janela passando a lista
+        EditAppointmentDialog dialog = new EditAppointmentDialog(this, nomeMedico, dataAtual, horariosLivres);
+        dialog.setVisible(true);
+
+        // 4. Processa o resultado
+        if (dialog.isDesmarcou()) {
+            controller.cancelarConsulta(linha);
+            modelTabela.removeRow(linha);
         
-        GridBagConstraints centralizator = new GridBagConstraints();
-        centralizator.insets = new Insets(10, 10, 10, 10);
+        } else if (dialog.isSalvou()) {
+            String novaData = dialog.getNovoHorario();
         
-        JComboBox comboDias = new JComboBox();
+        // Atualiza no Backend
+            controller.atualizarConsulta(linha, novaData);
         
-        JComboBox comboHorario = new JComboBox();
-        
-        JButton cancelBtn = new JButton("Cancelar");
-        cancelBtn.addActionListener(e->hideWindow(edit));
-        editPanel.add(cancelBtn);
-        
-        JButton confirmBtn = new JButton("Confirmar");
-        
-        edit.add(editPanel);
-        edit.setContentPane(editPanel);
-        edit.setTitle("Dados do Agendamento");
-        edit.setSize(640, 480);
-        edit.setResizable(false);
-        edit.setVisible(true);
-        
+        // Atualiza na Tabela
+            tabelaConsultas.setValueAt(novaData, linha, 2);
+    }
+        */
     }
     
     public void hideWindow(JFrame frame){
