@@ -1,23 +1,6 @@
 [
   {
     "profile": "PACIENTE",
-    "name": "Italo Fagundes Silverio",
-    "email": {
-      "email": "fagundes@gmail.com"
-    },
-    "cpf": {
-      "cpf": "023.552.096-93"
-    },
-    "password": {
-      "password": "12345678"
-    },
-    "phoneNumber": {
-      "phoneNumber": "(32)99923-9026"
-    },
-    "active": false
-  },
-  {
-    "profile": "PACIENTE",
     "name": "Bersan",
     "email": {
       "email": "bersan@email.com"
@@ -30,6 +13,25 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)92323-2323"
+    },
+    "active": false
+  },
+  {
+    "hospitalized": false,
+    "visitable": false,
+    "profile": "PACIENTE",
+    "name": "Italo Fagundes Silverio",
+    "email": {
+      "email": "fagundes@gmail.com"
+    },
+    "cpf": {
+      "cpf": "023.552.096-93"
+    },
+    "password": {
+      "password": "12345678"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)99923-9026"
     },
     "active": false
   }

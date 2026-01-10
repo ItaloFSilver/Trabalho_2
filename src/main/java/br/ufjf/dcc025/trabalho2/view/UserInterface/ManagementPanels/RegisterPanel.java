@@ -116,6 +116,8 @@ public class RegisterPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
+                    if(index >= 0)
+                        removePerIndex(index, model, campoCPF.getText());
                     new RegisterController().registerUser(
                         campoNome.getText(),
                         campoEmail.getText(),
@@ -125,8 +127,6 @@ public class RegisterPanel extends JPanel{
                         Profile.fromString((String) cbTipoUsuario.getSelectedItem())
                     );
                     String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
-                    if(index >= 0)
-                        removePerIndex(index, model, campoCPF.getText());
                     model.addRow(data);
                     
                 } catch (InvalidRegisterException e) {
