@@ -16,7 +16,7 @@ import java.util.List;
 
 
 public class MedicController {
-    private MedicRepository repo;
+ 
     private WorkShiftRepository repoWS;
     
     public void savesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
@@ -30,14 +30,7 @@ public class MedicController {
         catch(InvalidDateException e) {
             throw new InvalidDateException(e.getMessage());
         }
-        
-        medic.addDisponibility(workShift);
-        
-        repo = new MedicRepository();
-        
-        repo.remove(medic);
-        
-        repo.save(medic);
+
     }
     public void removesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
@@ -50,7 +43,6 @@ public class MedicController {
         catch(InvalidDateException e) {
             throw new InvalidDateException(e.getMessage());
         }
-        medic.addDisponibility(workShift);
     }
     
     public void removesWorkShift(WorkShift w){

@@ -89,9 +89,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             cpf = alpha.getMedicCPF();
             MedicController medic = new MedicController();
             List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
-            //horariosLivres = daysOfWork.get(0).getFreeTime();
-            horariosLivres.add(alpha.getDate().substring(0, 9) + "08:00");
-            horariosLivres.add(alpha.getDate().substring(0, 9) + " 08:30");
+            horariosLivres = daysOfWork.get(alpha.getDayOfWeek()).getFreeTime();
              // ex: Coluna 1 é médico
               // ex: Coluna 0 é data
 
@@ -103,7 +101,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             
 
                 // 3. Abre a Janela passando a lista
-            EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, dataAtual, horariosLivres);
+            EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, alpha.getDate().substring(0, 9), horariosLivres);
             dialog.setVisible(true);
 
             // 4. Processa o resultado

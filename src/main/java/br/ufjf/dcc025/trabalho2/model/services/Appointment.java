@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.util.Calendar;
 
 public class Appointment {
    
@@ -13,6 +14,7 @@ public class Appointment {
     private final String patientName;
     private final String medicName;
     private boolean confirmed;
+    
     //private final User medic; // <- não sei se vai precisar disso aqui
 
     public Appointment(User medic, User patient, Date date, boolean check) {
@@ -65,6 +67,11 @@ public class Appointment {
         String fullDate = day + "/"+ month + "/" + year + " " + hour + ":" + minute;
         
         return fullDate;
+    }
+    
+    public int getDayOfWeek(){
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.DAY_OF_WEEK)-1;
     }
     
     public String getCheck(){

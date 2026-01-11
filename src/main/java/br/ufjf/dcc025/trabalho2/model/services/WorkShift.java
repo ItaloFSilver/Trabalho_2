@@ -7,6 +7,7 @@ import java.util.Date;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class WorkShift {
@@ -34,34 +35,36 @@ public class WorkShift {
         return this.start;
     }
     
-    public void timeBlock(String time){
-        block.add(time);
+    public void timeBlock(Date time){
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        block.add(parser.format(time));
     }
     
-    public void setFree(String time){
-        block.remove(time);
+    public void setFree(Date time){
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        block.remove(parser.format(time));
     }
     
     public List<String> getFreeTime(){
-        List<Date> freeDate = new ArrayList<>();
-        List<String> converted = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        List<String> listaHorarios = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Calendar cal = Calendar.getInstance();
+        Calendar calFim = Calendar.getInstance();
         try{
-            Date upToDate = parser.parse(start);
-            while(upToDate.before(parser.parse(end)) || upToDate.equals( parser.parse(end))){
-                if(block == null || !block.contains(start))
-                    freeDate.add(parser.parse(start));
-                    
-                upToDate.setTime(upToDate.getTime());
-            }
-            int i=0;
-            for(Date d : freeDate)
-                converted.add(parser.format(freeDate.get(i++)));
-        }catch(ParseException e){
-            System.exit(1);
+            cal.setTime(parser.parse(start));
+            calFim.setTime(parser.parse(end));
         }
-       
-        return converted;
+        catch(ParseException e){}
+    
+        while (cal.compareTo(calFim) <= 0) {
+           
+            Date horarioAtual = cal.getTime();
+            listaHorarios.add(sdf.format(horarioAtual));
+            cal.add(Calendar.MINUTE, 30);
+        }
+
+        return listaHorarios;
     }
     
     public boolean isFree(String time){

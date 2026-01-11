@@ -289,7 +289,7 @@ public class MedicPanel extends UserPanel<Medic> {
             txtRecomendacao.setText("");
         });
         
-        add(btnEmitir, BorderLayout.SOUTH);
+        medicPanel.add(btnEmitir, BorderLayout.SOUTH);
     
         return medicPanel;
     }

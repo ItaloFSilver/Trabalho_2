@@ -198,5 +198,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         controller.removeAllOfUser(cpf);
         
     }
+    
+    
 }
 

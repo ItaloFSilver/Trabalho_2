@@ -42,7 +42,7 @@ public class EditAppointmentDialog extends JDialog {
         for (String horario : horariosDisponiveis) {
             // Evita duplicar se o horário atual já estiver na lista de disponíveis
             if (!horario.equals(horarioAtual)) {
-                comboHorarios.addItem(horario);
+                comboHorarios.addItem(horarioAtual+" "+horario);
             }
         }
         

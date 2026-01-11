@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.util.Calendar;
 
 public class AppointPanel extends JPanel {
 
@@ -32,6 +34,7 @@ public class AppointPanel extends JPanel {
     private final SecretaryController controller;     //**************************SOCORRO*************************
     private final DefaultTableModel model;            //**************************SOCORRO*************************
     private final JFrame frame;
+    private final JComboBox<String> comboHorario;
 
     public AppointPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
       
@@ -53,9 +56,14 @@ public class AppointPanel extends JPanel {
         for(User u : patients)
             comboPaciente.addItem(u.getName()+"-"+u.getCPF());
         
+        Calendar cal = Calendar.getInstance();
+        
+        comboHorario = new JComboBox<>();
+        
+        
         SpinnerDateModel modelData = new SpinnerDateModel();
         spinnerDataHora = new JSpinner(modelData);
-        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDataHora, "dd/MM/yyyy | HH:mm");
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDataHora, "dd/MM/yyyy HH:mm");
         spinnerDataHora.setEditor(editor);
         
         checkConfirmada = new JCheckBox("Confirmada?");
@@ -92,22 +100,27 @@ public class AppointPanel extends JPanel {
         
         int indMed = comboMedico.getSelectedIndex();
         int indPac = comboPaciente.getSelectedIndex();
-        
+        Medic medic = (Medic) m.get(indMed);
         Date data = (Date) spinnerDataHora.getValue();
-        agenda.add(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
-        try{
-            control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-            return;
+        if(medic.medicoAtendeNestaData(data)){
+            agenda.add(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+            try{
+                control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(this, e.getMessage());
+                return;
+            }
+            String [] dados = {data.toString(), p.get(indPac).getName(), m.get(indMed).getName(), checar};
+            model.addRow(dados);
+        
+            JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.get(indPac).getName() + " com Dr. " + m.get(indMed).getName());
+        
+            clearFields();
+            closeWindow();
         }
-        String [] dados = {data.toString(), p.get(indPac).getName(), m.get(indMed).getName(), checar};
-        model.addRow(dados);
-        
-        JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.get(indPac).getName() + " com Dr. " + m.get(indMed).getName());
-        
-        clearFields();
-        closeWindow();
+        else{
+            JOptionPane.showMessageDialog(this, "Confira os dias de atendimento do médico!");
+        }
     }
     
     private void cancelSaving(){

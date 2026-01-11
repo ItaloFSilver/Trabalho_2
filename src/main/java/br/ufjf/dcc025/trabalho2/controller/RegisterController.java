@@ -18,9 +18,9 @@ public class RegisterController {
     private String regex;
     public void registerUser(String name, String email, String cpf, String phoneNumber, String password, Profile userType) throws InvalidRegisterException {
 
-        //regex = "^[A-Za-zÀ-ú']+(\\s[A-Za-zÀ-ú']+)+$";
+        regex = "^[A-Za-zÀ-ú']+(\\s[A-Za-zÀ-ú']+)+$";
         
-        //String nAme = name;
+        String nAme = name;
         Email emailObj;
         CPF cpfObj;
         PhoneNumber phoneNumberObj;
@@ -28,8 +28,8 @@ public class RegisterController {
         UserRepository repository = new UserRepository();
         List<User> users = repository.listAllUsers();
         try {
-            //if(!nAme.matches(regex))
-                //throw new InvalidEmailException("Nome inválido");
+            if(!nAme.matches(regex))
+                throw new InvalidEmailException("Nome inválido");
             emailObj = new Email(email);
             cpfObj = new CPF(cpf);
             phoneNumberObj = new PhoneNumber(phoneNumber);
