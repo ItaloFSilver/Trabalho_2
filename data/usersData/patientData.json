@@ -19,8 +19,6 @@
     "status": false
   },
   {
-    "hospitalized": false,
-    "visitable": false,
     "profile": "PACIENTE",
     "name": "Arthur Marques",
     "email": {

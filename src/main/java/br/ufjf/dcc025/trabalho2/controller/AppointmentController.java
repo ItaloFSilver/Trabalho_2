@@ -20,6 +20,7 @@ public class AppointmentController {
             if(a.getPatientCPF().equals(appointment.getPatientCPF()) && a.getDate().equals(appointment.getDate())){
                 throw new InvalidAppointmentException("Paciente já possui uma consulta nessa data");
             }
+            
         }
 
         new AppointmentRepository().save(appointment);

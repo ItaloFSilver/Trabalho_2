@@ -2,6 +2,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 import java.util.List;
 
 public class EditAppointmentDialog extends JDialog {
@@ -42,7 +43,7 @@ public class EditAppointmentDialog extends JDialog {
         for (String horario : horariosDisponiveis) {
             // Evita duplicar se o horário atual já estiver na lista de disponíveis
             if (!horario.equals(horarioAtual)) {
-                comboHorarios.addItem(horarioAtual+" "+horario);
+                comboHorarios.addItem(horarioAtual+horario);
             }
         }
         

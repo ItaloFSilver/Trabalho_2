@@ -6,6 +6,7 @@ import br.ufjf.dcc025.trabalho2.controller.DocumentController;
 import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
@@ -90,26 +91,17 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             MedicController medic = new MedicController();
             List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
             horariosLivres = daysOfWork.get(alpha.getDayOfWeek()).getFreeTime();
-             // ex: Coluna 1 é médico
-              // ex: Coluna 0 é data
-
-            // 2. BUSCA HORÁRIOS DISPONÍVEIS (Isso viria do seu Controller)
-            // Exemplo simulado:
-            //List<String> horariosLivres = controller.getHorariosDisponiveis(nomeMedico);
-    
-                // Se o controller ainda não existir, simule assim para testar:
-            
-
-                // 3. Abre a Janela passando a lista
+             
             EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, alpha.getDate().substring(0, 9), horariosLivres);
             dialog.setVisible(true);
 
-            // 4. Processa o resultado
+            
             if (dialog.isDesmarcou()) {
                 agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
                 for(Appointment a : agenda){  
                     if(a.getDate().equals(appoint.getValueAt(linha, 0))){
                         consultController.removeAppointment(a);
+                        medic.freeTime(a.getMedic(), a.getData());
                         break;
                     }
                 }
@@ -117,13 +109,27 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
                 appoint.removeRow(linha);
         
             } else if (dialog.isSalvou()) {
+                
                 String novaData = dialog.getNovoHorario();
+                
+                agenda = consultController.listAll();  //pesquisa pelo cpf do usuário pra achar certin
+                
+                for(Appointment a : agenda){  
+                    if(a.getDate().equals(appoint.getValueAt(linha, 0))){
+                        try{
+                            consultController.saveAppointment(new Appointment(a.getMedic(), a.getPatient(), a.getData(), true));
+                            consultController.removeAppointment(a);
+                            medic.freeTime(a.getMedic(), a.getData());
+                            appoint.setValueAt(novaData, linha, 0);
+                        }catch(InvalidAppointmentException eita){
+                                JOptionPane.showMessageDialog(this, eita.getMessage());
+                        }
+                        break;
+                        }
+                    }
         
-            // Atualiza no Backend
-                //controller.atualizarConsulta(linha, novaData);
-        
-            //  Atualiza na Tabela
-                appoint.setValueAt(novaData, linha, 0);
+            
+                
     }
         });
         

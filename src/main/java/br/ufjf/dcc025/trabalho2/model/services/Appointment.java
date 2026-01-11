@@ -3,6 +3,8 @@ package br.ufjf.dcc025.trabalho2.model.services;
 import java.util.Date;
 
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.util.Calendar;
 
@@ -14,6 +16,8 @@ public class Appointment {
     private final String patientName;
     private final String medicName;
     private boolean confirmed;
+    private final Medic medic;
+    private final Patient patient;
     
     //private final User medic; // <- não sei se vai precisar disso aqui
 
@@ -24,11 +28,19 @@ public class Appointment {
         this.medicName = medic.getName();
         this.patientName = patient.getName();
         this.confirmed = check;
-        //this.medic = medic; // <- idem
+        this.medic = (Medic)medic; 
+        this.patient = (Patient)patient;
     }
 
     public String getMedicName(){
         return this.medicName;
+    }
+    public Medic getMedic(){
+        return medic;
+    }
+    
+    public Patient getPatient(){
+        return patient;
     }
     
     public CPF getMedicCPF() {
@@ -40,6 +52,9 @@ public class Appointment {
     }
     public CPF getPatientCPF() {
         return this.patientCPF;
+    }
+    public Date getData(){
+        return this.date;
     }
     
     public String getDate(){        //retorna a data formatada corretamente

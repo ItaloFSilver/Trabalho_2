@@ -91,12 +91,5 @@ public class AppointmentRepository implements Repository<Appointment> {
             }
         }
         return null;
-    }/*
-    public List<String> getHorariosDisponiveis(String nomeMedico) {
-        // 1. Acha o médico na lista
-        // 2. Verifica a agenda dele
-        // 3. Filtra apenas os horários que NÃO têm 'paciente' atrelado ou status 'LIVRE'
-        // 4. Retorna a lista
-        return listaDeStrings;
-    }*/
+    }
 }

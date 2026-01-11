@@ -19,7 +19,9 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.User;
@@ -91,6 +93,7 @@ public class AppointPanel extends JPanel {
     private void saveAppointment(List<User> m, List<User> p, List<Appointment> agenda) {
         
         AppointmentController control = new AppointmentController();
+        MedicController medicCon = new MedicController();
         
         String checar;
         if(checkConfirmada.isSelected())
@@ -102,15 +105,17 @@ public class AppointPanel extends JPanel {
         int indPac = comboPaciente.getSelectedIndex();
         Medic medic = (Medic) m.get(indMed);
         Date data = (Date) spinnerDataHora.getValue();
-        if(medic.medicoAtendeNestaData(data)){
+        if(medicCon.medicoAtendeNestaData(medic, data)){
             agenda.add(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
             try{
                 control.saveAppointment(new Appointment(m.get(indMed), p.get(indPac), data, checkConfirmada.isSelected()));
-            } catch (Exception e){
+                medicCon.lockTime(medic, data);
+            } catch (InvalidAppointmentException e){
                 JOptionPane.showMessageDialog(this, e.getMessage());
                 return;
             }
             String [] dados = {data.toString(), p.get(indPac).getName(), m.get(indMed).getName(), checar};
+            
             model.addRow(dados);
         
             JOptionPane.showMessageDialog(this, "Consulta agendada para: " + p.get(indPac).getName() + " com Dr. " + m.get(indMed).getName());

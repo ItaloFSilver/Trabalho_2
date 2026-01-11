@@ -11,6 +11,7 @@ import br.ufjf.dcc025.trabalho2.model.repository.WorkShiftRepository;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -54,5 +55,77 @@ public class MedicController {
         repoWS = new WorkShiftRepository();
         
         return repoWS.searchByCPF(cpf);
+    }
+    
+    public void freeTime(Medic medic, Date dataAgendamento){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dataAgendamento);
+        int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
+        String diaTexto = "";
+        switch (diaNumero) {
+        case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
+        case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
+        case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
+        case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
+        case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
+        case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
+        case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
+        
+        }
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String horaDoDia = parser.format(dataAgendamento);
+        for(WorkShift u : medic.getDisponibilityAsList())
+            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia))
+                u.setFree(dataAgendamento);
+    }
+    
+    public void lockTime(Medic medic, Date dataAgendamento){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dataAgendamento);
+        int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
+        String diaTexto = "";
+        switch (diaNumero) {
+        case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
+        case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
+        case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
+        case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
+        case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
+        case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
+        case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
+        
+        }
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String horaDoDia = parser.format(dataAgendamento);
+        for(WorkShift u : medic.getDisponibilityAsList())
+            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia))
+                u.timeBlock(dataAgendamento);
+    }
+    
+    public boolean medicoAtendeNestaData(Medic medic, Date dataConsulta) {
+    
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dataConsulta);
+        int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
+
+        String diaTexto = "";
+        switch (diaNumero) {
+            case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
+            case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
+            case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
+            case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
+            case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
+            case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
+            case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
+        }
+
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String horaDoDia = parser.format(dataConsulta);
+    
+        for (WorkShift horario : medic.getDisponibilityAsList()) {
+            if (horario.getDayOfWeek().toString().equals(diaTexto) && horario.getFreeTime().contains(horaDoDia)) {
+                return true; 
+            }
+        }
+        return false;
     }
 }
