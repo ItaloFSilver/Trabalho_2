@@ -29,4 +29,8 @@ public class Secretary extends User {
     public boolean getStatus(){
         return false;
     }
+    //@Override
+    //public void setStatus(){
+        //return;
+    //}
 }

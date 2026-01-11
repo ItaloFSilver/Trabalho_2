@@ -31,10 +31,10 @@ public class Patient extends User {
     public boolean getStatus(){
         return this.visitable;
     }
-    
-    public void setStatus(boolean bool){
-        this.visitable = bool;
-    }
+    //@Override
+    //public void setStatus(boolean bool){
+        //this.visitable = bool;
+    //}
     
     public void setHospitalized(boolean bool){
         this.hospitalized = bool;

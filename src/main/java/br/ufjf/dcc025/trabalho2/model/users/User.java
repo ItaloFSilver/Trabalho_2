@@ -16,6 +16,7 @@ public abstract class User {
     protected CPF cpf;
     protected Password password;
     protected PhoneNumber phoneNumber;
+    protected boolean status;
 
     /**
     * @throws InvalidEmailException se o email for invalido
@@ -64,6 +65,7 @@ public abstract class User {
     public Profile getProfile() {
         return this.profile;
     }
+    //public abstract void setStatus(boolean bool);
     
     public abstract boolean getStatus();
 }

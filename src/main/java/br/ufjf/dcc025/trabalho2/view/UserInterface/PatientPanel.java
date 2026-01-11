@@ -89,7 +89,9 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             cpf = alpha.getMedicCPF();
             MedicController medic = new MedicController();
             List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
-            horariosLivres = daysOfWork.get(0).getFreeTime();
+            //horariosLivres = daysOfWork.get(0).getFreeTime();
+            horariosLivres.add(alpha.getDate().substring(0, 9) + "08:00");
+            horariosLivres.add(alpha.getDate().substring(0, 9) + " 08:30");
              // ex: Coluna 1 é médico
               // ex: Coluna 0 é data
 
@@ -136,7 +138,10 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     }
                     //Vou precisar de ajuda pra acertar essa função aqui dps
     private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
-        agenda = null;
+        if(!(agenda == null)){
+            agenda.clear();
+            appoint.setRowCount(0);
+        }
         agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
         for(Appointment a : agenda){
             String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};   
@@ -146,7 +151,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         
     }
     
-    private JPanel createPatientsList(){
+    private JPanel createPatientsList(){        //procura por outros pacientes para verificar horário de visita
         JPanel painel = new JPanel();
         SecretaryController repo = new SecretaryController();
         List<User> patients = repo.listPatients();

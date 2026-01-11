@@ -15,7 +15,8 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)92323-2323"
-    }
+    },
+    "status": false
   },
   {
     "hospitalized": false,
@@ -33,6 +34,7 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)99923-9026"
-    }
+    },
+    "status": false
   }
 ]

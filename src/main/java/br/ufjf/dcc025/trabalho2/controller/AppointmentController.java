@@ -46,9 +46,10 @@ public class AppointmentController {
         List<Appointment> appointments = new AppointmentRepository().listAll(), hisAppointments = new ArrayList<>();
         UserRepository users = new UserRepository();
         
-        for(Appointment a : appointments)
+        for(Appointment a : appointments){
             if(a.getPatientCPF().toString().equals(cpf) && users.findByCPF(a.getMedicCPF().toString()) != null || a.getMedicCPF().toString().equals(cpf) && users.findByCPF(a.getPatientCPF().toString()) != null)
                 hisAppointments.add(a);
+        }
         return hisAppointments;
     }
 }
