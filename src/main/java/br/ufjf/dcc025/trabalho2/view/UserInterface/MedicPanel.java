@@ -244,5 +244,73 @@ public class MedicPanel extends UserPanel<Medic> {
 
         listModel.addElement(horarioFormatado);
     }
+    /*
+    public class DoctorIssuePanel extends JPanel {
 
+    private JComboBox<String> comboTipo;
+    private JTextArea txtDiagnostico;
+    private JTextArea txtRecomendacao;
+    private String cpfMedicoLogado;
+    private String cpfPacienteAtual; // Recebido da seleção anterior
+
+    public DoctorIssuePanel(String cpfMedico, String cpfPaciente) {
+        this.cpfMedicoLogado = cpfMedico;
+        this.cpfPacienteAtual = cpfPaciente;
+        
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
+
+        // --- Formulario ---
+        JPanel form = new JPanel(new GridLayout(4, 1, 5, 5));
+        
+        comboTipo = new JComboBox<>(new String[]{"Atestado Médico", "Pedido de Exame", "Receita"});
+        
+        txtDiagnostico = new JTextArea(3, 20); // Linhas, Colunas
+        txtRecomendacao = new JTextArea(5, 20);
+        
+        // JTextArea precisa de ScrollPane para ter barra de rolagem
+        JScrollPane scrollDiag = new JScrollPane(txtDiagnostico);
+        JScrollPane scrollRec = new JScrollPane(txtRecomendacao);
+
+        form.add(new JLabel("Tipo de Documento:"));
+        form.add(comboTipo);
+        form.add(new JLabel("Diagnóstico / Motivo:"));
+        form.add(scrollDiag);
+        form.add(new JLabel("Recomendação / Prescrição:"));
+        form.add(scrollRec);
+
+        add(form, BorderLayout.CENTER);
+
+        // --- Botão ---
+        JButton btnEmitir = new JButton("Emitir e Salvar");
+        btnEmitir.addActionListener(e -> salvarDocumento());
+        
+        add(btnEmitir, BorderLayout.SOUTH);
+    }
+
+    private void salvarDocumento() {
+        String tipo = (String) comboTipo.getSelectedItem();
+        String diag = txtDiagnostico.getText();
+        String rec = txtRecomendacao.getText();
+
+        if (diag.isEmpty() || rec.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            return;
+        }
+
+        // 1. Cria o objeto
+        MedicalDocument doc = new MedicalDocument(tipo, cpfMedicoLogado, cpfPacienteAtual, diag, rec);
+        
+        // 2. Chama o controller
+        DocumentController controller = new DocumentController();
+        controller.emitirDocumento(doc);
+
+        JOptionPane.showMessageDialog(this, "Documento emitido com sucesso!");
+        
+        // Limpa campos
+        txtDiagnostico.setText("");
+        txtRecomendacao.setText("");
+    }
+}
+    */
 }

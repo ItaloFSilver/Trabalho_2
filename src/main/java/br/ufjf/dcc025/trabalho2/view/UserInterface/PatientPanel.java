@@ -2,16 +2,21 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.DocumentController;
 import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -173,5 +178,82 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     public void hideWindow(JFrame frame){
         frame.setVisible(false);
     }
+    /*
+    public JPanel createDocumentPanel(){
+        JPanel painel = new JPanel(new BorderLayout());
+        private JTable tabela;
+        private DefaultTableModel model;
+        private DocumentController controller;
+        private List<MedicalDocument> listaMeusDocs;
+
+        controller = new DocumentController();
+
+        // Configura Tabela
+        String[] colunas = {"Data", "Tipo", "Médico (CPF)", "Diagnóstico (Resumo)"};
+        model = new DefaultTableModel(colunas, 0) {
+            @Override // Impede edição das células
+            public boolean isCellEditable(int row, int column) { return false; }
+        };
+        
+        tabela = new JTable(model);
+        
+        // Evento de Clique Duplo para ver detalhes
+        tabela.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) { // Clique duplo
+                    mostrarDetalhes();
+                }
+            }
+        });
+
+        carregarDados(cpfPacienteLogado);
+
+        add(new JScrollPane(tabela), BorderLayout.CENTER);
+        add(new JLabel("Dica: Clique duas vezes na linha para ver os detalhes."), BorderLayout.SOUTH);
+    
+    }
+    private void carregarDados(String cpf) {
+        listaMeusDocs = controller.buscarPorPaciente(cpf);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        model.setRowCount(0); // Limpa tabela
+        for (MedicalDocument doc : listaMeusDocs) {
+            Object[] linha = {
+                sdf.format(doc.getDataEmissao()),
+                doc.getTipo(),
+                doc.getDoctorCpf(),
+                doc.getDiagnostico()
+            };
+            model.addRow(linha);
+        }
+    }
+    
+
+    private void mostrarDetalhes() {
+        int linha = tabela.getSelectedRow();
+        if (linha == -1) return;
+
+        // Pega o objeto correspondente da lista (a ordem da lista e da tabela é a mesma)
+        MedicalDocument doc = listaMeusDocs.get(linha);
+
+        // Monta a mensagem
+        String mensagem = "--- " + doc.getTipo().toUpperCase() + " ---\n\n" +
+                          "Data: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(doc.getDataEmissao()) + "\n" +
+                          "Médico: " + doc.getDoctorCpf() + "\n\n" +
+                          "DIAGNÓSTICO:\n" + doc.getDiagnostico() + "\n\n" +
+                          "RECOMENDAÇÃO/RECEITA:\n" + doc.getRecomendacao();
+
+        // Mostra num scrollpane caso o texto seja grande
+        JTextArea textArea = new JTextArea(mensagem);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setSize(300, 200);
+
+        JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Detalhes do Documento", JOptionPane.INFORMATION_MESSAGE);
+    } */
 }
+
+
 
