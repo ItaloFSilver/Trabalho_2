@@ -3,7 +3,6 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -19,7 +18,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class MedicPanel <Medic> extends UserPanel {
+public class MedicPanel extends UserPanel<Medic> {
     
     private AppointmentController consultController;
     private DefaultTableModel appoint;
@@ -30,9 +29,9 @@ public class MedicPanel <Medic> extends UserPanel {
     private JSpinner spinnerInicio;
     private JSpinner spinnerFim;
     
-    public MedicPanel(MainFrame main) {
+    public MedicPanel(MainFrame main, Medic user) {
         super(main);
-        
+        this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());
          this.tabbedPane.addTab("Gerenciar Agenda", DoctorSchedulePanel());
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab());
@@ -104,7 +103,7 @@ public class MedicPanel <Medic> extends UserPanel {
         return appPanel;
     }
     private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
-        this.user = this.mainPage.getUser();    //puxa o User armazenado na main pra acessar os dados
+            //puxa o User armazenado na main pra acessar os dados
         if(agenda == null){
             agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
             for(Appointment a : agenda){
@@ -124,7 +123,7 @@ public class MedicPanel <Medic> extends UserPanel {
         panelForm.setBorder(BorderFactory.createTitledBorder("Configurar Disponibilidade"));
 
         
-        String[] diasSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"};
+        String[] diasSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"};
         JComboBox comboDias = new JComboBox<>(diasSemana);
 
         spinnerInicio = createHourSpinner();
@@ -147,11 +146,11 @@ public class MedicPanel <Medic> extends UserPanel {
         listModel = new DefaultListModel<>();
         
         // Carrega o que o médico JÁ TINHA salvo anteriormente
-        /*if (medico.getDisponibilidade() != null) {
-            for (String h : medico.getDisponibilidade()) {
+        if (user.getDisponibility() != null) {
+            for (String h : user.getDisponibility()) {
                 listModel.addElement(h);
             }
-        }*/
+        }
 
         listaVisual = new JList<>(listModel);
         painel.add(new JScrollPane(listaVisual), BorderLayout.CENTER);

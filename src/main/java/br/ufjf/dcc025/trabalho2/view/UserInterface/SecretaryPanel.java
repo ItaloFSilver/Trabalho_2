@@ -21,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.users.Secretary;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointPanel;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
 import javax.swing.JFrame;
 
-public class SecretaryPanel<Secretary> extends UserPanel{
+public class SecretaryPanel extends UserPanel<Secretary>{
     
     private JButton logOutBtn;
     private MainFrame mainPage;

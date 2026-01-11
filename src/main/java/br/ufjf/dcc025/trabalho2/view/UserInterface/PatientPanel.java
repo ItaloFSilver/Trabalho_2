@@ -3,6 +3,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
 import java.awt.BorderLayout;
@@ -17,7 +18,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class PatientPanel <Patient> extends UserPanel { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
+public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
             
     private AppointmentController consultController;
     private List<Appointment> agenda;
