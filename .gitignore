@@ -8,3 +8,6 @@ target/
 .project
 .classpath
 bin/
+Doxyfile
+latex
+html
