@@ -6,6 +6,7 @@ import java.util.Date;
 
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkShift {
@@ -22,6 +23,7 @@ public class WorkShift {
         this.start = start;
         this.end = end;
         this.medicCPF = cpf;
+        this.block = new ArrayList<>();
     }
 
     public DayOfWeek getDayOfWeek() {
@@ -30,6 +32,36 @@ public class WorkShift {
 
     public String getStart() {
         return this.start;
+    }
+    
+    public void timeBlock(String time){
+        block.add(time);
+    }
+    
+    public void setFree(String time){
+        block.remove(time);
+    }
+    
+    public List<String> getFreeTime(){
+        List<Date> freeDate = new ArrayList<>();
+        List<String> converted = new ArrayList<>();
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        try{
+            Date upToDate = parser.parse(start);
+            while(upToDate.before(parser.parse(end)) || upToDate.equals( parser.parse(end))){
+                if(block == null || !block.contains(start))
+                    freeDate.add(parser.parse(start));
+                    
+                upToDate.setTime(upToDate.getTime());
+            }
+            int i=0;
+            for(Date d : freeDate)
+                converted.add(parser.format(freeDate.get(i++)));
+        }catch(ParseException e){
+            System.exit(1);
+        }
+       
+        return converted;
     }
     
     public boolean isFree(String time){

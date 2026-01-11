@@ -82,16 +82,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             cpf = alpha.getMedicCPF();
             MedicController medic = new MedicController();
             List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
-            if(cpf != null){
-                String hora = daysOfWork.get(0).getStart();
-                daysOfWork = medic.loadWorkShift(cpf);
-                
-                for(int i = 0; i<daysOfWork.size(); i++){
-                    if(daysOfWork.get(i).isFree(hora))
-                        horariosLivres.add(hora);
-                    
-                }
-            }
+            horariosLivres = daysOfWork.get(0).getFreeTime();
              // ex: Coluna 1 é médico
               // ex: Coluna 0 é data
 

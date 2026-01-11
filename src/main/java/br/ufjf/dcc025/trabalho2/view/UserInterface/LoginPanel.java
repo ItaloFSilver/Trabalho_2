@@ -76,14 +76,14 @@ public class LoginPanel extends JPanel {
         exitBtn.addActionListener(this::exitBtnActionPerformed);
         exitBtn.setPreferredSize(new Dimension(60, 30));
         centralizator.gridx = 1;
-        centralizator.gridy = 5;
+        centralizator.gridy = 4;
         centralizator.gridwidth = 2;
         centralizator.anchor = GridBagConstraints.CENTER;
         add(exitBtn, centralizator);
         
         invalidCredLbl = new JLabel("*Usuário e/ou senha inválido!");
         centralizator.gridx = 0;
-        centralizator.gridy = 4;
+        centralizator.gridy = 5;
         centralizator.anchor = GridBagConstraints.CENTER;
         add(invalidCredLbl, centralizator);
         invalidCredLbl.setForeground(Color.RED);
