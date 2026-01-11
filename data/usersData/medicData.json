@@ -1,10 +1,61 @@
 [
   {
     "active": false,
+    "disponibility": [
+      {
+        "dayOfWeek": "MONDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      },
+      null,
+      {
+        "dayOfWeek": "SATURDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      },
+      {
+        "dayOfWeek": "SUNDAY",
+        "start": "08:00",
+        "end": "12:00",
+        "medicCPF": {
+          "cpf": "222.222.222-22"
+        }
+      }
+    ],
     "profile": "MEDICO",
-    "name": "Arthur de Souza Marques",
+    "name": "Aaaaaaaaa",
     "email": {
-      "email": "arthur@gmail.com"
+      "email": "f@email.com"
     },
     "cpf": {
       "cpf": "222.222.222-22"
@@ -13,7 +64,7 @@
       "password": "12345678"
     },
     "phoneNumber": {
-      "phoneNumber": "(32)99922-1122"
+      "phoneNumber": "(32)99999-9999"
     }
   }
 ]

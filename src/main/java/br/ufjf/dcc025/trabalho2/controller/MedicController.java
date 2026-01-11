@@ -1,30 +1,48 @@
 package br.ufjf.dcc025.trabalho2.controller;
 
 
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
+import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
+import br.ufjf.dcc025.trabalho2.model.repository.WorkShiftRepository;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import br.ufjf.dcc025.trabalho2.model.users.Profile;
+import java.util.Date;
+import java.util.List;
 
 
 public class MedicController {
+    private MedicRepository repo;
+    private WorkShiftRepository repoWS;
     
-    public void savesWorkShift(String dayOfWeek, String start, String end, Medic medic) throws InvalidDateException {
+    public void savesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-        WorkShift workShift = null;
+        WorkShift workShift;
+        repoWS = new WorkShiftRepository();
         try {
-            workShift = new WorkShift(dayOfWeek, parser.parse(start), parser.parse(end));
-        }
-        catch(ParseException e) {
-            System.err.println("Erro ao converter a String para o tipo Date");
-            e.printStackTrace();
+            workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
+            repoWS.save(workShift);
         }
         catch(InvalidDateException e) {
-            throw new InvalidDateException("Data invalida");
+            throw new InvalidDateException(e.getMessage());
         }
-
+        
         medic.addDisponibility(workShift);
+        
+        repo = new MedicRepository();
+        
+        repo.remove(medic);
+        
+        repo.save(medic);
+    }
+    
+    public List<WorkShift> loadWorkShift(CPF cpf) {
+        repoWS = new WorkShiftRepository();
+        
+        return repoWS.searchByCPF(cpf);
     }
 }

@@ -117,7 +117,8 @@ public class AppointPanel extends JPanel {
     
     
     private void clearFields() {
-        comboMedico.setSelectedIndex(0);
+        if(comboMedico != null)
+            comboMedico.setSelectedIndex(0);
         comboPaciente.setSelectedIndex(0);
         spinnerDataHora.setValue(new Date()); // Reseta para data de hoje
         checkConfirmada.setSelected(false);

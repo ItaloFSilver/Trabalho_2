@@ -2,6 +2,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -148,8 +149,15 @@ public abstract class UserPanel<T extends User> extends JPanel {
             public void actionPerformed(ActionEvent evt){   //Registra um novo usuário e deleta a versão antiga
                 RegisterController nova = new RegisterController();
                 SecretaryController secret = new SecretaryController();
-                secret.removeUserByCPF(cpfField.getText());
-                nova.registerUser(nameField.getText(), emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile());
+                String name = user.getName();
+                try{
+                    secret.removeUserByCPF(cpfField.getText());
+                    nova.registerUser(nameField.getText(), emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile());
+                }catch(InvalidRegisterException e){
+                    JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    nova.registerUser(name, emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile());
+                }
+            
             }
         });
         

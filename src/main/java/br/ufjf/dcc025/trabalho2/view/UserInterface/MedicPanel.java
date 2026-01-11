@@ -1,6 +1,8 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 
@@ -20,6 +22,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
+import java.text.ParseException;
 
 
 public class MedicPanel extends UserPanel<Medic> {
@@ -128,8 +131,8 @@ public class MedicPanel extends UserPanel<Medic> {
         panelForm.setBorder(BorderFactory.createTitledBorder("Configurar Disponibilidade"));
 
         
-        String[] diasSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"};
-        JComboBox comboDias = new JComboBox<>(diasSemana);
+        String[] diasSemana = {"Segunda-feira", "Terca-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sabado", "Domingo"};
+        comboDias = new JComboBox<>(diasSemana);
 
         spinnerInicio = createHourSpinner();
         spinnerFim = createHourSpinner();
@@ -151,8 +154,8 @@ public class MedicPanel extends UserPanel<Medic> {
         listModel = new DefaultListModel<>();
         
         // Carrega o que o médico JÁ TINHA salvo anteriormente
-        if (user.getDisponibility() != null) {
-            for (WorkShift h : user.getDisponibility()) {
+        if (user.getDisponibilityAsList() != null) {
+            for (WorkShift h : user.getDisponibilityAsList()) {
                 listModel.addElement(h.toString());
             }
         }
@@ -164,24 +167,40 @@ public class MedicPanel extends UserPanel<Medic> {
         JPanel panelBotoes = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
         JButton btnRemover = new JButton("Remover Selecionado");
-        JButton btnSalvarTudo = new JButton("Salvar Agenda");
 
-        btnRemover.addActionListener(e -> removeSelected());
-        
-        btnSalvarTudo.addActionListener(e -> {
-            //savesOnMedic();
-            //JOptionPane.showMessageDialog(this, "Agenda do Dr. " + medico.getNome() + " atualizada!");
+        btnRemover.addActionListener(e -> {
+            int index = listaVisual.getSelectedIndex();
+            if (index != -1) {
+                
+                listModel.remove(index);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione um horário na lista para remover.");
+            }
         });
-
-        panelBotoes.add(btnRemover);
-        panelBotoes.add(btnSalvarTudo);
+        
+        panelForm.add(btnRemover);
 
         painel.add(panelBotoes, BorderLayout.SOUTH);
         
         return painel;
     }
 
-    
+    public String getHour(int Hours, int Minutes){        //retorna a data formatada corretamente
+        String hour = "";
+        String minute = "";
+       
+        if(Hours < 10)
+            hour += "0";
+        hour += "" + (Hours);
+        
+        if(Minutes < 10)
+            minute += "0";
+        minute += "" + (Minutes);
+        
+        String fullDate = hour + ":" + minute;
+        
+        return fullDate;
+    }
 
     private JSpinner createHourSpinner() {
         SpinnerDateModel model = new SpinnerDateModel();
@@ -196,15 +215,26 @@ public class MedicPanel extends UserPanel<Medic> {
     }
 
     private void addItemInList() {
-        
-        String dia = (String) comboDias.getSelectedItem();
+        MedicController medic = new MedicController();
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String a = spinnerInicio.getValue().toString().substring(11, 16);
+        String b = spinnerFim.getValue().toString().substring(11, 16);
+        System.out.println(a);
+        System.out.println(b);
+        try{
+            medic.savesWorkShift(comboDias.getSelectedItem().toString(), parser.parse(a), parser.parse(b), user);
+        }catch(ParseException exc){}
+        catch(InvalidDateException invD){
+            JOptionPane.showMessageDialog(null, invD);
+        }
+        String dia = comboDias.getSelectedItem().toString();
         Date inicio = (Date) spinnerInicio.getValue();
         Date fim = (Date) spinnerFim.getValue();
 
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String horarioFormatado = dia + ": " + sdf.format(inicio) + " - " + sdf.format(fim);
 
-        if (listModel.contains(horarioFormatado)) {
+        if (listModel.contains(dia)) {
             JOptionPane.showMessageDialog(this, "Este horário já foi adicionado!");
             return;
         }
@@ -212,30 +242,4 @@ public class MedicPanel extends UserPanel<Medic> {
         listModel.addElement(horarioFormatado);
     }
 
-    private void removeSelected() {
-        int index = listaVisual.getSelectedIndex();
-        if (index != -1) {
-            listModel.remove(index);
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um horário na lista para remover.");
-        }
-    }
-    /*
-    private void savesOnMedic() {
-        // 1. Cria uma nova lista limpa
-        List<String> novaAgenda = new ArrayList<>();
-        
-        // 2. Passa tudo que está na tela (ListModel) para a Lista Java
-        for (int i = 0; i < listModel.size(); i++) {
-            novaAgenda.add(listModel.getElementAt(i));
-        }
-
-        // 3. Atualiza o objeto Médico
-        medicoAtual.setDisponibilidade(novaAgenda);
-
-        // 4. AQUI VOCÊ CHAMARIA O CONTROLLER PARA SALVAR NO JSON
-        // ex: doctorController.atualizarMedico(medicoAtual);
-        System.out.println("Salvo no objeto: " + medicoAtual.getDisponibilidade());
-    }
-    */
 }

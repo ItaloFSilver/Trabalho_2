@@ -111,14 +111,14 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     }
                     //Vou precisar de ajuda pra acertar essa função aqui dps
     private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
-        if(agenda == null){
-            agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
-            for(Appointment a : agenda){
-                String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};   
-                System.out.println(a.getMedicName());
-                appoint.addRow(data);
-            }
+        agenda = null;
+        agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
+        for(Appointment a : agenda){
+            String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};   
+            System.out.println(a.getMedicName());
+            appoint.addRow(data);
         }
+        
     }
     
     private JPanel createPatientsList(){

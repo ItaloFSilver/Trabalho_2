@@ -1,5 +1,6 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,23 @@ public class Medic extends User {
     private boolean active;
     //private List<String> agenda;
     private WorkShift[] disponibility;
+    
 
 
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
-        disponibility = new WorkShift[7];
+        if(this.disponibility == null)
+            this.disponibility = new WorkShift[7];
+        
     }
 
     public Medic(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
+        if(this.disponibility == null)
+            this.disponibility = new WorkShift[7];
+        
     }
 
     public Specialization getSpecialization() {
@@ -40,7 +47,6 @@ public class Medic extends User {
     }
 
     public WorkShift[] getDisponibility() {
-
         if (this.disponibility == null) {
             SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
             this.disponibility = new WorkShift[7];
@@ -51,25 +57,30 @@ public class Medic extends User {
             };
 
             for (int i = 0; i < 7; i++) {
-                try{
-                    this.disponibility[i] = new WorkShift(dias[i], parser.parse("09:00"), parser.parse("17:00"));
-                }catch(ParseException e){
-                    System.out.println("Putz, melou");
-                }
+                
+                this.disponibility[i] = new WorkShift(dias[i], "09:00", "17:00", this.getCPF());
+                
             }
         }
         return this.disponibility;
     }
+    public void initDisponibility(){
+        MedicController medic = new MedicController();
+        this.disponibility = new WorkShift[7];
+        
+        medic.loadWorkShift(this.getCPF());
+    }
     
     public List<WorkShift> getDisponibilityAsList() {
-        List<WorkShift> workshifts = new ArrayList<>();
-        for(int i = 0; i < 7; i++) {
-            workshifts.add(disponibility[i]);
-        }
-        return workshifts;
+        MedicController medic = new MedicController();
+        
+        return medic.loadWorkShift(this.getCPF());
     }
 
     public void addDisponibility(WorkShift dayShift) {
+        if(this.disponibility == null)
+            this.disponibility = new WorkShift[7];
+        
         switch(dayShift.getDayOfWeek()) {
             case MONDAY -> {
                 disponibility[0] = dayShift;
@@ -93,7 +104,9 @@ public class Medic extends User {
                 disponibility[6] = dayShift;
             }
             default -> throw new InvalidDateException("Data invalida");
+            
         }
+        
     }
 
     @Override

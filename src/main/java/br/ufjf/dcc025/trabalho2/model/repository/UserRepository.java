@@ -74,4 +74,15 @@ public class UserRepository {
             }
         }
     }
+    
+     public void removeUserByCPF(User user) throws InvalidRemoveException{
+        for(BaseRepository<? extends User> repo : repositories) {
+            try {
+                repo.remove(user);
+            } 
+            catch (InvalidRemoveException e) {
+                throw new InvalidRemoveException(e.getMessage());
+            }
+        }
+    }
 }

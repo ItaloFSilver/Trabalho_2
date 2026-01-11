@@ -5,7 +5,9 @@ import java.util.List;
 
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
 import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
+import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class AppointmentController {
     
@@ -42,8 +44,10 @@ public class AppointmentController {
     
     public List<Appointment> listThis(String cpf){  //Pesquisa os agendamentos do CPF, assim a gente puxa só as de cada usuário pra eles mesmos
         List<Appointment> appointments = new AppointmentRepository().listAll(), hisAppointments = new ArrayList<>();
+        UserRepository users = new UserRepository();
+        
         for(Appointment a : appointments)
-            if(a.getPatientCPF().toString().equals(cpf) || a.getMedicCPF().toString().equals(cpf))
+            if(a.getPatientCPF().toString().equals(cpf) && users.findByCPF(a.getMedicCPF().toString()) != null || a.getMedicCPF().toString().equals(cpf) && users.findByCPF(a.getPatientCPF().toString()) != null)
                 hisAppointments.add(a);
         return hisAppointments;
     }

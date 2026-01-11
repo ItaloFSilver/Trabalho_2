@@ -3,7 +3,7 @@
     "hospitalized": false,
     "visitable": false,
     "profile": "PACIENTE",
-    "name": "Gustaco",
+    "name": "Gustavo Bersan",
     "email": {
       "email": "bersan@email.com"
     },
@@ -19,7 +19,7 @@
   },
   {
     "hospitalized": false,
-    "visitable": true,
+    "visitable": false,
     "profile": "PACIENTE",
     "name": "Italo Fagundes Silverio",
     "email": {
