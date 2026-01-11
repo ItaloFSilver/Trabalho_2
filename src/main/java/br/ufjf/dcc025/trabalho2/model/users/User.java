@@ -30,14 +30,16 @@ public abstract class User {
         this.cpf = new CPF(cpf);
         this.phoneNumber = new PhoneNumber(phoneNumber);
         this.password = new Password(password);
+        
     }
 
-    public User(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
-        this.name = name;
+    public User(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password, boolean status) {
+       this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.status = status;
     }
 
     public abstract JPanel createPanel(MainFrame mainframe);
@@ -46,10 +48,16 @@ public abstract class User {
         return this.name;
     }
 
+    public Email getFormatEmail(){
+        return this.email;
+    }
     public String getEmail() {
         return this.email.getEmail();
     }
-
+    public Password getFormatPassword(){
+        return this.password;
+    }
+    
     public String getPassword() {
         return this.password.getPassword();
     }
@@ -65,7 +73,9 @@ public abstract class User {
     public Profile getProfile() {
         return this.profile;
     }
-    //public abstract void setStatus(boolean bool);
+    public abstract void setStatus(boolean bool);
     
-    public abstract boolean getStatus();
+    public boolean getStatus(){
+        return this.status;
+    }
 }

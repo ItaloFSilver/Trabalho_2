@@ -16,7 +16,7 @@ public class Secretary extends User {
     } 
 
     public Secretary(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
-        super(name, email, cpf, phoneNumber, password);
+        super(name, email, cpf, phoneNumber, password, true);
         this.profile = Profile.SECRETARIO;
     }
 
@@ -29,8 +29,8 @@ public class Secretary extends User {
     public boolean getStatus(){
         return false;
     }
-    //@Override
-    //public void setStatus(){
-        //return;
-    //}
+    @Override 
+    public void setStatus(boolean sts){
+        this.status = sts;
+    }
 }

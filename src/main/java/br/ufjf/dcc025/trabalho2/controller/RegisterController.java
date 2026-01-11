@@ -16,7 +16,7 @@ import java.util.List;
 
 public class RegisterController {
     private String regex;
-    public void registerUser(String name, String email, String cpf, String phoneNumber, String password, Profile userType) throws InvalidRegisterException {
+    public void registerUser(String name, String email, String cpf, String phoneNumber, String password, Profile userType, boolean stat) throws InvalidRegisterException {
 
         regex = "^[A-Za-zÀ-ú']+(\\s[A-Za-zÀ-ú']+)+$";
         
@@ -29,7 +29,7 @@ public class RegisterController {
         List<User> users = repository.listAllUsers();
         try {
             if(!nAme.matches(regex))
-                throw new InvalidEmailException("Nome inválido");
+            throw new InvalidEmailException("Nome inválido");
             emailObj = new Email(email);
             cpfObj = new CPF(cpf);
             phoneNumberObj = new PhoneNumber(phoneNumber);
@@ -44,6 +44,6 @@ public class RegisterController {
             throw new InvalidRegisterException(e.getMessage());
         }
 
-        repository.saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType);
+        repository.saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType, stat);
     }
 }

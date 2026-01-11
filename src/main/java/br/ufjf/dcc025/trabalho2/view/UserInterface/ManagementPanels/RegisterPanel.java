@@ -25,13 +25,12 @@ import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import javax.swing.JCheckBox;
 
 
 public class RegisterPanel extends JPanel{
    
     private JComboBox<String> cbTipoUsuario;
-    private JLabel lblEspecializacao;
-    private JTextField txtEspecializacao;
     private JFormattedTextField campoCPF;
     private JFormattedTextField campophoneNumber;
     private JTextField campoNome;
@@ -72,19 +71,13 @@ public class RegisterPanel extends JPanel{
         gbc.anchor = GridBagConstraints.LINE_START;
         add(cbTipoUsuario, gbc);
 
-        
-        lblEspecializacao = new JLabel("Especialização:");
-        lblEspecializacao.setVisible(false); 
+        JCheckBox checkConfirmada = new JCheckBox("Pode receber visitas?");
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.LINE_END;
-        add(lblEspecializacao, gbc);
-
-        txtEspecializacao = new JTextField(20);
-        txtEspecializacao.setVisible(false); // Começa invisível
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        add(txtEspecializacao, gbc);
+        add(checkConfirmada, gbc);
+                
+        
 
         
         cbTipoUsuario.addActionListener(new ActionListener() {
@@ -102,6 +95,7 @@ public class RegisterPanel extends JPanel{
             }
         });
         
+        SecretaryController secretaria = new SecretaryController();
         
         JButton btnCadastrar = new JButton("Confirmar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));
@@ -115,6 +109,8 @@ public class RegisterPanel extends JPanel{
         btnCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+        
+                
                 try {
                     if(index >= 0)
                         removePerIndex(index, model, campoCPF.getText());
@@ -124,8 +120,9 @@ public class RegisterPanel extends JPanel{
                         campoCPF.getText(),
                         campophoneNumber.getText(),
                         new String(campoSenha.getPassword()),
-                        Profile.fromString((String) cbTipoUsuario.getSelectedItem())
+                        Profile.fromString((String) cbTipoUsuario.getSelectedItem()), checkConfirmada.isSelected()
                     );
+                    
                     String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
                     model.addRow(data);
                     

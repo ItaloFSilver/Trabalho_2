@@ -22,11 +22,15 @@ public class UserRepository {
         new PatientRepository(),
         new MedicRepository()
     );
-
-    public void saveUser(String name, Email email, CPF cpf, User user, PhoneNumber number, Password password, Profile profile) throws InvalidSaveException {
+    
+    public void saveUser(User user, boolean stat){
+        this.saveUser(user.getName(), user.getFormatEmail(), user.getCPF(), user, user.getphoneNumber(), user.getFormatPassword(), user.getProfile(), stat);
+    }
+    
+    public void saveUser(String name, Email email, CPF cpf, User user, PhoneNumber number, Password password, Profile profile, boolean stat) throws InvalidSaveException {
         switch(profile) {
             case PACIENTE -> {
-                Patient patient = new Patient(name, email, cpf, number, password);
+                Patient patient = new Patient(name, email, cpf, number, password, stat);
                 PatientRepository patientRepo = new PatientRepository();
                 patientRepo.save(patient);
             }

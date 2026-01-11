@@ -30,11 +30,10 @@ public class Medic extends User {
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
         this.profile = Profile.MEDICO;
-        
     }
 
     public Medic(String name, Email email, CPF cpf, PhoneNumber phoneNumber, Password password) {
-        super(name, email, cpf, phoneNumber, password);
+        super(name, email, cpf, phoneNumber, password, true);
         this.profile = Profile.MEDICO;
         
     }
@@ -43,13 +42,11 @@ public class Medic extends User {
         return specialization;
     }
 
-    
     public List<WorkShift> getDisponibilityAsList() {
         MedicController medic = new MedicController();
         
         return medic.loadWorkShift(this.getCPF());
     }
-
 
     @Override
     public JPanel createPanel(MainFrame mainframe) {
@@ -59,6 +56,10 @@ public class Medic extends User {
     @Override 
     public boolean getStatus(){
         return this.active;
+    }
+    @Override 
+    public void setStatus(boolean sts){
+        this.status = sts;
     }
     
     public List<String> getFreeTime(int dds){
@@ -92,33 +93,31 @@ public class Medic extends User {
     
     public boolean medicoAtendeNestaData(Date dataConsulta) {
     
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(dataConsulta);
-    int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dataConsulta);
+        int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
 
-    String diaTexto = "";
-    switch (diaNumero) {
-        case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
-        case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
-        case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
-        case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
-        case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
-        case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
-        case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
-    }
-
-    SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-    String horaDoDia = parser.format(dataConsulta);
-    
-    for (WorkShift horario : this.getDisponibilityAsList()) {
-        if (horario.getDayOfWeek().toString().equals(diaTexto) && horario.getFreeTime().contains(horaDoDia)) {
-            return true; 
+        String diaTexto = "";
+        switch (diaNumero) {
+            case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
+            case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
+            case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
+            case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
+            case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
+            case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
+            case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
         }
+
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String horaDoDia = parser.format(dataConsulta);
+    
+        for (WorkShift horario : this.getDisponibilityAsList()) {
+            if (horario.getDayOfWeek().toString().equals(diaTexto) && horario.getFreeTime().contains(horaDoDia)) {
+                return true; 
+            }
+        }
+    
+        return false; 
     }
-    
-    return false; 
-}
-        
-    
-    
+ 
 }

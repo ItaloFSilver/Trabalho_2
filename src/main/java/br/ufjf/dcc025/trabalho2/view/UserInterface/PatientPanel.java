@@ -169,7 +169,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         
         for(User u : patients)
             if(!(u.getCPF().equals(user.getCPF()))){
-                String[] linha = {u.getName(), (u.getStatus()) ? "Visita liberada" : "Não disponível"};
+                String[] linha = {u.getName(), ((u.getStatus()) ? "Visita liberada" : "Não disponível")};
                 model.addRow(linha);
             }
         
