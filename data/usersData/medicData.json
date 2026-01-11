@@ -8,55 +8,62 @@
         "end": "18:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "TUESDAY",
         "start": "08:00",
-        "end": "18:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "WEDNESDAY",
         "start": "08:00",
-        "end": "18:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "THURSDAY",
         "start": "08:00",
-        "end": "18:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "FRIDAY",
         "start": "08:00",
-        "end": "18:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "SATURDAY",
         "start": "08:00",
-        "end": "18:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       },
       {
         "dayOfWeek": "SUNDAY",
         "start": "08:00",
-        "end": "12:00",
+        "end": "14:00",
         "medicCPF": {
           "cpf": "222.222.222-22"
-        }
+        },
+        "block": []
       }
     ],
     "profile": "MEDICO",

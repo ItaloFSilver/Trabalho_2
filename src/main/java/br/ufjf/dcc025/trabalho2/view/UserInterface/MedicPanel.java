@@ -1,9 +1,12 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.DocumentController;
 import br.ufjf.dcc025.trabalho2.controller.MedicController;
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 
 import java.awt.BorderLayout;
@@ -22,6 +25,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
+import java.awt.GridLayout;
 import java.text.ParseException;
 
 
@@ -41,7 +45,8 @@ public class MedicPanel extends UserPanel<Medic> {
         super(main, user);
         this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());
-         this.tabbedPane.addTab("Gerenciar Agenda", DoctorSchedulePanel());
+        this.tabbedPane.addTab("Gerenciar Agenda", DoctorSchedulePanel());
+        this.tabbedPane.addTab("Emitir atestado / exame", createDoctorIssuePanel());
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab());
         
         
@@ -54,26 +59,6 @@ public class MedicPanel extends UserPanel<Medic> {
         
         GridBagConstraints centralizator = new GridBagConstraints();
         centralizator.insets = new Insets(10, 10, 10, 10);
-        
-        JToggleButton active = new JToggleButton();
-        active.setText(" Ativo ");
-            
-            
-        centralizator.gridwidth = 2;
-        centralizator.gridx = 2;
-        centralizator.gridy = 0;
-        centralizator.anchor = centralizator.anchor = GridBagConstraints.NORTH;
-        jPanel.add(active, centralizator);
-        
-        active.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-            if(active.getText().equals(" Ativo "))
-                active.setText("Ausente");
-            else
-                active.setText(" Ativo ");
-            }
-        });
         
         return jPanel;
     }
@@ -244,21 +229,17 @@ public class MedicPanel extends UserPanel<Medic> {
 
         listModel.addElement(horarioFormatado);
     }
-    /*
-    public class DoctorIssuePanel extends JPanel {
+    
 
-    private JComboBox<String> comboTipo;
-    private JTextArea txtDiagnostico;
-    private JTextArea txtRecomendacao;
-    private String cpfMedicoLogado;
-    private String cpfPacienteAtual; // Recebido da seleção anterior
-
-    public DoctorIssuePanel(String cpfMedico, String cpfPaciente) {
-        this.cpfMedicoLogado = cpfMedico;
-        this.cpfPacienteAtual = cpfPaciente;
+    public JPanel createDoctorIssuePanel() {
+        JPanel medicPanel = new JPanel(new BorderLayout());
+        JComboBox<String> comboTipo;
+        JTextArea txtDiagnostico;
+        JTextArea txtRecomendacao;
+        JTextField patientCPF = new JTextField(15);
         
-        setLayout(new BorderLayout());
-        setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
+     
+        medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
 
         // --- Formulario ---
         JPanel form = new JPanel(new GridLayout(4, 1, 5, 5));
@@ -274,43 +255,44 @@ public class MedicPanel extends UserPanel<Medic> {
 
         form.add(new JLabel("Tipo de Documento:"));
         form.add(comboTipo);
+        form.add(new JLabel("CPF do paciente: "));
+        form.add(patientCPF);
         form.add(new JLabel("Diagnóstico / Motivo:"));
         form.add(scrollDiag);
         form.add(new JLabel("Recomendação / Prescrição:"));
         form.add(scrollRec);
 
-        add(form, BorderLayout.CENTER);
+        medicPanel.add(form, BorderLayout.CENTER);
 
         // --- Botão ---
         JButton btnEmitir = new JButton("Emitir e Salvar");
-        btnEmitir.addActionListener(e -> salvarDocumento());
-        
-        add(btnEmitir, BorderLayout.SOUTH);
-    }
+        btnEmitir.addActionListener(e -> {
+            String tipo = (String) comboTipo.getSelectedItem();
+            String diag = txtDiagnostico.getText();
+            String rec = txtRecomendacao.getText();
 
-    private void salvarDocumento() {
-        String tipo = (String) comboTipo.getSelectedItem();
-        String diag = txtDiagnostico.getText();
-        String rec = txtRecomendacao.getText();
-
-        if (diag.isEmpty() || rec.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
-            return;
-        }
+            if (diag.isEmpty() || rec.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+                return;
+            }
 
         // 1. Cria o objeto
-        MedicalDocument doc = new MedicalDocument(tipo, cpfMedicoLogado, cpfPacienteAtual, diag, rec);
+            MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientCPF.getText(), diag, rec);
         
         // 2. Chama o controller
-        DocumentController controller = new DocumentController();
-        controller.emitirDocumento(doc);
+            DocumentController controller = new DocumentController();
+            controller.emitirDocumento(doc);
 
-        JOptionPane.showMessageDialog(this, "Documento emitido com sucesso!");
+            JOptionPane.showMessageDialog(this, "Documento emitido com sucesso!");
         
-        // Limpa campos
-        txtDiagnostico.setText("");
-        txtRecomendacao.setText("");
+            txtDiagnostico.setText("");
+            txtRecomendacao.setText("");
+        });
+        
+        add(btnEmitir, BorderLayout.SOUTH);
+    
+        return medicPanel;
     }
-}
-    */
-}
+
+}   
+

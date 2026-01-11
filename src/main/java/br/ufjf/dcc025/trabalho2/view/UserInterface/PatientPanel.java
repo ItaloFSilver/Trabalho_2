@@ -29,13 +29,15 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     private List<Appointment> agenda;
     private DefaultTableModel appoint;
     private Patient user;
+    private List<MedicalDocument> listaMeusDocs;
+    private DocumentController documentController;
     
     public PatientPanel(MainFrame main, Patient user) {
         super(main, user);
         this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
         this.tabbedPane.addTab("Checar Disp. Visitas", createPatientsList());
-        this.tabbedPane.addTab("Exames e atestados", new JPanel(new BorderLayout()));
+        this.tabbedPane.addTab("Exames e atestados", createDocumentPanel());
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
         
         add(tabbedPane, BorderLayout.CENTER);
@@ -178,43 +180,41 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     public void hideWindow(JFrame frame){
         frame.setVisible(false);
     }
-    /*
+    
     public JPanel createDocumentPanel(){
         JPanel painel = new JPanel(new BorderLayout());
-        private JTable tabela;
-        private DefaultTableModel model;
-        private DocumentController controller;
-        private List<MedicalDocument> listaMeusDocs;
+        JTable tabelaDocument;
+        DefaultTableModel tabelaModel;
 
-        controller = new DocumentController();
+        documentController = new DocumentController();
 
-        // Configura Tabela
-        String[] colunas = {"Data", "Tipo", "Médico (CPF)", "Diagnóstico (Resumo)"};
-        model = new DefaultTableModel(colunas, 0) {
+        String[] colunas = {"Data", "Tipo", "Médico", "Diagnóstico (Resumo)"};
+        tabelaModel = new DefaultTableModel(colunas, 0) {
             @Override // Impede edição das células
             public boolean isCellEditable(int row, int column) { return false; }
         };
         
-        tabela = new JTable(model);
+        tabelaDocument = new JTable(tabelaModel);
         
-        // Evento de Clique Duplo para ver detalhes
-        tabela.addMouseListener(new MouseAdapter() {
+        tabelaDocument.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) { // Clique duplo
-                    mostrarDetalhes();
+                    mostrarDetalhes(tabelaDocument.getSelectedRow());
                 }
             }
         });
 
-        carregarDados(cpfPacienteLogado);
+        carregarDados(tabelaModel);
 
-        add(new JScrollPane(tabela), BorderLayout.CENTER);
-        add(new JLabel("Dica: Clique duas vezes na linha para ver os detalhes."), BorderLayout.SOUTH);
+        painel.add(new JScrollPane(tabelaDocument), BorderLayout.CENTER);
+        painel.add(new JLabel("Dica: Clique duas vezes na linha para ver os detalhes."), BorderLayout.SOUTH);
     
+        return painel;
     }
-    private void carregarDados(String cpf) {
-        listaMeusDocs = controller.buscarPorPaciente(cpf);
+    
+    private void carregarDados(DefaultTableModel model) {
+        listaMeusDocs = documentController.buscarPorCPF(user.getCPF());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         model.setRowCount(0); // Limpa tabela
@@ -230,21 +230,18 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     }
     
 
-    private void mostrarDetalhes() {
-        int linha = tabela.getSelectedRow();
+    private void mostrarDetalhes(int linha) {
         if (linha == -1) return;
 
-        // Pega o objeto correspondente da lista (a ordem da lista e da tabela é a mesma)
         MedicalDocument doc = listaMeusDocs.get(linha);
 
-        // Monta a mensagem
         String mensagem = "--- " + doc.getTipo().toUpperCase() + " ---\n\n" +
                           "Data: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(doc.getDataEmissao()) + "\n" +
                           "Médico: " + doc.getDoctorCpf() + "\n\n" +
                           "DIAGNÓSTICO:\n" + doc.getDiagnostico() + "\n\n" +
                           "RECOMENDAÇÃO/RECEITA:\n" + doc.getRecomendacao();
 
-        // Mostra num scrollpane caso o texto seja grande
+        
         JTextArea textArea = new JTextArea(mensagem);
         textArea.setEditable(false);
         textArea.setLineWrap(true);
@@ -252,7 +249,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         textArea.setSize(300, 200);
 
         JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Detalhes do Documento", JOptionPane.INFORMATION_MESSAGE);
-    } */
+    } 
 }
 
 
