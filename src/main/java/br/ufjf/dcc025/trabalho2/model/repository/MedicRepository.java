@@ -7,4 +7,5 @@ public class MedicRepository extends BaseRepository<Medic> {
     public MedicRepository() {
         super("medicData.json", Medic.class);
     }
+    
 }

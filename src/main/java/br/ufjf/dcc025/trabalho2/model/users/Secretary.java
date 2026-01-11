@@ -24,4 +24,9 @@ public class Secretary extends User {
     public JPanel createPanel(MainFrame mainframe) {
         return new SecretaryPanel(mainframe, this);
     }
+    
+    @Override
+    public boolean getStatus(){
+        return false;
+    }
 }

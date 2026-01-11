@@ -1,5 +1,7 @@
 [
   {
+    "hospitalized": false,
+    "visitable": false,
     "profile": "PACIENTE",
     "name": "Gustaco",
     "email": {
@@ -17,9 +19,9 @@
   },
   {
     "hospitalized": false,
-    "visitable": false,
+    "visitable": true,
     "profile": "PACIENTE",
-    "name": "Italo",
+    "name": "Italo Fagundes Silverio",
     "email": {
       "email": "fagundes@gmail.com"
     },

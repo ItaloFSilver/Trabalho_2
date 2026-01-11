@@ -13,7 +13,7 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.MedicPanel;
 
 public class Medic extends User {    
     private Specialization specialization;
-    //private boolean active;
+    private boolean active;
     private List<String> agenda;
 
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
@@ -39,4 +39,8 @@ public class Medic extends User {
         return new MedicPanel(mainframe, this);
     }
     
+    @Override 
+    public boolean getStatus(){
+        return this.active;
+    }
 }

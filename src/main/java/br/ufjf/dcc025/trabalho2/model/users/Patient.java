@@ -26,4 +26,21 @@ public class Patient extends User {
     public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
         return new PatientPanel(mainframe, this);
     }
+    
+    @Override
+    public boolean getStatus(){
+        return this.visitable;
+    }
+    
+    public void setStatus(boolean bool){
+        this.visitable = bool;
+    }
+    
+    public void setHospitalized(boolean bool){
+        this.hospitalized = bool;
+    }
+    
+    public boolean isHospitalized(){
+        return this.hospitalized;
+    }
 }

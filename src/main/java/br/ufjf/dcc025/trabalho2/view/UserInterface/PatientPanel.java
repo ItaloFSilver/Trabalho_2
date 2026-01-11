@@ -2,17 +2,13 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +25,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         super(main, user);
         this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
+        this.tabbedPane.addTab("Checar Disp. Visitas", createPatientsList());
         this.tabbedPane.addTab("Exames e atestados", new JPanel(new BorderLayout()));
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
         
@@ -124,6 +121,36 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         }
     }
     
+    private JPanel createPatientsList(){
+        JPanel painel = new JPanel();
+        SecretaryController repo = new SecretaryController();
+        List<User> patients = repo.listPatients();
+        
+        DefaultTableModel model;
+        
+        String[] colunas = {"Paciente", "Status"};
+        
+        model = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        JTable tabela = new JTable(model);
+        
+        for(User u : patients)
+            if(!(u.getCPF().equals(user.getCPF()))){
+                String[] linha = {u.getName(), (u.getStatus()) ? "Visita liberada" : "Não disponível"};
+                model.addRow(linha);
+            }
+        
+        JScrollPane scroll = new JScrollPane(tabela);
+        painel.add(scroll, BorderLayout.CENTER);
+       
+        
+        return painel;
+    }
     
     public void hideWindow(JFrame frame){
         frame.setVisible(false);
