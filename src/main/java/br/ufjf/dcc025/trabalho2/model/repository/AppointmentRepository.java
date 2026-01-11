@@ -1,7 +1,5 @@
 package br.ufjf.dcc025.trabalho2.model.repository;
 
-import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,9 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
 
 public class AppointmentRepository implements Repository<Appointment> {
     private final String path = dirPath + File.separator + "servicesData" + File.separator + "appointmentsData.json"; 
@@ -84,6 +82,7 @@ public class AppointmentRepository implements Repository<Appointment> {
         }
         return null;
     }
+
     public Appointment searchByCPF(CPF medic) {
         List<Appointment> appointments = listAll();
         for (Appointment appointment : appointments) {
