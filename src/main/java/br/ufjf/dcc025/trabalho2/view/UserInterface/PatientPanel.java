@@ -2,13 +2,17 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -60,20 +64,43 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         updateBtn.addActionListener(this::updateBtnActionListener);
         
         JButton editBtn = new JButton("Editar");
-        editBtn.addActionListener(e -> {
-            int linha = tabela.getSelectedRow();
+        editBtn.addActionListener(e -> {                ///////////////////
+            int linha = tabela.getSelectedRow();        ////////////////// Aqui precisamos pegar as horas que o médico tem livre pra atender
             if (linha == -1) return;
-
-            // 1. Pega os dados da linha selecionada
-            String nomeMedico = (String) tabela.getValueAt(linha, 1); // ex: Coluna 1 é médico
-            String dataAtual = (String) tabela.getValueAt(linha, 0);  // ex: Coluna 2 é data
+            
+            String nomeMedico = (String) tabela.getValueAt(linha, 1);
+            String dataAtual = (String) tabela.getValueAt(linha, 0);
+            
+            CPF cpf;
+            Appointment alpha = null;
+            List<Appointment> consult = consultController.listAll();
+            for(Appointment a : consult)
+                if(a.getMedicName().contains(nomeMedico.substring(0, 4)) && a.getDate().equals(dataAtual))
+                    alpha = a;
+            
+            List<String> horariosLivres = new ArrayList<>();
+            cpf = alpha.getMedicCPF();
+            MedicController medic = new MedicController();
+            List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
+            if(cpf != null){
+                String hora = daysOfWork.get(0).getStart();
+                daysOfWork = medic.loadWorkShift(cpf);
+                
+                for(int i = 0; i<daysOfWork.size(); i++){
+                    if(daysOfWork.get(i).isFree(hora))
+                        horariosLivres.add(hora);
+                    
+                }
+            }
+             // ex: Coluna 1 é médico
+              // ex: Coluna 0 é data
 
             // 2. BUSCA HORÁRIOS DISPONÍVEIS (Isso viria do seu Controller)
             // Exemplo simulado:
             //List<String> horariosLivres = controller.getHorariosDisponiveis(nomeMedico);
     
                 // Se o controller ainda não existir, simule assim para testar:
-            List<String> horariosLivres = List.of("12/01/2026 14:00", "12/01/2026 15:30", "13/01/2026 09:00");
+            
 
                 // 3. Abre a Janela passando a lista
             EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, dataAtual, horariosLivres);

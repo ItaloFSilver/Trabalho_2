@@ -5,12 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
+import java.text.ParseException;
+import java.util.List;
 
 public class WorkShift {
     private DayOfWeek dayOfWeek;
     private String start;
     private String end;
     private CPF medicCPF;
+    private List<String> block;
 
     public WorkShift(String dayOfWeek, String start, String end, CPF cpf)  throws InvalidDateException {
         if(start.charAt(0) >= end.charAt(0) && start.charAt(1) >= end.charAt(1))
@@ -28,7 +31,22 @@ public class WorkShift {
     public String getStart() {
         return this.start;
     }
-
+    
+    public boolean isFree(String time){
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        try{
+        if(parser.parse(this.start).before(parser.parse(time)) && parser.parse(this.end).after( parser.parse(time))){
+            if(block == null)
+                return true;
+            return !(block.contains(time));
+        }
+        return false; 
+        }catch(ParseException evt){
+            System.out.println("Error on Parse");
+        }
+        return false;
+    }
+    
     public String getEnd() {
         return this.end;
     }

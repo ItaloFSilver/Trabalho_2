@@ -30,13 +30,13 @@ public enum DayOfWeek {
                     return TUESDAY;
                 }
                 case "Quarta-feira" -> {
-                    return MONDAY;
-                }
-                case "Quinta-feira" -> {
                     return WEDNESDAY;
                 }
-                case "Sexta-feira" -> {
+                case "Quinta-feira" -> {
                     return THURSDAY;
+                }
+                case "Sexta-feira" -> {
+                    return FRIDAY;
                 }
                 case "Sabado" -> {
                     return SATURDAY;

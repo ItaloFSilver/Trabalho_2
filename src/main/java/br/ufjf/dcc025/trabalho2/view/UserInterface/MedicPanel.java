@@ -152,7 +152,7 @@ public class MedicPanel extends UserPanel<Medic> {
 
         
         listModel = new DefaultListModel<>();
-        
+        List<WorkShift> list = user.getDisponibilityAsList();
         // Carrega o que o médico JÁ TINHA salvo anteriormente
         if (user.getDisponibilityAsList() != null) {
             for (WorkShift h : user.getDisponibilityAsList()) {
@@ -169,9 +169,11 @@ public class MedicPanel extends UserPanel<Medic> {
         JButton btnRemover = new JButton("Remover Selecionado");
 
         btnRemover.addActionListener(e -> {
+            MedicController medic = new MedicController();
+            List<WorkShift> listUpd = user.getDisponibilityAsList();
             int index = listaVisual.getSelectedIndex();
             if (index != -1) {
-                
+                medic.removesWorkShift(listUpd.get(index));
                 listModel.remove(index);
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione um horário na lista para remover.");
@@ -226,6 +228,7 @@ public class MedicPanel extends UserPanel<Medic> {
         }catch(ParseException exc){}
         catch(InvalidDateException invD){
             JOptionPane.showMessageDialog(null, invD);
+            return;
         }
         String dia = comboDias.getSelectedItem().toString();
         Date inicio = (Date) spinnerInicio.getValue();

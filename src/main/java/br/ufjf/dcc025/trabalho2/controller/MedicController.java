@@ -39,6 +39,24 @@ public class MedicController {
         
         repo.save(medic);
     }
+    public void removesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        WorkShift workShift;
+        repoWS = new WorkShiftRepository();
+        try {
+            workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
+            repoWS.remove(workShift);
+        }
+        catch(InvalidDateException e) {
+            throw new InvalidDateException(e.getMessage());
+        }
+        medic.addDisponibility(workShift);
+    }
+    
+    public void removesWorkShift(WorkShift w){
+        repoWS = new WorkShiftRepository();
+        repoWS.remove(w);
+    }
     
     public List<WorkShift> loadWorkShift(CPF cpf) {
         repoWS = new WorkShiftRepository();
