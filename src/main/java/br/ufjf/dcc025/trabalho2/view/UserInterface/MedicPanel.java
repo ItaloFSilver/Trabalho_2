@@ -19,7 +19,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class MedicPanel extends UserPanel {
+public class MedicPanel <Medic> extends UserPanel {
     
     private AppointmentController consultController;
     private DefaultTableModel appoint;

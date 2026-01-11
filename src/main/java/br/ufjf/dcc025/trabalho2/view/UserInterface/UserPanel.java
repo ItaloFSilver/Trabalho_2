@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class UserPanel extends JPanel {
+public abstract class UserPanel<T extends User> extends JPanel {
     
     protected final MainFrame mainPage;
     private final JButton logOutBtn;

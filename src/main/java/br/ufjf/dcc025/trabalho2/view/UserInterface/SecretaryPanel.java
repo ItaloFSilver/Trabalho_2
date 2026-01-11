@@ -27,7 +27,7 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFram
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
 import javax.swing.JFrame;
 
-public class SecretaryPanel extends UserPanel{
+public class SecretaryPanel<Secretary> extends UserPanel{
     
     private JButton logOutBtn;
     private MainFrame mainPage;

@@ -17,7 +17,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class PatientPanel extends UserPanel { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
+public class PatientPanel <Patient> extends UserPanel { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
             
     private AppointmentController consultController;
     private List<Appointment> agenda;
