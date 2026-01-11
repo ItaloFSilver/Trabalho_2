@@ -3,6 +3,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -14,8 +15,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 
 
 public class MedicPanel extends UserPanel<Medic> {
@@ -148,8 +152,8 @@ public class MedicPanel extends UserPanel<Medic> {
         
         // Carrega o que o médico JÁ TINHA salvo anteriormente
         if (user.getDisponibility() != null) {
-            for (String h : user.getDisponibility()) {
-                listModel.addElement(h);
+            for (WorkShift h : user.getDisponibility()) {
+                listModel.addElement(h.toString());
             }
         }
 
