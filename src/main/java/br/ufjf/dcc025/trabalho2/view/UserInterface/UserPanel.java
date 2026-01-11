@@ -21,8 +21,9 @@ public abstract class UserPanel<T extends User> extends JPanel {
     protected final JTabbedPane tabbedPane;
     protected User user;
             
-    public UserPanel(MainFrame main){
+    public UserPanel(MainFrame main, User user){
         this.mainPage = main;
+        this.user = user;
         setLayout(new BorderLayout());
         
         JPanel pnlHeader = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -50,7 +51,6 @@ public abstract class UserPanel<T extends User> extends JPanel {
     
     
     protected JPanel initDataComponents(){        //Inicializa todos os campos na página de dados pessoais
-        this.user = mainPage.getUser();
         JPanel painel = new JPanel();
         painel.setLayout(new GridBagLayout());
         

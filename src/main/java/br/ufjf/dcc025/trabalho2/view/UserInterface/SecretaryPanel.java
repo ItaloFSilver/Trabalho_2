@@ -35,8 +35,8 @@ public class SecretaryPanel extends UserPanel<Secretary>{
     private SecretaryController controller;
     private DefaultTableModel model;
     
-    public SecretaryPanel(MainFrame main){
-        super(main);
+    public SecretaryPanel(MainFrame main, Secretary user){
+        super(main, user);
         tabbedPane.addTab("Agendamentos", criarTabAgenda());
         tabbedPane.addTab("Gerenciar Usuários", criarTabUsuarios());
 

@@ -24,6 +24,6 @@ public class Patient extends User {
 
     @Override
     public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
-        return new PatientPanel(mainframe);
+        return new PatientPanel(mainframe, this);
     }
 }

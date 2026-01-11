@@ -22,6 +22,6 @@ public class Secretary extends User {
 
     @Override
     public JPanel createPanel(MainFrame mainframe) {
-        return new SecretaryPanel(mainframe);
+        return new SecretaryPanel(mainframe, this);
     }
 }

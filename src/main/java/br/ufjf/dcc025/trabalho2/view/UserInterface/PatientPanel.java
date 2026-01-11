@@ -23,10 +23,11 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     private AppointmentController consultController;
     private List<Appointment> agenda;
     private DefaultTableModel appoint;
+    private Patient user;
     
-    public PatientPanel(MainFrame main) {
-        super(main);
-        
+    public PatientPanel(MainFrame main, Patient user) {
+        super(main, user);
+        this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
         this.tabbedPane.addTab("Exames e atestados", new JPanel(new BorderLayout()));
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
@@ -113,7 +114,6 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
     }
                     //Vou precisar de ajuda pra acertar essa função aqui dps
     private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
-        this.user = this.mainPage.getUser();    //puxa o User armazenado na main pra acessar os dados
         if(agenda == null){
             agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
             for(Appointment a : agenda){

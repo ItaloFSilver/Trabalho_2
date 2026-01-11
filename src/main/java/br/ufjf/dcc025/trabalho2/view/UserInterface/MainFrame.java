@@ -38,10 +38,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         cardLayout.show(jPanel, name);        
     }
+    
     public void changeScreen(String name){          //essa é só pro botão LogOut
-        SecretaryPanel secret = new SecretaryPanel(this);
-        jPanel.add(secret, "Secretario");
-        
         cardLayout.show(jPanel, name);
     }
 

@@ -14,7 +14,7 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.MedicPanel;
 public class Medic extends User {    
     private Specialization specialization;
     //private boolean active;
-    private List<Date> datasDisponiveis;
+    private List<String> agenda;
 
     public Medic(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
@@ -29,10 +29,14 @@ public class Medic extends User {
     public Specialization getSpecialization() {
         return specialization;
     }
+    
+    public List<String> getDisponibility(){
+        return agenda;
+    }
 
     @Override
     public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
-        return new MedicPanel(mainframe);
+        return new MedicPanel(mainframe, this);
     }
     
 }

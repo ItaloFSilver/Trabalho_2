@@ -28,9 +28,10 @@ public class MedicPanel extends UserPanel<Medic> {
     private JComboBox comboDias;
     private JSpinner spinnerInicio;
     private JSpinner spinnerFim;
+    private Medic user;
     
     public MedicPanel(MainFrame main, Medic user) {
-        super(main);
+        super(main, user);
         this.user = user;
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());
          this.tabbedPane.addTab("Gerenciar Agenda", DoctorSchedulePanel());
