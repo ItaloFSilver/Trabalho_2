@@ -14,6 +14,7 @@ public enum DayOfWeek {
         }
 
         private String text;
+        private int order;
 
         @Override
         public String toString() {
