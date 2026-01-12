@@ -1,3 +1,7 @@
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.model.repository;
 
 import java.io.File;
@@ -16,7 +20,6 @@ import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import static br.ufjf.dcc025.trabalho2.model.repository.Repository.dirPath;
-import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 
 public class WorkShiftRepository implements Repository<WorkShift> {

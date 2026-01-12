@@ -1,5 +1,11 @@
+/*Arthur de Souza Marques - 202435015 */
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +13,6 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
 import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
-import br.ufjf.dcc025.trabalho2.model.users.User;
-import java.text.SimpleDateFormat;
 
 public class AppointmentController {
     

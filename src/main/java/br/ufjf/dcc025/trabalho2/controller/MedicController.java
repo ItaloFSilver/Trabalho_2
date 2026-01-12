@@ -1,19 +1,21 @@
+/*Arthur de Souza Marques - 202435015 */
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.controller;
 
 
-import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
-import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
-import br.ufjf.dcc025.trabalho2.model.repository.WorkShiftRepository;
-import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
+import br.ufjf.dcc025.trabalho2.model.repository.WorkShiftRepository;
+import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
 
 
 public class MedicController {

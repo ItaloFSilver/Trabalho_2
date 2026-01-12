@@ -1,9 +1,24 @@
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.Date;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GridLayout;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class EditAppointmentDialog extends JDialog {
 

@@ -1,15 +1,17 @@
+/*Arthur de Souza Marques - 202435015 */
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.controller;
 
-import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import java.util.List;
 
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRemoveException;
 import br.ufjf.dcc025.trabalho2.model.repository.MedicRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.PatientRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-import br.ufjf.dcc025.trabalho2.model.users.Patient;
-import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class SecretaryController {

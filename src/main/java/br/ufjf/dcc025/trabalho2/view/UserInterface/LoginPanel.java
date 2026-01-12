@@ -1,3 +1,7 @@
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import java.awt.Color;
@@ -14,7 +18,6 @@ import javax.swing.JTextField;
 
 import br.ufjf.dcc025.trabalho2.controller.LoginController;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidLoginException;
-import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class LoginPanel extends JPanel {

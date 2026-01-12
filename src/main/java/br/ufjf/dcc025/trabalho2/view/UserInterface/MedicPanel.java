@@ -1,3 +1,7 @@
+/*
+*Arthur de Souza Marques - 202435015
+*Ítalo Fagundes Silvério - 202435020
+*/
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import java.awt.BorderLayout;
@@ -245,7 +249,6 @@ public class MedicPanel extends UserPanel<Medic> {
         JTextArea txtDiagnostico;
         JTextArea txtRecomendacao;
         JTextField patientCPF = new JTextField(15);
-        
         
      
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
