@@ -16,9 +16,13 @@ public class AppointmentController {
         List<Appointment> appointments = new AppointmentRepository().listAll();
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(appointment.getData());
+        int diaDoMes = appointment.getData().getDay();
+        int mesDoAno = appointment.getData().getMonth();
+        int year = appointment.getData().getYear();
         for(Appointment a : appointments) {
             if(a.getMedicCPF().equals(appointment.getMedicCPF()) && parser.format(a.getData()).equals(horaDoDia) && !(a.getPatientCPF().equals(appointment.getPatientCPF()))) {
-                throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
+                if(a.getData().getDay() == diaDoMes && a.getData().getMonth() == mesDoAno && a.getData().getYear() == year)
+                    throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
             }
             
             if(a.getPatientCPF().equals(appointment.getPatientCPF()) && a.getDate().equals(appointment.getDate())){
