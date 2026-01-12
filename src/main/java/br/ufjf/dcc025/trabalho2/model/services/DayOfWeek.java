@@ -1,13 +1,13 @@
 package br.ufjf.dcc025.trabalho2.model.services;
 
 public enum DayOfWeek {
+        SUNDAY("Domingo"),
         MONDAY("Segunda-feira"),
         TUESDAY("Terca-feira"),
         WEDNESDAY("Quarta-feira"),
         THURSDAY("Quinta-feira"),
         FRIDAY("Sexta-feira"),
-        SATURDAY("Sabado"),
-        SUNDAY("Domingo");
+        SATURDAY("Sabado");
 
         DayOfWeek(String text) {
             this.text = text;

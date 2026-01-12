@@ -17,11 +17,14 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 
 
 public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
@@ -76,23 +79,24 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             int linha = tabela.getSelectedRow();        ////////////////// Aqui precisamos pegar as horas que o médico tem livre pra atender
             if (linha == -1) return;
             
-            String nomeMedico = (String) tabela.getValueAt(linha, 1);
             String dataAtual = (String) tabela.getValueAt(linha, 0);
             
             CPF cpf;
             Appointment alpha = null;
             List<Appointment> consult = consultController.listAll();
             for(Appointment a : consult)
-                if(a.getMedicName().contains(nomeMedico.substring(0, 4)) && a.getDate().equals(dataAtual))
+                if(a.getPatientCPF().equals(user.getCPF()) && a.getDate().equals(dataAtual))
                     alpha = a;
             
             List<String> horariosLivres = new ArrayList<>();
             cpf = alpha.getMedicCPF();
             MedicController medic = new MedicController();
             List<WorkShift> daysOfWork = medic.loadWorkShift(cpf);
-            horariosLivres = daysOfWork.get(alpha.getDayOfWeek()).getFreeTime();
+            for(WorkShift w : daysOfWork)
+                if(w.getDayOfWeeki() == alpha.getDayOfWeek())
+                    horariosLivres = w.getFreeTime();
              
-            EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, nomeMedico, alpha.getDate().substring(0, 9), horariosLivres);
+            EditAppointmentDialog dialog = new EditAppointmentDialog(mainPage, alpha.getMedicName(), alpha.getDate().substring(0, 9), horariosLivres);
             dialog.setVisible(true);
 
             
@@ -101,7 +105,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
                 for(Appointment a : agenda){  
                     if(a.getDate().equals(appoint.getValueAt(linha, 0))){
                         consultController.removeAppointment(a);
-                        medic.freeTime(a.getMedic(), a.getData());
+                         medic.freeTime(a.getMedic(), a.getData());
                         break;
                     }
                 }
@@ -111,13 +115,19 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             } else if (dialog.isSalvou()) {
                 
                 String novaData = dialog.getNovoHorario();
+                SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yy HH:mm");
+                Date data = alpha.getData();
+                try{
+                    data = parser.parse(novaData);
+                }
+                catch(ParseException fodeo){System.out.println("fodeo");}
                 
                 agenda = consultController.listAll();  //pesquisa pelo cpf do usuário pra achar certin
                 
                 for(Appointment a : agenda){  
                     if(a.getDate().equals(appoint.getValueAt(linha, 0))){
                         try{
-                            consultController.saveAppointment(new Appointment(a.getMedic(), a.getPatient(), a.getData(), true));
+                            consultController.saveAppointment(new Appointment(a.getMedic(), a.getPatient(), data, true));
                             consultController.removeAppointment(a);
                             medic.freeTime(a.getMedic(), a.getData());
                             appoint.setValueAt(novaData, linha, 0);
@@ -127,10 +137,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
                         break;
                         }
                     }
-        
-            
-                
-    }
+            }
         });
         
         toolbar.add(updateBtn);

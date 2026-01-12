@@ -1,7 +1,6 @@
 [
   {
     "hospitalized": false,
-    "visitable": false,
     "profile": "PACIENTE",
     "name": "Gustavo Bersan",
     "email": {
@@ -19,6 +18,7 @@
     "status": false
   },
   {
+    "hospitalized": false,
     "profile": "PACIENTE",
     "name": "Arthur Marques",
     "email": {

@@ -30,6 +30,19 @@ public class WorkShift {
     public DayOfWeek getDayOfWeek() {
         return this.dayOfWeek;
     }
+    
+    public int getDayOfWeeki(){
+        return switch (this.dayOfWeek) {
+            case SUNDAY -> 1;
+            case MONDAY -> 2;
+            case TUESDAY -> 3;
+            case WEDNESDAY -> 4;
+            case THURSDAY -> 5;
+            case FRIDAY -> 6;
+            case SATURDAY -> 7;
+            default -> 0;
+        };
+    }
 
     public String getStart() {
         return this.start;

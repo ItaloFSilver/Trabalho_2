@@ -1,6 +1,7 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -51,6 +52,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         JButton deleteBtn = new JButton("Desmarcar Consulta");
         
         AppointmentController appController = new AppointmentController();
+        MedicController medicCon = new MedicController();
         
         List<Appointment> agenda = appController.listAll();
         
@@ -90,6 +92,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
                 
                 System.out.println(tabela.getSelectedRow());
                 appController.removeAppointment(a);
+                medicCon.freeTime(a.getMedic(), a.getData());
                 appoint.removeRow(tabela.getSelectedRow());
             }
         });

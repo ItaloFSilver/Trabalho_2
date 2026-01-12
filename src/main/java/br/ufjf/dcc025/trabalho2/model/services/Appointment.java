@@ -13,27 +13,23 @@ public class Appointment {
     private final CPF medicCPF;
     private final CPF patientCPF;
     private final Date date;
-    private final String patientName;
-    private final String medicName;
     private boolean confirmed;
     private final Medic medic;
     private final Patient patient;
-    
-    //private final User medic; // <- não sei se vai precisar disso aqui
 
     public Appointment(User medic, User patient, Date date, boolean check) {
         this.medicCPF = medic.getCPF();
         this.patientCPF = patient.getCPF();
         this.date = date;
-        this.medicName = medic.getName();
-        this.patientName = patient.getName();
+        //this.medicName = medic.getName();
+        //this.patientName = patient.getName();
         this.confirmed = check;
         this.medic = (Medic)medic; 
         this.patient = (Patient)patient;
     }
 
     public String getMedicName(){
-        return this.medicName;
+        return this.medic.getName();
     }
     public Medic getMedic(){
         return medic;
@@ -48,7 +44,7 @@ public class Appointment {
     }
     
     public String getPatientName(){
-        return this.patientName;
+        return this.patient.getName();
     }
     public CPF getPatientCPF() {
         return this.patientCPF;
@@ -86,7 +82,10 @@ public class Appointment {
     
     public int getDayOfWeek(){
         Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.DAY_OF_WEEK)-1;
+        cal.setTime(this.date);
+        cal.get(Calendar.DAY_OF_WEEK);
+        
+        return cal.get(Calendar.DAY_OF_WEEK);
     }
     
     public String getCheck(){

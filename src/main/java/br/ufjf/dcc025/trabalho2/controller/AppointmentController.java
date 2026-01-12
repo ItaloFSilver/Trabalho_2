@@ -8,15 +8,19 @@ import br.ufjf.dcc025.trabalho2.model.repository.AppointmentRepository;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.text.SimpleDateFormat;
 
 public class AppointmentController {
     
     public void saveAppointment(Appointment appointment) throws InvalidAppointmentException {
         List<Appointment> appointments = new AppointmentRepository().listAll();
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+        String horaDoDia = parser.format(appointment.getData());
         for(Appointment a : appointments) {
-            if(a.getMedicCPF().equals(appointment.getMedicCPF()) && a.getDate().equals(appointment.getDate())) {
+            if(a.getMedicCPF().equals(appointment.getMedicCPF()) && parser.format(a.getData()).equals(horaDoDia) && !(a.getPatientCPF().equals(appointment.getPatientCPF()))) {
                 throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
             }
+            
             if(a.getPatientCPF().equals(appointment.getPatientCPF()) && a.getDate().equals(appointment.getDate())){
                 throw new InvalidAppointmentException("Paciente já possui uma consulta nessa data");
             }

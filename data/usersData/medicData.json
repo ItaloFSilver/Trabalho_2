@@ -2,7 +2,7 @@
   {
     "active": false,
     "profile": "MEDICO",
-    "name": "Aaaaaaaaa",
+    "name": "Medico Jr",
     "email": {
       "email": "f@email.com"
     },
@@ -15,6 +15,6 @@
     "phoneNumber": {
       "phoneNumber": "(32)99999-9999"
     },
-    "status": false
+    "status": true
   }
 ]

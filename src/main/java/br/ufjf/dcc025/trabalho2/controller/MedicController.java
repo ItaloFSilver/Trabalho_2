@@ -70,7 +70,6 @@ public class MedicController {
         case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
         case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
         case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
-        
         }
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataAgendamento);

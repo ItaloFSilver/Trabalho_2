@@ -6,50 +6,12 @@
     "patientCPF": {
       "cpf": "111.111.111-11"
     },
-    "date": "Jan 11, 2026, 3:38:51 AM",
-    "patientName": "Gustavo Bersan",
-    "medicName": "Aaaaaaaaa",
-    "confirmed": false
-  },
-  {
-    "medicCPF": {
-      "cpf": "222.222.222-22"
-    },
-    "patientCPF": {
-      "cpf": "111.111.111-11"
-    },
-    "date": "Jan 12, 2026, 3:00:00 PM",
-    "patientName": "Gustavo Bersan",
-    "medicName": "Aaaaaaaaa",
-    "confirmed": false
-  },
-  {
-    "medicCPF": {
-      "cpf": "222.222.222-22"
-    },
-    "patientCPF": {
-      "cpf": "111.111.111-11"
-    },
-    "date": "Jan 12, 2026, 3:30:00 PM",
-    "patientName": "Gustavo Bersan",
-    "medicName": "Aaaaaaaaa",
-    "confirmed": false
-  },
-  {
-    "medicCPF": {
-      "cpf": "222.222.222-22"
-    },
-    "patientCPF": {
-      "cpf": "168.698.416-24"
-    },
-    "date": "Jan 12, 2026, 4:00:00 PM",
-    "patientName": "Arthur Marques",
-    "medicName": "Aaaaaaaaa",
+    "date": "Jan 13, 2026, 10:30:00 AM",
     "confirmed": true,
     "medic": {
       "active": false,
       "profile": "MEDICO",
-      "name": "Aaaaaaaaa",
+      "name": "Medico Jr",
       "email": {
         "email": "f@email.com"
       },
@@ -62,25 +24,25 @@
       "phoneNumber": {
         "phoneNumber": "(32)99999-9999"
       },
-      "status": false
+      "status": true
     },
     "patient": {
       "hospitalized": false,
       "profile": "PACIENTE",
-      "name": "Arthur Marques",
+      "name": "Gustavo Bersan",
       "email": {
-        "email": "arthur@email.com"
+        "email": "bersan@email.com"
       },
       "cpf": {
-        "cpf": "168.698.416-24"
+        "cpf": "111.111.111-11"
       },
       "password": {
         "password": "12345678"
       },
       "phoneNumber": {
-        "phoneNumber": "(32)91111-1111"
+        "phoneNumber": "(32)92323-2323"
       },
-      "status": true
+      "status": false
     }
   },
   {
@@ -90,14 +52,12 @@
     "patientCPF": {
       "cpf": "168.698.416-24"
     },
-    "date": "Jan 13, 2026, 3:30:00 PM",
-    "patientName": "Arthur Marques",
-    "medicName": "Aaaaaaaaa",
-    "confirmed": false,
+    "date": "Jan 13, 2026, 2:00:00 PM",
+    "confirmed": true,
     "medic": {
       "active": false,
       "profile": "MEDICO",
-      "name": "Aaaaaaaaa",
+      "name": "Medico Jr",
       "email": {
         "email": "f@email.com"
       },
@@ -110,7 +70,7 @@
       "phoneNumber": {
         "phoneNumber": "(32)99999-9999"
       },
-      "status": false
+      "status": true
     },
     "patient": {
       "hospitalized": false,
