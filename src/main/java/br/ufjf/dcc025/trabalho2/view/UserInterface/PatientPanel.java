@@ -1,6 +1,26 @@
 
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
+
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.controller.DocumentController;
 import br.ufjf.dcc025.trabalho2.controller.MedicController;
@@ -13,18 +33,6 @@ import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
 
 public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
@@ -43,6 +51,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         this.tabbedPane.addTab("Checar Disp. Visitas", createPatientsList());
         this.tabbedPane.addTab("Exames e atestados", createDocumentPanel());
         this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
+        this.tabbedPane.addTab("Histórico", initTables());
         
         add(tabbedPane, BorderLayout.CENTER);
     }
@@ -266,6 +275,47 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
 
         JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Detalhes do Documento", JOptionPane.INFORMATION_MESSAGE);
     } 
+
+    private JPanel initTables() {
+        JPanel panel = new JPanel(new BorderLayout());
+        String[] colunasConsultas = {"Data", "Médico", "Status"};
+        DefaultTableModel modelConsultas = new DefaultTableModel(colunasConsultas, 0);
+        JTable tableConsultas = new JTable(modelConsultas);
+
+        String[] colunasDocs = {"Tipo", "Médico", "Diagnóstico", "Data"};
+        DefaultTableModel modelDocumentos = new DefaultTableModel(colunasDocs, 0);
+        JTable tableDocumentos = new JTable(modelDocumentos);
+
+        panel.add(tableConsultas);
+        panel.add(tableDocumentos);
+
+        String cpfPaciente = user.getCPF().toString();
+    
+        modelConsultas.setRowCount(0);
+        modelDocumentos.setRowCount(0);
+
+    // Conexão com AppointmentController (Consultas)
+    AppointmentController appointCtrl = new AppointmentController();
+    for (Appointment a : appointCtrl.listThis(cpfPaciente)) {
+        modelConsultas.addRow(new Object[]{
+            a.getDate(), 
+            a.getMedicName(), 
+            a.getCheck()
+        });
+    }
+
+    // Conexão com DocumentController (Documentos/Exames/Atestados)
+    DocumentController docCtrl = new DocumentController();
+    for (MedicalDocument d : docCtrl.buscarPorCPF(user.getCPF())) {
+        modelDocumentos.addRow(new Object[] {
+            d.getTipo(),
+            d.getDoctorCpf(), // Ou buscar nome do médico via UserRepository
+            d.getDiagnostico(),
+            new SimpleDateFormat("dd/MM/yyyy").format(d.getDataEmissao())
+        });
+    }
+    return panel;
+}
 }
 
 

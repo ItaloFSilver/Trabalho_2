@@ -1,27 +1,21 @@
 package br.ufjf.dcc025.trabalho2.model.users;
 
-import br.ufjf.dcc025.trabalho2.controller.MedicController;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
 import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
-import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.MedicPanel;
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class Medic extends User {    
-    private Specialization specialization;
     private boolean active;
     //private List<String> agenda;
     
@@ -36,10 +30,6 @@ public class Medic extends User {
         super(name, email, cpf, phoneNumber, password, true);
         this.profile = Profile.MEDICO;
         
-    }
-
-    public Specialization getSpecialization() {
-        return specialization;
     }
 
     public List<WorkShift> getDisponibilityAsList() {

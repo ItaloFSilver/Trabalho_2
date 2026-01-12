@@ -3,6 +3,7 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,20 +26,19 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidAppointmentException;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-import java.util.Calendar;
 
-public class AppointPanel extends JPanel {
+public class AppointmentPanel extends JPanel {
 
-    private final JComboBox<String> comboMedico;      //**************************SOCORRO*************************
-    private final JComboBox<String> comboPaciente;    //**************************SOCORRO*************************
-    private final JSpinner spinnerDataHora;           //**************************SOCORRO*************************
-    private final JCheckBox checkConfirmada;          //**************************SOCORRO*************************
-    private final SecretaryController controller;     //**************************SOCORRO*************************
-    private final DefaultTableModel model;            //**************************SOCORRO*************************
+    private final JComboBox<String> comboMedico;      
+    private final JComboBox<String> comboPaciente;    
+    private final JSpinner spinnerDataHora;          
+    private final JCheckBox checkConfirmada;         
+    private final SecretaryController controller;    
+    private final DefaultTableModel model;           
     private final JFrame frame;
     private final JComboBox<String> comboHorario;
 
-    public AppointPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
+    public AppointmentPanel(List<Appointment> agenda, DefaultTableModel tableAppoint, JFrame frame) {
       
         this.frame = frame;
         this.model = tableAppoint;

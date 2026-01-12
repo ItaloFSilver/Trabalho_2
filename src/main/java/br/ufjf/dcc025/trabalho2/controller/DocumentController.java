@@ -1,16 +1,22 @@
 package br.ufjf.dcc025.trabalho2.controller;
 
-import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import static br.ufjf.dcc025.trabalho2.model.repository.Repository.dirPath;
-import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
+import static br.ufjf.dcc025.trabalho2.model.repository.Repository.dirPath;
+import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 
 public class DocumentController {
     private List<MedicalDocument> documentos;
@@ -31,7 +37,7 @@ public class DocumentController {
     }
 
     // Filtra: Retorna apenas os documentos daquele CPF
-    public List<MedicalDocument> buscarPorCPF(CPF cpf) {
+    public List<MedicalDocument> buscarPorCPF(CPF cpf) throws InvalidCPFException {
         return documentos.stream()
                 .filter(d -> d.getPatientCpf().equals(cpf.toString()))
                 .collect(Collectors.toList());

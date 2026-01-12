@@ -1,7 +1,6 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
-import br.ufjf.dcc025.trabalho2.controller.MedicController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -24,7 +23,7 @@ import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
 import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.users.Secretary;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointPanel;
+import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointmentPanel;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
 import javax.swing.JFrame;
@@ -52,7 +51,6 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         JButton deleteBtn = new JButton("Desmarcar Consulta");
         
         AppointmentController appController = new AppointmentController();
-        MedicController medicCon = new MedicController();
         
         List<Appointment> agenda = appController.listAll();
         
@@ -77,7 +75,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
 
         appointAddBtn.addActionListener((ActionEvent e) -> {
             JFrame appointmentFrame = new JFrame();
-            appointmentFrame.add(new AppointPanel(agenda, appoint,appointmentFrame));
+            appointmentFrame.add(new AppointmentPanel(agenda, appoint,appointmentFrame));
             
             appointmentFrame.pack();
             appointmentFrame.setLocationRelativeTo(null);
@@ -92,7 +90,6 @@ public class SecretaryPanel extends UserPanel<Secretary>{
                 
                 System.out.println(tabela.getSelectedRow());
                 appController.removeAppointment(a);
-                medicCon.freeTime(a.getMedic(), a.getData());
                 appoint.removeRow(tabela.getSelectedRow());
             }
         });
