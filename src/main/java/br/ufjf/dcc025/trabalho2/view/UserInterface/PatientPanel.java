@@ -33,6 +33,7 @@ import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
+import javax.swing.JSplitPane;
 
 
 
@@ -295,7 +296,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         modelConsultas.setRowCount(0);
         modelDocumentos.setRowCount(0);
 
-    // Conexão com AppointmentController (Consultas)
+    
     AppointmentController appointCtrl = new AppointmentController();
     for (Appointment a : appointCtrl.listThis(cpfPaciente)) {
         modelConsultas.addRow(new Object[]{
@@ -305,16 +306,18 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         });
     }
 
-    // Conexão com DocumentController (Documentos/Exames/Atestados)
+    
     DocumentController docCtrl = new DocumentController();
     for (MedicalDocument d : docCtrl.buscarPorCPF(user.getCPF())) {
         modelDocumentos.addRow(new Object[] {
             d.getTipo(),
-            d.getDoctorCpf(), // Ou buscar nome do médico via UserRepository
+            d.getDoctorCpf(), 
             d.getDiagnostico(),
             new SimpleDateFormat("dd/MM/yyyy").format(d.getDataEmissao())
         });
     }
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tableConsultas, tableDocumentos);
+        panel.add(splitPane);
     return panel;
 }
 }
