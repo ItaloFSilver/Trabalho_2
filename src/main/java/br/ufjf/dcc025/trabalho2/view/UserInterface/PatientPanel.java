@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.crypto.Data;
 
 
+
 public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
             
     private AppointmentController consultController;

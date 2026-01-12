@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import java.awt.GridLayout;
 import java.text.ParseException;
+import javax.swing.text.MaskFormatter;
 
 
 public class MedicPanel extends UserPanel<Medic> {
@@ -237,8 +238,15 @@ public class MedicPanel extends UserPanel<Medic> {
         JTextArea txtDiagnostico;
         JTextArea txtRecomendacao;
         JTextField patientCPF = new JTextField(15);
-        
-     
+        try {
+            MaskFormatter format = new MaskFormatter("###.###.###-##");
+            format.setPlaceholderCharacter('_'); 
+            patientCPF = new JFormattedTextField(format);
+            patientCPF.setColumns(20);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        String patientcPf = patientCPF.getText();
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
 
         // --- Formulario ---
@@ -277,7 +285,7 @@ public class MedicPanel extends UserPanel<Medic> {
             }
 
         // 1. Cria o objeto
-            MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientCPF.getText(), diag, rec);
+            MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientcPf, diag, rec);
         
         // 2. Chama o controller
             DocumentController controller = new DocumentController();
