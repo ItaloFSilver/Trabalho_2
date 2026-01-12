@@ -2,14 +2,6 @@
   {
     "tipo": "Atestado Médico",
     "doctorCpf": "Medico Jr",
-    "patientCpf": "16869841624",
-    "diagnostico": "peido\t",
-    "recomendacao": "peidar",
-    "dataEmissao": "12/01/2026 02:07"
-  },
-  {
-    "tipo": "Atestado Médico",
-    "doctorCpf": "Medico Jr",
     "patientCpf": "168.698.416-24",
     "diagnostico": "lalalalal estoy loco\t",
     "recomendacao": "ficar mais louco",
