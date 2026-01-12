@@ -250,17 +250,7 @@ public class MedicPanel extends UserPanel<Medic> {
         JComboBox<String> comboTipo;
         JTextArea txtDiagnostico;
         JTextArea txtRecomendacao;
-        JTextField patientCPF = new JTextField(15);
-
-        try {
-            MaskFormatter format = new MaskFormatter("###.###.###-##");
-            format.setPlaceholderCharacter('_'); 
-            patientCPF = new JFormattedTextField(format);
-            patientCPF.setColumns(20);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        String patientcPf = patientCPF.getText();
+        JTextField patientCPF = criarCampoFormatado("###.###.###-##");
 
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
 
@@ -300,7 +290,7 @@ public class MedicPanel extends UserPanel<Medic> {
             }
 
         // 1. Cria o objeto
-            MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientcPf, diag, rec);
+            MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientCPF.getText(), diag, rec);
         
         // 2. Chama o controller
             DocumentController controller = new DocumentController();
@@ -316,6 +306,17 @@ public class MedicPanel extends UserPanel<Medic> {
     
         return medicPanel;
     }
-
+    private JFormattedTextField criarCampoFormatado(String mascara) {
+        JFormattedTextField campo = null;
+        try {
+            MaskFormatter format = new MaskFormatter(mascara);
+            format.setPlaceholderCharacter('_'); 
+            campo = new JFormattedTextField(format);
+            campo.setColumns(20);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return campo;
+    }
 }   
 

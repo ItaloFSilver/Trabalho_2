@@ -43,7 +43,7 @@ public class DocumentController {
                 .collect(Collectors.toList());
         
         if(filtered.isEmpty()) {
-            throw new InvalidCPFException("Usuário com CPF " + cpf.toString() + "não encontrado");
+            //throw new InvalidCPFException("Usuário com CPF " + cpf.toString() + " não encontrado");
         }
 
         return filtered;
