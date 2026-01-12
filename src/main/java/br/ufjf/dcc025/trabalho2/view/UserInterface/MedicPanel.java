@@ -1,32 +1,40 @@
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
-import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
-import br.ufjf.dcc025.trabalho2.controller.DocumentController;
-import br.ufjf.dcc025.trabalho2.controller.MedicController;
-import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
-import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
-import br.ufjf.dcc025.trabalho2.model.services.Appointment;
-import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
-import br.ufjf.dcc025.trabalho2.model.users.Medic;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 
+import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
+import br.ufjf.dcc025.trabalho2.controller.DocumentController;
+import br.ufjf.dcc025.trabalho2.controller.MedicController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidDateException;
+import br.ufjf.dcc025.trabalho2.model.services.Appointment;
+import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
-import java.awt.GridLayout;
-import java.text.ParseException;
+import br.ufjf.dcc025.trabalho2.model.users.Medic;
 
 
 public class MedicPanel extends UserPanel<Medic> {
@@ -237,6 +245,7 @@ public class MedicPanel extends UserPanel<Medic> {
         JTextArea txtDiagnostico;
         JTextArea txtRecomendacao;
         JTextField patientCPF = new JTextField(15);
+        
         
      
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));

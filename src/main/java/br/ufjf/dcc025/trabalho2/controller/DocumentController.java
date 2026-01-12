@@ -38,9 +38,15 @@ public class DocumentController {
 
     // Filtra: Retorna apenas os documentos daquele CPF
     public List<MedicalDocument> buscarPorCPF(CPF cpf) throws InvalidCPFException {
-        return documentos.stream()
+        List<MedicalDocument> filtered =  documentos.stream()
                 .filter(d -> d.getPatientCpf().equals(cpf.toString()))
                 .collect(Collectors.toList());
+        
+        if(filtered.isEmpty()) {
+            throw new InvalidCPFException("Usuário com CPF " + cpf.toString() + "não encontrado");
+        }
+
+        return filtered;
     }
 
     private void salvar() {
