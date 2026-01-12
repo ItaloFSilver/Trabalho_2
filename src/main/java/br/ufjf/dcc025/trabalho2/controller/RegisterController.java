@@ -1,5 +1,7 @@
 package br.ufjf.dcc025.trabalho2.controller;
 
+import java.util.List;
+
 import br.ufjf.dcc025.trabalho2.model.credentials.CPF;
 import br.ufjf.dcc025.trabalho2.model.credentials.Email;
 import br.ufjf.dcc025.trabalho2.model.credentials.Password;
@@ -12,14 +14,12 @@ import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidphoneNumberException;
 import br.ufjf.dcc025.trabalho2.model.repository.UserRepository;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
-import java.util.List;
 
 public class RegisterController {
-    private String regex;
+    private final String regex = "^[A-Za-zÀ-ú']+(\\s[A-Za-zÀ-ú']+)+$";
+
     public void registerUser(String name, String email, String cpf, String phoneNumber, String password, Profile userType, boolean stat) throws InvalidRegisterException {
 
-        regex = "^[A-Za-zÀ-ú']+(\\s[A-Za-zÀ-ú']+)+$";
-        
         String nAme = name;
         Email emailObj;
         CPF cpfObj;
