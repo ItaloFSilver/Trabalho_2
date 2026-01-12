@@ -1,8 +1,4 @@
 
-/*
-*Arthur de Souza Marques - 202435015
-*Ítalo Fagundes Silvério - 202435020
-*/
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import java.awt.BorderLayout;
@@ -21,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +34,7 @@ import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Patient;
 import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointmentDialog;
+
 
 
 public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
@@ -298,7 +296,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         modelConsultas.setRowCount(0);
         modelDocumentos.setRowCount(0);
 
-    // Conexão com AppointmentController (Consultas)
+    
     AppointmentController appointCtrl = new AppointmentController();
     for (Appointment a : appointCtrl.listThis(cpfPaciente)) {
         modelConsultas.addRow(new Object[]{
@@ -308,19 +306,18 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         });
     }
 
-    // Conexão com DocumentController (Documentos/Exames/Atestados)
+    
     DocumentController docCtrl = new DocumentController();
     for (MedicalDocument d : docCtrl.buscarPorCPF(user.getCPF())) {
         modelDocumentos.addRow(new Object[] {
             d.getTipo(),
-            d.getDoctorCpf(), // Ou buscar nome do médico via UserRepository
+            d.getDoctorCpf(), 
             d.getDiagnostico(),
             new SimpleDateFormat("dd/MM/yyyy").format(d.getDataEmissao())
         });
     }
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, tableConsultas, tableDocumentos);
+        panel.add(splitPane);
     return panel;
 }
 }
-
-
-

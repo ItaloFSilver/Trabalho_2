@@ -1,7 +1,3 @@
-/*
-*Arthur de Souza Marques - 202435015
-*Ítalo Fagundes Silvério - 202435020
-*/
 package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import java.awt.BorderLayout;
@@ -19,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -30,6 +27,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import br.ufjf.dcc025.trabalho2.controller.DocumentController;
@@ -39,6 +37,7 @@ import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
+
 
 
 public class MedicPanel extends UserPanel<Medic> {
@@ -248,9 +247,8 @@ public class MedicPanel extends UserPanel<Medic> {
         JComboBox<String> comboTipo;
         JTextArea txtDiagnostico;
         JTextArea txtRecomendacao;
-        JTextField patientCPF = new JTextField(15);
-        
-     
+        JTextField patientCPF = criarCampoFormatado("###.###.###-##");
+
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
 
         // --- Formulario ---
@@ -305,6 +303,16 @@ public class MedicPanel extends UserPanel<Medic> {
     
         return medicPanel;
     }
-
+    private JFormattedTextField criarCampoFormatado(String mascara) {
+        JFormattedTextField campo = null;
+        try {
+            MaskFormatter format = new MaskFormatter(mascara);
+            format.setPlaceholderCharacter('_'); 
+            campo = new JFormattedTextField(format);
+            campo.setColumns(20);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return campo;
+    }
 }   
-

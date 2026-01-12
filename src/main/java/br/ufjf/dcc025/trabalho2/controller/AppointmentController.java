@@ -1,8 +1,3 @@
-/*Arthur de Souza Marques - 202435015 */
-/*
-*Arthur de Souza Marques - 202435015
-*Ítalo Fagundes Silvério - 202435020
-*/
 package br.ufjf.dcc025.trabalho2.controller;
 
 import java.text.SimpleDateFormat;
@@ -20,9 +15,13 @@ public class AppointmentController {
         List<Appointment> appointments = new AppointmentRepository().listAll();
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(appointment.getData());
+        int diaDoMes = appointment.getData().getDay();
+        int mesDoAno = appointment.getData().getMonth();
+        int year = appointment.getData().getYear();
         for(Appointment a : appointments) {
             if(a.getMedicCPF().equals(appointment.getMedicCPF()) && parser.format(a.getData()).equals(horaDoDia) && !(a.getPatientCPF().equals(appointment.getPatientCPF()))) {
-                throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
+                if(a.getData().getDay() == diaDoMes && a.getData().getMonth() == mesDoAno && a.getData().getYear() == year)
+                    throw new InvalidAppointmentException("O Médico já possui uma consulta nessa data");
             }
             
             if(a.getPatientCPF().equals(appointment.getPatientCPF()) && a.getDate().equals(appointment.getDate())){
