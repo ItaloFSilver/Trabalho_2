@@ -1,8 +1,8 @@
-
 /*
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
-*/package br.ufjf.dcc025.trabalho2.controller;
+*/
+package br.ufjf.dcc025.trabalho2.controller;
 
 import java.io.File;
 import java.io.FileReader;
@@ -45,21 +45,17 @@ public class DocumentController {
         List<MedicalDocument> filtered =  documentos.stream()
                 .filter(d -> d.getPatientCpf().equals(cpf.toString()))
                 .collect(Collectors.toList());
-        
-        if(filtered.isEmpty()) {
-            //throw new InvalidCPFException("Usuário com CPF " + cpf.toString() + " não encontrado");
-        }
 
         return filtered;
     }
 
     private void salvar() {
-        try (FileWriter writer = new FileWriter(path)) {
+        try (FileWriter writer = new FileWriter(path)) {    //Salva no repositório o documento gerado pelo médico
             gson.toJson(documentos, writer);
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    private void carregar() {
+    private void carregar() {   //carrega o documento do repositório
         File f = new File(path);
         if (!f.exists()) return;
         try (FileReader reader = new FileReader(f)) {

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegisterFrame extends JFrame {
     private static JPanel Credentials;
     
+    //inicializa uma janela para registro de usuário
     public RegisterFrame(DefaultTableModel main, int index){
         
         setSize(640, 400);

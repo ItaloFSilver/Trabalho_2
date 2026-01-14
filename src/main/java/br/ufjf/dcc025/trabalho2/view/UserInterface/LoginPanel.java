@@ -95,10 +95,12 @@ public class LoginPanel extends JPanel {
         campoUser.requestFocusInWindow();
     }
     
+    //função para limpar os campos de credenciais após o botão de "Entrar" ser pressionado
     private void limpaCampo(javax.swing.JTextField c) {
         c.setText("");
     }
     
+    //define a ação do botão de "Entrar"
     private void enterBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
         if(campoUser.getText().equals("Usuario01") && senhaUser.getText().equals("senha"))
         {
@@ -126,7 +128,8 @@ public class LoginPanel extends JPanel {
         }
     }
     
-    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt){    //charme apenas
+    //definição do botão para encerrar a execução do programa
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt){    
         System.exit(0);
     }
 }

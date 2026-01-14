@@ -1,4 +1,3 @@
-/*Arthur de Souza Marques - 202435015 */
 /*
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
@@ -22,8 +21,8 @@ public class MedicController {
  
     private WorkShiftRepository repoWS;
     
-    public void savesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
-        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+    public void savesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException { //Salva o horário de trabalho do médico de acordo com o dia da semana
+        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");                                            
         WorkShift workShift;
         repoWS = new WorkShiftRepository();
         try {
@@ -33,9 +32,9 @@ public class MedicController {
         catch(InvalidDateException e) {
             throw new InvalidDateException(e.getMessage());
         }
-
+        
     }
-    public void removesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException {
+    public void removesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException { //remove o dia de trabalho da lista do medico
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         WorkShift workShift;
         repoWS = new WorkShiftRepository();
@@ -48,31 +47,24 @@ public class MedicController {
         }
     }
     
-    public void removesWorkShift(WorkShift w){
+    public void removesWorkShift(WorkShift w){  //chamada alternativa para remover o dia de trabalho da lista do médico
         repoWS = new WorkShiftRepository();
         repoWS.remove(w);
     }
     
-    public List<WorkShift> loadWorkShift(CPF cpf) {
+    public List<WorkShift> loadWorkShift(CPF cpf) { //retorna a agenda de trabalho do médico
         repoWS = new WorkShiftRepository();
         
         return repoWS.searchByCPF(cpf);
     }
     
-    public void freeTime(Medic medic, Date dataAgendamento){
+    public void freeTime(Medic medic, Date dataAgendamento){    //retorna os horários disponíveis que o médico possui
         Calendar cal = Calendar.getInstance();
         cal.setTime(dataAgendamento);
         int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
-        String diaTexto = "";
-        switch (diaNumero) {
-        case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
-        case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
-        case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
-        case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
-        case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
-        case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
-        case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
-        }
+        
+        String diaTexto = diaSemana(diaNumero);
+        
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataAgendamento);
         for(WorkShift u : medic.getDisponibilityAsList())
@@ -80,21 +72,13 @@ public class MedicController {
                 u.setFree(dataAgendamento);
     }
     
-    public void lockTime(Medic medic, Date dataAgendamento){
+    public void lockTime(Medic medic, Date dataAgendamento){    //bloqueia o horário anteriormente disponível
         Calendar cal = Calendar.getInstance();
         cal.setTime(dataAgendamento);
         int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
-        String diaTexto = "";
-        switch (diaNumero) {
-        case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
-        case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
-        case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
-        case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
-        case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
-        case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
-        case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
         
-        }
+        String diaTexto = diaSemana(diaNumero);
+        
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataAgendamento);
         for(WorkShift u : medic.getDisponibilityAsList())
@@ -102,23 +86,14 @@ public class MedicController {
                 u.timeBlock(dataAgendamento);
     }
     
-    public boolean medicoAtendeNestaData(Medic medic, Date dataConsulta) {
+    public boolean medicoAtendeNestaData(Medic medic, Date dataConsulta) {  //verifica se o horário está disponível para agendamento
     
         Calendar cal = Calendar.getInstance();
         cal.setTime(dataConsulta);
         int diaNumero = cal.get(Calendar.DAY_OF_WEEK);
 
-        String diaTexto = "";
-        switch (diaNumero) {
-            case Calendar.SUNDAY:    diaTexto = "Domingo-feira"; break;
-            case Calendar.MONDAY:    diaTexto = "Segunda-feira"; break;
-            case Calendar.TUESDAY:   diaTexto = "Terca-feira"; break;
-            case Calendar.WEDNESDAY: diaTexto = "Quarta-feira"; break;
-            case Calendar.THURSDAY:  diaTexto = "Quinta-feira"; break;
-            case Calendar.FRIDAY:    diaTexto = "Sexta-feira"; break;
-            case Calendar.SATURDAY:  diaTexto = "Sabado"; break;
-        }
-
+        String diaTexto = diaSemana(diaNumero);
+        
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataConsulta);
     
@@ -128,5 +103,32 @@ public class MedicController {
             }
         }
         return false;
+    }
+    
+    public String diaSemana(int dia){       //método para retornar o dia da semana com base no inteiro do Calendar passado
+        switch (dia) {
+            case Calendar.SUNDAY -> {
+                return "Domingo";
+            }
+            case Calendar.MONDAY -> {
+                return "Segunda-feira";
+            }
+            case Calendar.TUESDAY -> { 
+                return "Terca-feira";
+            }
+            case Calendar.WEDNESDAY -> {
+                return "Quarta-feira";
+            }
+            case Calendar.THURSDAY -> {
+                return "Quinta-feira";
+            }
+            case Calendar.FRIDAY -> {
+                return "Sexta-feira";
+            }
+            case Calendar.SATURDAY -> {
+                return "Sabado";
+            }
+        }
+        return "";
     }
 }

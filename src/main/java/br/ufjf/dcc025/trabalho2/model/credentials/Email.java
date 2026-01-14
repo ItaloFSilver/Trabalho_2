@@ -1,4 +1,3 @@
-/*Arthur de Souza Marques - 202435015 */
 /*
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
@@ -21,11 +20,13 @@ public class Email {
             this.email = email;
         }
     }
-
+    
+    //valida se o email possui domínio
     private boolean validateEmail(String email) {
         return email.matches(regex);
     }
 
+    //retorna o email do usuário
     public String getEmail() {
         return email;
     }

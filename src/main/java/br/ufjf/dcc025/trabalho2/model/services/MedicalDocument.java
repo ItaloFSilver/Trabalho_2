@@ -7,12 +7,12 @@ package br.ufjf.dcc025.trabalho2.model.services;
 import java.util.Date;
 
 public class MedicalDocument {
-    private String tipo; // "Atestado" ou "Exame"
-    private String doctorCpf;
-    private String patientCpf;
-    private String diagnostico;
-    private String recomendacao; // Receita ou instruções do exame
-    private Date dataEmissao;
+    private final String tipo; // "Atestado" ou "Exame"
+    private final String doctorCpf;
+    private final String patientCpf;
+    private final String diagnostico;
+    private final String recomendacao; // Receita ou instruções do exame
+    private final Date dataEmissao;
 
     public MedicalDocument(String tipo, String doctorCpf, String patientCpf, String diagnostico, String recomendacao) {
         this.tipo = tipo;
@@ -23,10 +23,21 @@ public class MedicalDocument {
         this.dataEmissao = new Date(); 
     }
 
+    //retorna se é um atestado, exame ou receita
     public String getTipo() { return tipo; }
+    
+    //retorna o cpf do médico
     public String getDoctorCpf() { return doctorCpf; }
+    
+    //retorna o cpf do paciente
     public String getPatientCpf() { return patientCpf; }
+    
+    //retorna o diagnóstico
     public String getDiagnostico() { return diagnostico; }
+    
+    //retorna a recomendação do médico
     public String getRecomendacao() { return recomendacao; }
+    
+    //retorna a data em que foi emitido
     public Date getDataEmissao() { return dataEmissao; }
 }

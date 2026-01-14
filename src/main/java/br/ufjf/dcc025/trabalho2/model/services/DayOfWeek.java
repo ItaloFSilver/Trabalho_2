@@ -17,14 +17,16 @@ public enum DayOfWeek {
             this.text = text;
         }
 
-        private String text;
+        private final String text;
         private int order;
 
+        //retorna o dia da semana como String. ex: "Segunda-feira"
         @Override
         public String toString() {
             return text;
         }
 
+        //retorna o enum
         public static DayOfWeek fromString(String text) {
             switch(text) {
                 case "Segunda-feira" -> {

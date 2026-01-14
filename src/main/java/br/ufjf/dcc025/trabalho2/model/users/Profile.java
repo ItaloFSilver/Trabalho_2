@@ -15,11 +15,13 @@ public enum Profile {
         this.label = label; 
     }
 
+    //retorna o profile como String. ex: "Paciente"
     @Override 
     public String toString() {
          return label; 
     }
 
+    //retorna o Profile do usuário 
     public static Profile fromString(String s) {
         if (s == null) throw new IllegalArgumentException("Tipo nulo");
         switch (s) {

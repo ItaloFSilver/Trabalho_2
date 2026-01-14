@@ -24,6 +24,7 @@ public class Secretary extends User {
         this.profile = Profile.SECRETARIO;
     }
 
+    //cria o painel de visualização do(a) secretário(a)
     @Override
     public JPanel createPanel(MainFrame mainframe) {
         return new SecretaryPanel(mainframe, this);

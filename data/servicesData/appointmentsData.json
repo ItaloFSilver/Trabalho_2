@@ -52,7 +52,7 @@
     "patientCPF": {
       "cpf": "168.698.416-24"
     },
-    "date": "Jan 13, 2026, 2:00:00 PM",
+    "date": "Jan 12, 2026, 8:00:00 AM",
     "confirmed": true,
     "medic": {
       "active": false,
@@ -68,53 +68,7 @@
         "password": "12345678"
       },
       "phoneNumber": {
-        "phoneNumber": "(32)99999-9999"
-      },
-      "status": true
-    },
-    "patient": {
-      "hospitalized": false,
-      "profile": "PACIENTE",
-      "name": "Arthur Marques",
-      "email": {
-        "email": "arthur@email.com"
-      },
-      "cpf": {
-        "cpf": "168.698.416-24"
-      },
-      "password": {
-        "password": "12345678"
-      },
-      "phoneNumber": {
-        "phoneNumber": "(32)91111-1111"
-      },
-      "status": true
-    }
-  },
-  {
-    "medicCPF": {
-      "cpf": "222.222.222-22"
-    },
-    "patientCPF": {
-      "cpf": "168.698.416-24"
-    },
-    "date": "Jan 6, 2026, 12:30:00 PM",
-    "confirmed": false,
-    "medic": {
-      "active": false,
-      "profile": "MEDICO",
-      "name": "Medico Jr",
-      "email": {
-        "email": "f@email.com"
-      },
-      "cpf": {
-        "cpf": "222.222.222-22"
-      },
-      "password": {
-        "password": "12345678"
-      },
-      "phoneNumber": {
-        "phoneNumber": "(32)99999-9999"
+        "phoneNumber": "(32)99222-2222"
       },
       "status": true
     },

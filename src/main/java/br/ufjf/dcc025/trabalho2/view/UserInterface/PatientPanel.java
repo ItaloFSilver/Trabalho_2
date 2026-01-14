@@ -40,12 +40,12 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.EditAppointm
 
 
 
-public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os dois painés, oq vai mudar é cada subpagina
+public class PatientPanel extends UserPanel<Patient> { 
             
     private AppointmentController consultController;
     private List<Appointment> agenda;
     private DefaultTableModel appoint;
-    private Patient user;
+    private final Patient user;
     private List<MedicalDocument> listaMeusDocs;
     private DocumentController documentController;
     
@@ -55,15 +55,14 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         this.tabbedPane.addTab("Agendamentos", createAppointmentPage());  
         this.tabbedPane.addTab("Checar Disp. Visitas", createPatientsList());
         this.tabbedPane.addTab("Exames e atestados", createDocumentPanel());
-        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); //por enquanto só tem essa funcionando
+        this.tabbedPane.addTab("Dados Pessoais", createPersonalDataTab()); 
         this.tabbedPane.addTab("Histórico", initTables());
         
         add(tabbedPane, BorderLayout.CENTER);
     }
     
-    
-    
-    private JPanel createAppointmentPage(){ //cria uma tabela e puxa o user armazenado pela mainPage pra poder ver as consultas
+    //Cria a página de agendamentos do paciente 
+    private JPanel createAppointmentPage(){ 
         JPanel appPanel = new JPanel(new BorderLayout());
         
         consultController = new AppointmentController();
@@ -161,8 +160,9 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         
         return appPanel;
     }
-                    //Vou precisar de ajuda pra acertar essa função aqui dps
-    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
+    
+    //Atualiza a página de agendamentos do paciente com base no repositório
+    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   
         if(!(agenda == null)){
             agenda.clear();
             appoint.setRowCount(0);
@@ -176,7 +176,8 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         
     }
     
-    private JPanel createPatientsList(){        //procura por outros pacientes para verificar horário de visita
+    //procura por outros pacientes para verificar horário de visita
+    private JPanel createPatientsList(){        
         JPanel painel = new JPanel();
         SecretaryController repo = new SecretaryController();
         List<User> patients = repo.listPatients();
@@ -207,10 +208,12 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         return painel;
     }
     
+    //oculta a janela ativa
     public void hideWindow(JFrame frame){
         frame.setVisible(false);
     }
     
+    //cria a página de documentos emitidos pelo médico cujo paciente consultou
     public JPanel createDocumentPanel(){
         JPanel painel = new JPanel(new BorderLayout());
         JTable tabelaDocument;
@@ -230,12 +233,12 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) { // Clique duplo
-                    mostrarDetalhes(tabelaDocument.getSelectedRow());
+                    showDetails(tabelaDocument.getSelectedRow());
                 }
             }
         });
 
-        carregarDados(tabelaModel);
+        loadData(tabelaModel);
 
         painel.add(new JScrollPane(tabelaDocument), BorderLayout.CENTER);
         painel.add(new JLabel("Dica: Clique duas vezes na linha para ver os detalhes."), BorderLayout.SOUTH);
@@ -243,7 +246,8 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         return painel;
     }
     
-    private void carregarDados(DefaultTableModel model) {
+    //carrega os documentos(exames/atestados/receitas)
+    private void loadData(DefaultTableModel model) {
         listaMeusDocs = documentController.buscarPorCPF(user.getCPF());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -259,8 +263,8 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         }
     }
     
-
-    private void mostrarDetalhes(int linha) {
+    //ao dar um duplo clique sobre o documento, exibe seus detalhes
+    private void showDetails(int linha) {
         if (linha == -1) return;
 
         MedicalDocument doc = listaMeusDocs.get(linha);
@@ -281,6 +285,7 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
         JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Detalhes do Documento", JOptionPane.INFORMATION_MESSAGE);
     } 
 
+    //Painel do histórico do paciente, exibe os exames e as consultas do paciente na mesma página
     private JPanel initTables() {
         JPanel panel = new JPanel(new BorderLayout());
         String[] colunasConsultas = {"Data", "Médico", "Status"};
@@ -308,7 +313,6 @@ public class PatientPanel extends UserPanel<Patient> { //resolvi padronizar os d
             a.getCheck()
         });
     }
-
     
     DocumentController docCtrl = new DocumentController();
     for (MedicalDocument d : docCtrl.buscarPorCPF(user.getCPF())) {

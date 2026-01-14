@@ -1,4 +1,3 @@
-/*Arthur de Souza Marques - 202435015 */
 /*
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
@@ -19,10 +18,12 @@ public class Password {
         }
     }
 
+    //valida se a senha possui ao menos 8 caracteres
     private boolean validatePassword(String password) {
         return password.length() >= 8;
     }
 
+    //retorna a senha para verificação
     public String getPassword() {
         return password;
     }

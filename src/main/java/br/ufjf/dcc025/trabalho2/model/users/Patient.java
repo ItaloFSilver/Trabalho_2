@@ -25,24 +25,30 @@ public class Patient extends User {
         this.profile = Profile.PACIENTE;
     }
 
+    //cria o painel de visualização do paciente
     @Override
     public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
         return new PatientPanel(mainframe, this);
     }
     
+    //retorna se o paciente pode ou não receber visitas
     @Override
     public boolean getStatus(){
         return this.status;
     }
+    
+    //define se o paciente poderá receber visitas
     @Override
     public void setStatus(boolean bool){
         this.status = bool;
     }
     
+    //Internar o paciente
     public void setHospitalized(boolean bool){
         this.hospitalized = bool;
     }
     
+    //verificar se o paciente se encontra internado
     public boolean isHospitalized(){
         return this.hospitalized;
     }

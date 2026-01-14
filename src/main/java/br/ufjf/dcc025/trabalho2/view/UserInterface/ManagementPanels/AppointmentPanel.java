@@ -132,12 +132,13 @@ public class AppointmentPanel extends JPanel {
         }
     }
     
+    //ação do botão de cancelar: limpa os campos e fecha a janela
     private void cancelSaving(){
         clearFields();
         closeWindow();
     }
     
-    
+    //limpa os campos que tenham sido preenchidos
     private void clearFields() {
         if(comboMedico != null)
             comboMedico.setSelectedIndex(0);
@@ -145,6 +146,8 @@ public class AppointmentPanel extends JPanel {
         spinnerDataHora.setValue(new Date()); // Reseta para data de hoje
         checkConfirmada.setSelected(false);
     }
+    
+    //fecha a página de registro de agendamento
     private void closeWindow(){
         frame.setVisible(false);
     }

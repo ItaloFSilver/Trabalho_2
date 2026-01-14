@@ -2,7 +2,6 @@
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
 */
-/*Arthur de Souza Marques - 202435015 */
 package br.ufjf.dcc025.trabalho2.controller;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import br.ufjf.dcc025.trabalho2.model.users.User;
 
 public class LoginController {
     
-    public User login(String email, String password) throws InvalidLoginException {
+    public User login(String email, String password) throws InvalidLoginException { //tenta encontrar um usuário com os dados informados, se não encontrado, retorna erro
 
         List<User> users = new UserRepository().listAllUsers();
         Email emailObj;

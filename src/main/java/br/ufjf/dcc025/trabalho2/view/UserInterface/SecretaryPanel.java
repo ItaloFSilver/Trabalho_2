@@ -6,19 +6,15 @@ package br.ufjf.dcc025.trabalho2.view.UserInterface;
 
 import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -34,21 +30,20 @@ import javax.swing.JFrame;
 
 public class SecretaryPanel extends UserPanel<Secretary>{
     
-    private JButton logOutBtn;
-    private MainFrame mainPage;
     private SecretaryController controller;
     private DefaultTableModel model;
     
     public SecretaryPanel(MainFrame main, Secretary user){
         super(main, user);
-        tabbedPane.addTab("Agendamentos", criarTabAgenda());
-        tabbedPane.addTab("Gerenciar Usuários", criarTabUsuarios());
+        tabbedPane.addTab("Agendamentos", createAgendaTab());
+        tabbedPane.addTab("Gerenciar Usuários", createUsersTab());
 
         add(tabbedPane, BorderLayout.CENTER);
     }
 
     
-    private JPanel criarTabAgenda() {
+    //cria a página de agendamentos, aqui a secretária pode ver todas as consultas marcadas
+    private JPanel createAgendaTab() {
         
         JPanel painel = new JPanel(new BorderLayout());
         JButton appointAddBtn = new JButton("Novo Agendamento");
@@ -102,8 +97,8 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         return painel;
     }
 
-    
-    private JPanel criarTabUsuarios() {
+    //cria a página de gerenciamento dos usuários cadastrados no sistema
+    private JPanel createUsersTab() {
         JPanel painel = new JPanel(new BorderLayout());
 
         String[] colunas = {"Nome", "Documento", "Tipo", "Email", "phoneNumber"};
@@ -188,7 +183,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         return painel;
     }
 
-    
+    //abre um Frame secundário para registrar um novo usuário
     private void openRegisterWindow() {
         RegisterFrame dialog = new RegisterFrame(model, -1);
         dialog.pack(); 
@@ -197,6 +192,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         dialog.setVisible(true);
     }
     
+    //desmarca o agendamento selecionado
     private void deleteAppointments(String cpf){
         AppointmentController controller = new AppointmentController();
         controller.removeAllOfUser(cpf);

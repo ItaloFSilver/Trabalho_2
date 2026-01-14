@@ -56,11 +56,11 @@ public class RegisterPanel extends JPanel{
         campophoneNumber = criarCampoFormatado("(##)#####-####");
         campoCPF = criarCampoFormatado("###.###.###-##");
         
-        adicionarCampo("Nome Completo:", campoNome, 0, gbc);
-        adicionarCampo("Email:", campoEmail, 1, gbc);
-        adicionarCampo("phoneNumber:", campophoneNumber, 2, gbc); 
-        adicionarCampo("CPF:", campoCPF, 3, gbc);     
-        adicionarCampo("Senha:", campoSenha, 4, gbc);
+        createLabel("Nome Completo:", campoNome, 0, gbc);
+        createLabel("Email:", campoEmail, 1, gbc);
+        createLabel("phoneNumber:", campophoneNumber, 2, gbc); 
+        createLabel("CPF:", campoCPF, 3, gbc);     
+        createLabel("Senha:", campoSenha, 4, gbc);
 
         
         JLabel lblTipo = new JLabel("Tipo de Usuário:");
@@ -99,7 +99,6 @@ public class RegisterPanel extends JPanel{
             }
         });
         
-        SecretaryController secretaria = new SecretaryController();
         
         JButton btnCadastrar = new JButton("Confirmar");
         btnCadastrar.setPreferredSize(new Dimension(150, 30));
@@ -144,8 +143,8 @@ public class RegisterPanel extends JPanel{
         setBorder(BorderFactory.createTitledBorder("Novo Usuário"));
     }
 
-    
-    private void adicionarCampo(String rotulo, Component campo, int linha, GridBagConstraints gbc) {
+    //cria um Label contendo a String "rotulo" passada como referência
+    private void createLabel(String rotulo, Component campo, int linha, GridBagConstraints gbc) {
         gbc.gridwidth = 1;
         
         JLabel label = new JLabel(rotulo);
@@ -159,6 +158,7 @@ public class RegisterPanel extends JPanel{
         add(campo, gbc);
     }
     
+    //puxa os dados do usuário para os respectivos campos que os utilizam
     public void setText(User user){
         campoNome.setText(user.getName());
         campoEmail.setText(user.getEmail());
@@ -168,6 +168,7 @@ public class RegisterPanel extends JPanel{
         campoCPF.setEditable(false);
     }
     
+    //função para criar um campo formatado utilizando a máscara passada como parâmetro
     private JFormattedTextField criarCampoFormatado(String mascara) {
         JFormattedTextField campo = null;
         try {
@@ -181,6 +182,7 @@ public class RegisterPanel extends JPanel{
         return campo;
     }
     
+    //pega o cpf do usuário e o remove utilizando o index na tabela
     public void removePerIndex(int index, DefaultTableModel model, String c){
         if(index >= 0) {
             model.removeRow(index);

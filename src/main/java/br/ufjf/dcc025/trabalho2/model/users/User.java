@@ -46,34 +46,45 @@ public abstract class User {
         this.status = status;
     }
 
+    //cria o painel do usuário
     public abstract JPanel createPanel(MainFrame mainframe);
 
+    //retorna o nome do usuário
     public String getName() {
         return this.name;
     }
 
+    //retorna o email como Email
     public Email getFormatEmail(){
         return this.email;
     }
+    
+    //retorna o email como String
     public String getEmail() {
         return this.email.getEmail();
     }
+    
+    //retorna a senha como Password
     public Password getFormatPassword(){
         return this.password;
     }
     
+    //retorna a senha como String
     public String getPassword() {
         return this.password.getPassword();
     }
     
+    //retorna o CPF do user
     public CPF getCPF() {
         return this.cpf;
     }
 
+    //retorna o phoneNumber como PhoneNumber. ex: (##)#####-####
     public PhoneNumber getphoneNumber() {
         return this.phoneNumber;
     }
 
+    //retorna o profile como enum
     public Profile getProfile() {
         return this.profile;
     }

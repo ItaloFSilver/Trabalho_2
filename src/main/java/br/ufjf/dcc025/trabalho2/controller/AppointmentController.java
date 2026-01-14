@@ -15,7 +15,7 @@ import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 
 public class AppointmentController {
     
-    public void saveAppointment(Appointment appointment) throws InvalidAppointmentException {
+    public void saveAppointment(Appointment appointment) throws InvalidAppointmentException {   //salva o agendamento utilizando o cpf do médico e paciente
         List<Appointment> appointments = new AppointmentRepository().listAll();
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(appointment.getData());
@@ -37,16 +37,16 @@ public class AppointmentController {
         new AppointmentRepository().save(appointment);
     }
 
-    public void removeAppointment(Appointment appointment) {
+    public void removeAppointment(Appointment appointment) {    //remove o agendamento utilizando os CPFs de médico e paciente
         Appointment a = new AppointmentRepository().searchByCPF(appointment.getMedicCPF(), appointment.getPatientCPF());
         new AppointmentRepository().remove(appointment);
     }
 
-    public List<Appointment> listAll(){
+    public List<Appointment> listAll(){ //lista os agendamentos cadastrados
         return new AppointmentRepository().listAll();
     }
     
-    public void removeAllOfUser(String cpf){
+    public void removeAllOfUser(String cpf){    //remove todos os agendamentos do usuário com o CPF passado
         List<Appointment> list = listThis(cpf);
         while(!list.isEmpty()){
             new AppointmentRepository().remove(list.getLast());

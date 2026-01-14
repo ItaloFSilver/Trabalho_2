@@ -68,6 +68,7 @@ public class MedicPanel extends UserPanel<Medic> {
         add(tabbedPane, BorderLayout.CENTER);
     }
     
+    //gera a página contendo os dados pessoais do médico
     @Override
     public JPanel createPersonalDataTab(){
         JPanel jPanel = initDataComponents();
@@ -78,7 +79,8 @@ public class MedicPanel extends UserPanel<Medic> {
         return jPanel;
     }
     
-    private JPanel createAppointmentPage(){ //cria uma tabela e puxa o user armazenado pela mainPage pra poder ver as consultas
+    //cria o painel com a tabela de agendamentos do médico, informando a data agendada, o paciente e se a consulta está confirmada ou não
+    private JPanel createAppointmentPage(){ 
 
         JPanel appPanel = new JPanel(new BorderLayout());
         
@@ -110,7 +112,9 @@ public class MedicPanel extends UserPanel<Medic> {
         
         return appPanel;
     }
-    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   //fiz esse botão pra atualizar a tabela, mas tá meio bugado
+    
+    //Define a ação do botão de atualizar agenda: puxa a lista do repositório e exibe a versão mais atual dos agendamentos
+    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   
             //puxa o User armazenado na main pra acessar os dados
         if(agenda == null){
             agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
@@ -122,6 +126,7 @@ public class MedicPanel extends UserPanel<Medic> {
         }
     }
     
+    //cria o Painel da agenda do médico, para que ele possa registrar seus dias de serviço
     public JPanel DoctorSchedulePanel() {
         JPanel painel = new JPanel();
         painel.setLayout(new BorderLayout());
@@ -187,7 +192,8 @@ public class MedicPanel extends UserPanel<Medic> {
         return painel;
     }
 
-    public String getHour(int Hours, int Minutes){        //retorna a data formatada corretamente
+    //retorna a data formatada corretamente
+    public String getHour(int Hours, int Minutes){        
         String hour = "";
         String minute = "";
        
@@ -204,6 +210,7 @@ public class MedicPanel extends UserPanel<Medic> {
         return fullDate;
     }
 
+    //função para gerar o Spinner de seleção de horário
     private JSpinner createHourSpinner() {
         SpinnerDateModel model = new SpinnerDateModel();
         JSpinner spinner = new JSpinner(model);
@@ -216,6 +223,8 @@ public class MedicPanel extends UserPanel<Medic> {
         return spinner;
     }
 
+    //Adiciona o horário criado pelo médico em sua agenda
+    //update: Os horários aparecem ordenadamente seguindo o enum dos dias da semana
     private void addItemInList() {
         MedicController medic = new MedicController();
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
@@ -231,21 +240,17 @@ public class MedicPanel extends UserPanel<Medic> {
             return;
         }
         String dia = comboDias.getSelectedItem().toString();
-        Date inicio = (Date) spinnerInicio.getValue();
-        Date fim = (Date) spinnerFim.getValue();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        String horarioFormatado = dia + ": " + sdf.format(inicio) + " - " + sdf.format(fim);
 
         if (listModel.contains(dia)) {
             JOptionPane.showMessageDialog(this, "Este horário já foi adicionado!");
             return;
         }
-
-        listModel.addElement(horarioFormatado);
+        listModel.clear();
+        for(WorkShift w : user.getDisponibilityAsList())
+            listModel.addElement(w.getDayOfWeek().toString()+" "+w.getStart()+"-"+w.getEnd());
     }
     
-
+    //Cria o Painel de emissão de documentos(Atestado/Receitas/Exames) do médico
     public JPanel createDoctorIssuePanel() {
         JPanel medicPanel = new JPanel(new BorderLayout());
         JComboBox<String> comboTipo;
@@ -255,7 +260,7 @@ public class MedicPanel extends UserPanel<Medic> {
 
         medicPanel.setBorder(BorderFactory.createTitledBorder("Emitir Documento Médico"));
 
-        // --- Formulario ---
+        
         JPanel form = new JPanel(new GridLayout(4, 1, 5, 5));
         
         comboTipo = new JComboBox<>(new String[]{"Atestado Médico", "Pedido de Exame", "Receita"});
@@ -263,7 +268,7 @@ public class MedicPanel extends UserPanel<Medic> {
         txtDiagnostico = new JTextArea(3, 20); // Linhas, Colunas
         txtRecomendacao = new JTextArea(5, 20);
         
-        // JTextArea precisa de ScrollPane para ter barra de rolagem
+        
         JScrollPane scrollDiag = new JScrollPane(txtDiagnostico);
         JScrollPane scrollRec = new JScrollPane(txtRecomendacao);
 
@@ -278,7 +283,7 @@ public class MedicPanel extends UserPanel<Medic> {
 
         medicPanel.add(form, BorderLayout.CENTER);
 
-        // --- Botão ---
+        
         JButton btnEmitir = new JButton("Emitir e Salvar");
         btnEmitir.addActionListener(e -> {
             String tipo = (String) comboTipo.getSelectedItem();
@@ -290,10 +295,10 @@ public class MedicPanel extends UserPanel<Medic> {
                 return;
             }
 
-        // 1. Cria o objeto
+        
             MedicalDocument doc = new MedicalDocument(tipo, user.getName(), patientCPF.getText(), diag, rec);
         
-        // 2. Chama o controller
+        
             DocumentController controller = new DocumentController();
             controller.emitirDocumento(doc);
 
@@ -307,6 +312,8 @@ public class MedicPanel extends UserPanel<Medic> {
     
         return medicPanel;
     }
+    
+    //gera o campo formatado utilizando uma máscara. Aqui é usado apenas para o CPF do paciente
     private JFormattedTextField criarCampoFormatado(String mascara) {
         JFormattedTextField campo = null;
         try {

@@ -114,6 +114,7 @@ public class EditAppointmentDialog extends JDialog {
         add(panelButtons, BorderLayout.SOUTH);
     }
 
+    //funções para retornar qual foi o botão pressionado e o novo horário(caso tenha havido alteração)
     public boolean isSalvou() { return salvou; }
     public boolean isDesmarcou() { return desmarcou; }
     public String getNovoHorario() { return novoHorarioSelecionado; }

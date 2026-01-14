@@ -35,29 +35,34 @@ public class Medic extends User {
         this.profile = Profile.MEDICO;
         
     }
-
+    
+    //retorna a agenda do médico
     public List<WorkShift> getDisponibilityAsList() {
         MedicController medic = new MedicController();
         
         return medic.loadWorkShift(this.getCPF());
     }
 
+    //cria o painel de visualização do médico
     @Override
     public JPanel createPanel(MainFrame mainframe) {
         return new MedicPanel(mainframe, this);
     }
     
+    
     @Override 
     public boolean getStatus(){
         return this.active;
     }
+    
     @Override 
     public void setStatus(boolean sts){
         this.status = sts;
     }
     
+    //retorna o horário livre do médico
     public List<String> getFreeTime(int dds){
-        List<String> horarios = new ArrayList<>();
+        List<String> horarios;
         horarios = getDisponibilityAsList().get(dds).getFreeTime();
         
         return horarios;

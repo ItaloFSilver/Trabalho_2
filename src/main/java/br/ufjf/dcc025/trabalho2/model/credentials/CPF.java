@@ -2,7 +2,6 @@
 *Arthur de Souza Marques - 202435015
 *Ítalo Fagundes Silvério - 202435020
 */
-/*Arthur de Souza Marques - 202435015 */
 package br.ufjf.dcc025.trabalho2.model.credentials;
 
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
@@ -21,6 +20,7 @@ public class CPF {
         }
     }
 
+    //método que valida maticamente o CPF seguindo as normas atuais do governo
     boolean validateCPFMathematicaly(String cpf) {
         int firstSum = 0;
         int index = 0;
@@ -43,6 +43,7 @@ public class CPF {
                (secondSum * 10) % 11 == Character.getNumericValue(cpf.charAt(10));
     }
 
+    //valida se o cpf informado segue a forma ###.###.###-##
     boolean validateCPF(String cpf) {
         if(cpf.matches(regex)) {
             return validateCPFMathematicaly(cpf);
@@ -50,12 +51,14 @@ public class CPF {
         return false;
     }    
 
+    //retorna o CPF como uma string
     private String getCPF() {
         return cpf;
     }
 
+    // Remove tudo que não for número
     public String normalize(String cpf) {
-        return cpf.replaceAll("[^0-9]", ""); // Remove tudo que não for número
+        return cpf.replaceAll("[^0-9]", ""); 
     }
 
     @Override

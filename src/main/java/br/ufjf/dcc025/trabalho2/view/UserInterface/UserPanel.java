@@ -24,7 +24,7 @@ public abstract class UserPanel<T extends User> extends JPanel {
     protected final MainFrame mainPage;
     private final JButton logOutBtn;
     protected final JTabbedPane tabbedPane;
-    protected User user;
+    private final User user;
             
     public UserPanel(MainFrame main, User user){
         this.mainPage = main;
@@ -148,20 +148,17 @@ public abstract class UserPanel<T extends User> extends JPanel {
         painel.add(phoneField, centralizator);
         
         JButton confirmBtn = new JButton("Confirmar");
-        confirmBtn.addActionListener(new ActionListener(){
-        @Override
-            public void actionPerformed(ActionEvent evt){   //Registra um novo usuário e deleta a versão antiga
-                RegisterController nova = new RegisterController();
-                SecretaryController secret = new SecretaryController();
-                String name = user.getName();
-                try{
-                    secret.removeUserByCPF(cpfField.getText());
-                    nova.registerUser(nameField.getText(), emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile(), user.getStatus());
-                }catch(InvalidRegisterException e){
-                    JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                    nova.registerUser(name, emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile(), user.getStatus());
-                }
-            
+        confirmBtn.addActionListener((ActionEvent evt) -> {
+            //Registra um novo usuário e deleta a versão antiga
+            RegisterController nova = new RegisterController();
+            SecretaryController secret = new SecretaryController();
+            User backup = user;
+            try{
+                secret.removeUserByCPF(cpfField.getText());
+                nova.registerUser(nameField.getText(), emailField.getText(), cpfField.getText(), phoneField.getText(), passwordField.getText(), user.getProfile(), user.getStatus());
+            }catch(InvalidRegisterException e){
+                JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                nova.registerUser(backup.getName(), backup.getEmail(), backup.getCPF().toString(), backup.getphoneNumber().toString(), backup.getPassword(), backup.getProfile(), backup.getStatus());
             }
         });
         

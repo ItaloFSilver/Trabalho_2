@@ -29,13 +29,19 @@ public class WorkShiftRepository implements Repository<WorkShift> {
     @Override
     public void save(WorkShift a) throws InvalidDateException{
         List<WorkShift> workShifts = listAll();
+        List<WorkShift> ordenate = new ArrayList<>();
         for(WorkShift b : workShifts){
             if(a.getDayOfWeek().equals(b.getDayOfWeek()))
                 throw new InvalidDateException("Dia já registrado");
-        }workShifts.add(a);
+            if(a.getDayOfWeeki() > b.getDayOfWeeki())
+                ordenate.add(b);
+        }ordenate.add(a);
+        for(WorkShift b: workShifts)
+            if(b.getDayOfWeeki() > a.getDayOfWeeki())
+                ordenate.add(b);
         File file = new File(path);
         try (FileWriter writer = new FileWriter(file)) {
-            gson.toJson(workShifts, writer);
+            gson.toJson(ordenate, writer);
         }
         catch (IOException e) {
             e.printStackTrace();

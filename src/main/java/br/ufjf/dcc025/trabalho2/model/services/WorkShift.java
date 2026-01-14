@@ -31,10 +31,12 @@ public class WorkShift {
         this.block = new ArrayList<>();
     }
 
+    //retorna o enum do dia da semana
     public DayOfWeek getDayOfWeek() {
         return this.dayOfWeek;
     }
     
+    //retorna o dia da semana como um inteiro
     public int getDayOfWeeki(){
         return switch (this.dayOfWeek) {
             case SUNDAY -> 1;
@@ -48,20 +50,24 @@ public class WorkShift {
         };
     }
 
+    //retorna o horário de inicio da consulta
     public String getStart() {
         return this.start;
     }
     
+    //bloqueia o horário recebido como parametro
     public void timeBlock(Date time){
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         block.add(parser.format(time));
     }
     
+    //libera o horário recebido como parâmetro
     public void setFree(Date time){
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         block.remove(parser.format(time));
     }
     
+    //retorna uma lista com todos os horários disponíveis
     public List<String> getFreeTime(){
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         List<String> listaHorarios = new ArrayList<>();
@@ -84,6 +90,7 @@ public class WorkShift {
         return listaHorarios;
     }
     
+    //verifica se o horário está disponível
     public boolean isFree(String time){
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         try{
@@ -99,14 +106,17 @@ public class WorkShift {
         return false;
     }
     
+    //retorna o horário final do horário de atendimento
     public String getEnd() {
         return this.end;
     }
     
+    //retorna o cpf do médico
     public CPF getMedicCPF(){
         return this.medicCPF;
     }
 
+    //retorna o dia com horário de início e fim como String
     @Override
     public String toString() {
         

@@ -25,39 +25,47 @@ public class Appointment {
         this.medicCPF = medic.getCPF();
         this.patientCPF = patient.getCPF();
         this.date = date;
-        //this.medicName = medic.getName();
-        //this.patientName = patient.getName();
         this.confirmed = check;
         this.medic = (Medic)medic; 
         this.patient = (Patient)patient;
     }
 
+    //retorna o nome do médico registrado no agendamento
     public String getMedicName(){
         return this.medic.getName();
     }
+    //retorna o médico
     public Medic getMedic(){
         return medic;
     }
     
+    //retorna o paciente
     public Patient getPatient(){
         return patient;
     }
     
+    //retorna o cpf do médico
     public CPF getMedicCPF() {
         return this.medicCPF;
     }
     
+    //retorna o nome do paciente
     public String getPatientName(){
         return this.patient.getName();
     }
+    
+    //retorna o CPF do paciente
     public CPF getPatientCPF() {
         return this.patientCPF;
     }
+    
+    //retorna a data do agendamento como DATE
     public Date getData(){
         return this.date;
     }
     
-    public String getDate(){        //retorna a data formatada corretamente
+    //retorna a data formatada em String
+    public String getDate(){        
         String day = "";
         String month = "";
         String year = ""+(date.getYear()-100);
@@ -84,6 +92,7 @@ public class Appointment {
         return fullDate;
     }
     
+    //retorna o dia como inteiro 1-7
     public int getDayOfWeek(){
         Calendar cal = Calendar.getInstance();
         cal.setTime(this.date);
@@ -92,6 +101,7 @@ public class Appointment {
         return cal.get(Calendar.DAY_OF_WEEK);
     }
     
+    //confirma o status da consulta(para controle de frequência)
     public String getCheck(){
         if(confirmed)
             return "Confirmada";
