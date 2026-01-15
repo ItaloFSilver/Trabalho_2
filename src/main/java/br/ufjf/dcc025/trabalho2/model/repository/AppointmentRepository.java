@@ -27,10 +27,17 @@ public class AppointmentRepository implements Repository<Appointment> {
     @Override
     public void save(Appointment appointment) {
         List<Appointment> appointments = listAll();
-        appointments.add(appointment);
+        List<Appointment> ordenate = new ArrayList<>();
+        for(Appointment a : appointments)
+            if(a.getData().before(appointment.getData()))
+                ordenate.add(a);
+        ordenate.add(appointment);
+        for(Appointment a : appointments)
+            if(a.getData().equals(appointment.getData()) || a.getData().after(appointment.getData()))
+                ordenate.add(a);
         File file = new File(path);
         try (FileWriter writer = new FileWriter(file)) {
-            gson.toJson(appointments, writer);
+            gson.toJson(ordenate, writer);
         }
         catch (IOException e) {
             e.printStackTrace();

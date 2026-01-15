@@ -8,7 +8,6 @@ import br.ufjf.dcc025.trabalho2.controller.AppointmentController;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -130,49 +129,36 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         JButton btnExcluir = new JButton("Excluir");
 
         
-        btnNovo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openRegisterWindow();
-                
-            }
+        btnNovo.addActionListener((ActionEvent e) -> {
+            openRegisterWindow();
         });
         //Se a ação é confirmada, o usuário passado é deletado e registra-se um novo em cima do anterior. CPF não editável
-        btnEditar.addActionListener(new ActionListener() {
-        @Override
-            public void actionPerformed(ActionEvent e) {
-                int linha = tabela.getSelectedRow();
-                if (linha != -1) {
-                    String nome = tabela.getValueAt(linha, 0).toString();
-                    JOptionPane.showMessageDialog(null, "Editar: " + nome);
-                    
-                    User user = listaUsuarios.get(tabela.getSelectedRow());
-
-                    RegisterFrame edit = new RegisterFrame(model, tabela.getSelectedRow());
-                    RegisterPanel editar = new RegisterPanel(edit, model, tabela.getSelectedRow());
-                    edit.add(editar);
-                    editar.setText(user);
-                    edit.setContentPane(editar);
-                    edit.pack();
-                    edit.setLocationRelativeTo(null);
-                    edit.setSize(640, 480);
-                    edit.setVisible(true);
-                    
-                }
+        btnEditar.addActionListener((ActionEvent e) -> {
+            int linha = tabela.getSelectedRow();
+            if (linha != -1) {
+                String nome = tabela.getValueAt(linha, 0).toString();
+                JOptionPane.showMessageDialog(null, "Editar: " + nome);
+                User user1 = listaUsuarios.get(tabela.getSelectedRow());
+                RegisterFrame edit = new RegisterFrame(model, tabela.getSelectedRow());
+                RegisterPanel editar = new RegisterPanel(edit, model, tabela.getSelectedRow());
+                edit.add(editar);
+                editar.setText(user1);
+                edit.setContentPane(editar);
+                edit.pack();
+                edit.setLocationRelativeTo(null);
+                edit.setSize(640, 480);
+                edit.setVisible(true);
             }
         });
         
-        btnExcluir.addActionListener(new ActionListener() {
-        @Override
-            public void actionPerformed(ActionEvent evt) {
-                int line = tabela.getSelectedRow();
-                int modelRow = tabela.convertRowIndexToModel(line);
-                String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
-                controller.removeUserByCPF(cpf);
-                model.removeRow(tabela.getSelectedRow());
-                deleteAppointments(cpf);
-            }
-            });
+        btnExcluir.addActionListener((ActionEvent evt) -> {
+            int line = tabela.getSelectedRow();
+            int modelRow = tabela.convertRowIndexToModel(line);
+            String cpf = tabela.getModel().getValueAt(modelRow, 1).toString();
+            controller.removeUserByCPF(cpf);
+            model.removeRow(tabela.getSelectedRow());
+            deleteAppointments(cpf);
+        });
         
         pnlBotoes.add(btnNovo);
         pnlBotoes.add(btnEditar);
@@ -194,8 +180,8 @@ public class SecretaryPanel extends UserPanel<Secretary>{
     
     //desmarca o agendamento selecionado
     private void deleteAppointments(String cpf){
-        AppointmentController controller = new AppointmentController();
-        controller.removeAllOfUser(cpf);
+        AppointmentController appointmentController = new AppointmentController();
+        appointmentController.removeAllOfUser(cpf);
         
     }
     

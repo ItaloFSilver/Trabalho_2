@@ -27,6 +27,15 @@
     "block": []
   },
   {
+    "dayOfWeek": "FRIDAY",
+    "start": "08:00",
+    "end": "16:00",
+    "medicCPF": {
+      "cpf": "222.222.222-22"
+    },
+    "block": []
+  },
+  {
     "dayOfWeek": "SATURDAY",
     "start": "08:00",
     "end": "12:00",
