@@ -7,7 +7,7 @@
       "cpf": "111.111.111-11"
     },
     "date": "Jan 13, 2026, 10:30:00 AM",
-    "confirmed": true,
+    "confirmed": false,
     "medic": {
       "active": false,
       "profile": "MEDICO",
@@ -53,7 +53,7 @@
       "cpf": "168.698.416-24"
     },
     "date": "Jan 16, 2026, 8:30:00 AM",
-    "confirmed": false,
+    "confirmed": true,
     "medic": {
       "active": false,
       "profile": "MEDICO",
@@ -99,7 +99,7 @@
       "cpf": "111.111.111-11"
     },
     "date": "Jan 16, 2026, 10:30:00 AM",
-    "confirmed": false,
+    "confirmed": true,
     "medic": {
       "active": false,
       "profile": "MEDICO",

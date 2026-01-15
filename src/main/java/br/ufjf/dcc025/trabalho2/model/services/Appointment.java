@@ -105,7 +105,11 @@ public class Appointment {
     public String getCheck(){
         if(confirmed)
             return "Confirmada";
-        return "Aguardando Confirmação";
+        return "Paciente faltou";
+    }
+    
+    public void setChecked(boolean check){
+        this.confirmed = check;
     }
     
     @Override

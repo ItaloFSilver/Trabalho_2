@@ -41,6 +41,11 @@ import br.ufjf.dcc025.trabalho2.model.services.Appointment;
 import br.ufjf.dcc025.trabalho2.model.services.MedicalDocument;
 import br.ufjf.dcc025.trabalho2.model.services.WorkShift;
 import br.ufjf.dcc025.trabalho2.model.users.Medic;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 
 
@@ -105,6 +110,14 @@ public class MedicPanel extends UserPanel<Medic> {
         JButton updateBtn = new JButton("Atualizar");
         updateBtn.addActionListener(this::updateBtnActionListener);
         
+        tabela.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) { 
+                    checkFrequency(tabela.getSelectedRow());
+                }
+            }
+        });
         
         toolbar.add(updateBtn);
         
@@ -113,17 +126,68 @@ public class MedicPanel extends UserPanel<Medic> {
         return appPanel;
     }
     
+    private void checkFrequency(int line){
+        AppointmentController controllerAppointment = new AppointmentController();
+        
+        JFrame janela = new JFrame();
+        JPanel frequencyDialog = new JPanel();
+        janela.setSize(200, 200);
+        
+        JLabel questionLabel = new JLabel("Paciente compareceu?");
+        
+        JCheckBox confirm = new JCheckBox("Sim");
+        JCheckBox reject = new JCheckBox("Não");
+        JButton confirmBtn = new JButton("Confirmar");
+        
+        GridBagConstraints centralizator = new GridBagConstraints();
+        centralizator.insets = new Insets(10, 10, 10, 10);
+        
+        centralizator.gridx = 0;
+        centralizator.gridy = 0;
+        centralizator.anchor = GridBagConstraints.NORTH;
+        frequencyDialog.add(questionLabel, centralizator);
+        
+        centralizator.gridx = 0;
+        centralizator.gridy = 1;
+        centralizator.anchor = GridBagConstraints.CENTER;
+        frequencyDialog.add(confirm, centralizator);
+        
+        centralizator.gridx = 1;
+        centralizator.gridy = 1;
+        centralizator.anchor = GridBagConstraints.CENTER;
+        frequencyDialog.add(reject, centralizator);
+        
+        centralizator.gridx = 0;
+        centralizator.gridy = 2;
+        centralizator.anchor = GridBagConstraints.SOUTH;
+        frequencyDialog.add(confirmBtn, centralizator);
+        
+        janela.add(frequencyDialog);
+        janela.setVisible(true);
+        janela.setLocationRelativeTo(null);
+        frequencyDialog.setVisible(true);
+        
+        confirmBtn.addActionListener(e-> {
+            if(confirm.isSelected()){
+                controllerAppointment.setAppointmentCheck(agenda.get(line), true);
+            }
+            if(reject.isSelected()){
+                controllerAppointment.setAppointmentCheck(agenda.get(line), false);
+            }
+            janela.setVisible(false);
+        });
+    }
     //Define a ação do botão de atualizar agenda: puxa a lista do repositório e exibe a versão mais atual dos agendamentos
     private void updateBtnActionListener(java.awt.event.ActionEvent evt){   
             //puxa o User armazenado na main pra acessar os dados
-        if(agenda == null){
+        appoint.setRowCount(0);
             agenda = consultController.listThis(user.getCPF().toString());  //pesquisa pelo cpf do usuário pra achar certin
             for(Appointment a : agenda){
                 String [] data = {a.getDate(), a.getPatientName(), a.getCheck()};   
                 System.out.println(a.getMedicName());
                 appoint.addRow(data);
             }
-        }
+        
     }
     
     //cria o Painel da agenda do médico, para que ele possa registrar seus dias de serviço

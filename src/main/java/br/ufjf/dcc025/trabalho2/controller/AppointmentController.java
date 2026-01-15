@@ -64,4 +64,10 @@ public class AppointmentController {
         }
         return hisAppointments;
     }
+    
+    public void setAppointmentCheck(Appointment app, boolean bool){
+        app.setChecked(bool);
+        removeAppointment(app);
+        saveAppointment(app);
+    }
 }
