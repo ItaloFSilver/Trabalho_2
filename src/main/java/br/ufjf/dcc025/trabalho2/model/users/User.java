@@ -88,9 +88,14 @@ public abstract class User {
     public Profile getProfile() {
         return this.profile;
     }
-    public abstract void setStatus(boolean bool);
     
+     //retorna se o paciente pode ou não receber visitas
     public boolean getStatus(){
         return this.status;
+    }
+    
+    //define se o paciente poderá receber visitas
+    public void setStatus(boolean bool){
+        this.status = bool;
     }
 }

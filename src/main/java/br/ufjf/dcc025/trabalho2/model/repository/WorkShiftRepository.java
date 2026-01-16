@@ -31,13 +31,13 @@ public class WorkShiftRepository implements Repository<WorkShift> {
         List<WorkShift> workShifts = listAll();
         List<WorkShift> ordenate = new ArrayList<>();
         for(WorkShift b : workShifts){
-            if(a.getDayOfWeek().equals(b.getDayOfWeek()))
+            if(a.getDayOfWeek().equals(b.getDayOfWeek()) && a.getMedicCPF().equals(b.getMedicCPF()))
                 throw new InvalidDateException("Dia já registrado");
             if(a.getDayOfWeeki() > b.getDayOfWeeki())
                 ordenate.add(b);
         }ordenate.add(a);
         for(WorkShift b: workShifts)
-            if(b.getDayOfWeeki() > a.getDayOfWeeki())
+            if(b.getDayOfWeeki() >= a.getDayOfWeeki())
                 ordenate.add(b);
         File file = new File(path);
         try (FileWriter writer = new FileWriter(file)) {

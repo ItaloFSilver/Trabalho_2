@@ -107,6 +107,9 @@ public class Appointment {
             return "Confirmada";
         return "Paciente faltou";
     }
+    public boolean getChecked(){
+        return this.confirmed;
+    }
     
     public void setChecked(boolean check){
         this.confirmed = check;

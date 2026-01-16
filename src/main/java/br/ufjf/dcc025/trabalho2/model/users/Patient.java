@@ -13,7 +13,7 @@ import br.ufjf.dcc025.trabalho2.model.credentials.PhoneNumber;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.PatientPanel;
 
 public class Patient extends User {
-    public boolean hospitalized;
+    private boolean hospitalized;
     
     public Patient(String name, String email, String cpf, String phoneNumber, String password) {
         super(name, email, cpf, phoneNumber, password);
@@ -29,18 +29,6 @@ public class Patient extends User {
     @Override
     public JPanel createPanel(br.ufjf.dcc025.trabalho2.view.UserInterface.MainFrame mainframe) {
         return new PatientPanel(mainframe, this);
-    }
-    
-    //retorna se o paciente pode ou não receber visitas
-    @Override
-    public boolean getStatus(){
-        return this.status;
-    }
-    
-    //define se o paciente poderá receber visitas
-    @Override
-    public void setStatus(boolean bool){
-        this.status = bool;
     }
     
     //Internar o paciente

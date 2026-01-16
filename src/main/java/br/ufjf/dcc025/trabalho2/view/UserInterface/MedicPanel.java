@@ -81,6 +81,13 @@ public class MedicPanel extends UserPanel<Medic> {
         GridBagConstraints centralizator = new GridBagConstraints();
         centralizator.insets = new Insets(10, 10, 10, 10);
         
+        JButton activeBtn = new JButton();
+        centralizator.gridx = 4;
+        centralizator.gridy = 0;
+        centralizator.anchor = GridBagConstraints.NORTHEAST;
+        
+        jPanel.add(activeBtn);
+        
         return jPanel;
     }
     

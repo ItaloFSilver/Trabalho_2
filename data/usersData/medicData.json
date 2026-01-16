@@ -1,6 +1,5 @@
 [
   {
-    "active": false,
     "profile": "MEDICO",
     "name": "Medico Jr",
     "email": {
@@ -14,6 +13,23 @@
     },
     "phoneNumber": {
       "phoneNumber": "(32)99222-2222"
+    },
+    "status": true
+  },
+  {
+    "profile": "MEDICO",
+    "name": "Fernando Cassius",
+    "email": {
+      "email": "fernando1@gmail.com"
+    },
+    "cpf": {
+      "cpf": "291.559.680-82"
+    },
+    "password": {
+      "password": "12345678"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)91111-1111"
     },
     "status": true
   }

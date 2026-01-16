@@ -32,7 +32,7 @@ public class RegisterController {
         Password passwordObj;
         UserRepository repository = new UserRepository();
         List<User> users = repository.listAllUsers();
-        try {
+        
             if(!nAme.matches(regex))
                 throw new InvalidEmailException("Nome inválido");
             emailObj = new Email(email);
@@ -46,10 +46,8 @@ public class RegisterController {
                 if(emailObj.toString().equals(u.getEmail()))
                     throw new InvalidEmailException("E-mail já cadastrado");
             }
-        } 
-        catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException | InvalidphoneNumberException e) {
-            throw new InvalidRegisterException(e.getMessage());
-        }
+         
+        
 
         repository.saveUser(name, emailObj, cpfObj, null, phoneNumberObj, passwordObj, userType, stat);
     }

@@ -85,11 +85,11 @@ public class PatientPanel extends UserPanel<Patient> {
         JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         JButton updateBtn = new JButton("Atualizar");
-        updateBtn.addActionListener(this::updateBtnActionListener);
+        updateBtn.addActionListener(e -> updateTable());
         
         JButton editBtn = new JButton("Editar");
-        editBtn.addActionListener(e -> {                ///////////////////
-            int linha = tabela.getSelectedRow();        ////////////////// Aqui precisamos pegar as horas que o médico tem livre pra atender
+        editBtn.addActionListener(e -> {                
+            int linha = tabela.getSelectedRow();        
             if (linha == -1) return;
             
             String dataAtual = (String) tabela.getValueAt(linha, 0);
@@ -150,7 +150,7 @@ public class PatientPanel extends UserPanel<Patient> {
                         break;
                         }
                     }
-            }
+            } updateTable();
         });
         
         toolbar.add(updateBtn);
@@ -162,7 +162,7 @@ public class PatientPanel extends UserPanel<Patient> {
     }
     
     //Atualiza a página de agendamentos do paciente com base no repositório
-    private void updateBtnActionListener(java.awt.event.ActionEvent evt){   
+    private void updateTable(){
         if(!(agenda == null)){
             agenda.clear();
             appoint.setRowCount(0);
@@ -172,40 +172,7 @@ public class PatientPanel extends UserPanel<Patient> {
             String [] data = {a.getDate(), a.getMedicName(), a.getCheck()};   
             System.out.println(a.getMedicName());
             appoint.addRow(data);
-        }
-        
-    }
-    
-    //procura por outros pacientes para verificar horário de visita
-    private JPanel createPatientsList(){        
-        JPanel painel = new JPanel();
-        SecretaryController repo = new SecretaryController();
-        List<User> patients = repo.listPatients();
-        
-        DefaultTableModel model;
-        
-        String[] colunas = {"Paciente", "Status"};
-        
-        model = new DefaultTableModel(colunas, 0){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        
-        JTable tabela = new JTable(model);
-        
-        for(User u : patients)
-            if(!(u.getCPF().equals(user.getCPF()))){
-                String[] linha = {u.getName(), ((u.getStatus()) ? "Visita liberada" : "Não disponível")};
-                model.addRow(linha);
-            }
-        
-        JScrollPane scroll = new JScrollPane(tabela);
-        painel.add(scroll, BorderLayout.CENTER);
-       
-        
-        return painel;
+        } 
     }
     
     //oculta a janela ativa

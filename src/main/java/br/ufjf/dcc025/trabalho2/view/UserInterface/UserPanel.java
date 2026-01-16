@@ -17,7 +17,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public abstract class UserPanel<T extends User> extends JPanel {
     
@@ -173,5 +175,51 @@ public abstract class UserPanel<T extends User> extends JPanel {
     
     private void logOutBtnActionPerformed(ActionEvent evt){
         this.mainPage.changeScreen("login");
+    }
+    
+    protected JPanel createPatientsList(){        
+        JPanel painel = new JPanel();
+        
+        JButton updateTable = new JButton("Atualizar");
+        
+        SecretaryController repo = new SecretaryController();
+        List<User> patients = repo.listPatients();
+        
+        DefaultTableModel model;
+        
+        String[] colunas = {"Paciente", "Status"};
+        
+        model = new DefaultTableModel(colunas, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        JTable tabela = new JTable(model);
+        
+        for(User u : patients)
+            if(!(u.getCPF().equals(user.getCPF()))){
+                String[] linha = {u.getName(), ((u.getStatus()) ? "Visita liberada" : "Não disponível")};
+                model.addRow(linha);
+            }
+        
+        updateTable.addActionListener(e -> {
+            List<User> patientsList = repo.listPatients();
+            model.setRowCount(0);
+            for(User u : patientsList)
+            if(!(u.getCPF().equals(user.getCPF()))){
+                String[] linha = {u.getName(), ((u.getStatus()) ? "Visita liberada" : "Não disponível")};
+                model.addRow(linha);
+            }
+        
+        });
+        
+        JScrollPane scroll = new JScrollPane(tabela);
+        painel.add(updateTable, BorderLayout.NORTH);
+        painel.add(scroll, BorderLayout.CENTER);
+       
+        
+        return painel;
     }
 }

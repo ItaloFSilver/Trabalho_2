@@ -26,9 +26,14 @@ import javax.swing.text.MaskFormatter;
 
 import br.ufjf.dcc025.trabalho2.controller.RegisterController;
 import br.ufjf.dcc025.trabalho2.controller.SecretaryController;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidCPFException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidEmailException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidPasswordException;
 import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidRegisterException;
+import br.ufjf.dcc025.trabalho2.model.exceptions.InvalidphoneNumberException;
 import br.ufjf.dcc025.trabalho2.model.users.Profile;
 import br.ufjf.dcc025.trabalho2.model.users.User;
+import java.util.List;
 import javax.swing.JCheckBox;
 
 
@@ -126,14 +131,15 @@ public class RegisterPanel extends JPanel{
                         Profile.fromString((String) cbTipoUsuario.getSelectedItem()), checkConfirmada.isSelected()
                     );
                     
-                    String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
-                    model.addRow(data);
+                    //String [] data = {campoNome.getText(),campoCPF.getText(),(String) cbTipoUsuario.getSelectedItem(), campoEmail.getText(),campophoneNumber.getText()};
                     
-                } catch (InvalidRegisterException e) {
+                    
+                } catch (InvalidEmailException | InvalidCPFException | InvalidRegisterException | InvalidPasswordException | InvalidphoneNumberException e)  {
                     JOptionPane.showMessageDialog(null, "Erro no cadastro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                updateTable();
                 regPage.setVisible(false);
             }
         });
@@ -188,6 +194,16 @@ public class RegisterPanel extends JPanel{
             model.removeRow(index);
             SecretaryController nova = new SecretaryController();
             nova.removeUserByCPF(c);
+        }
+    }
+    private void updateTable(){
+        SecretaryController controladora = new SecretaryController();
+        List<User> lista;
+        lista = controladora.listAllUsers();
+        main.setRowCount(0);
+        for(User u : lista){
+            String [] data = {u.getName(), u.getCPF().toString(), u.getProfile().toString(), u.getEmail(), u.getphoneNumber().toString()};
+            main.addRow(data);
         }
     }
 }

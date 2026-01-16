@@ -25,6 +25,7 @@ import br.ufjf.dcc025.trabalho2.model.users.User;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.AppointmentPanel;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterFrame;
 import br.ufjf.dcc025.trabalho2.view.UserInterface.ManagementPanels.RegisterPanel;
+import java.util.Calendar;
 import javax.swing.JFrame;
 
 public class SecretaryPanel extends UserPanel<Secretary>{
@@ -35,9 +36,11 @@ public class SecretaryPanel extends UserPanel<Secretary>{
     public SecretaryPanel(MainFrame main, Secretary user){
         super(main, user);
         tabbedPane.addTab("Agendamentos", createAgendaTab());
+        tabbedPane.addTab("Pacientes registrados", createPatientsList());
         tabbedPane.addTab("Gerenciar Usuários", createUsersTab());
 
         add(tabbedPane, BorderLayout.CENTER);
+        
     }
 
     
@@ -59,9 +62,11 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         
         for(Appointment a : agenda){
             String [] data = {a.getDate(), a.getPatientName(), a.getMedicName(), a.getCheck()};
+            if(a.getData().before(Calendar.getInstance().getTime()) && !a.getChecked())
+                JOptionPane.showMessageDialog(null, "Paciente "+a.getPatientName()+" faltou à consulta");
             appoint.addRow(data);
         }
-        
+            
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
         
@@ -100,6 +105,11 @@ public class SecretaryPanel extends UserPanel<Secretary>{
     private JPanel createUsersTab() {
         JPanel painel = new JPanel(new BorderLayout());
 
+        this.controller = new SecretaryController();
+        
+        List<User> listaUsuarios;
+        listaUsuarios = controller.listAllUsers();
+                
         String[] colunas = {"Nome", "Documento", "Tipo", "Email", "phoneNumber"};
 
         model = new DefaultTableModel(colunas,0) {
@@ -114,14 +124,7 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         JScrollPane scroll = new JScrollPane(tabela);
         painel.add(scroll, BorderLayout.CENTER);
         
-        controller = new SecretaryController();
-        
-        List<User> listaUsuarios = controller.listAllUsers();
-        
-        for(User u : listaUsuarios){
-            String [] data = {u.getName(), u.getCPF().toString(), u.getProfile().toString(), u.getEmail(), u.getphoneNumber().toString()};
-            model.addRow(data);
-        }
+        updateTable();
         
         JPanel pnlBotoes = new JPanel();
         JButton btnNovo = new JButton("Cadastrar Novo Usuário");
@@ -131,6 +134,13 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         
         btnNovo.addActionListener((ActionEvent e) -> {
             openRegisterWindow();
+            listaUsuarios.clear();
+            SecretaryController controladora = new SecretaryController();
+            
+            for(User user : controladora.listAllUsers())
+                if(!(listaUsuarios.contains(user)))
+                    listaUsuarios.add(user);
+            updateTable();
         });
         //Se a ação é confirmada, o usuário passado é deletado e registra-se um novo em cima do anterior. CPF não editável
         btnEditar.addActionListener((ActionEvent e) -> {
@@ -138,6 +148,12 @@ public class SecretaryPanel extends UserPanel<Secretary>{
             if (linha != -1) {
                 String nome = tabela.getValueAt(linha, 0).toString();
                 JOptionPane.showMessageDialog(null, "Editar: " + nome);
+                
+                listaUsuarios.clear();
+                for(User user : controller.listAllUsers())
+                    if(!(listaUsuarios.contains(user))){
+                        listaUsuarios.add(user);
+                    }
                 User user1 = listaUsuarios.get(tabela.getSelectedRow());
                 RegisterFrame edit = new RegisterFrame(model, tabela.getSelectedRow());
                 RegisterPanel editar = new RegisterPanel(edit, model, tabela.getSelectedRow());
@@ -169,6 +185,16 @@ public class SecretaryPanel extends UserPanel<Secretary>{
         return painel;
     }
 
+    private void updateTable(){
+        SecretaryController controladora = new SecretaryController();
+        model.setRowCount(0);
+        for(User u : controladora.listAllUsers()){
+            String [] data = {u.getName(), u.getCPF().toString(), u.getProfile().toString(), u.getEmail(), u.getphoneNumber().toString()};
+            model.addRow(data);
+        }
+    }
+    
+    
     //abre um Frame secundário para registrar um novo usuário
     private void openRegisterWindow() {
         RegisterFrame dialog = new RegisterFrame(model, -1);

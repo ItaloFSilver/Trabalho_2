@@ -34,5 +34,23 @@
       "phoneNumber": "(32)91111-1111"
     },
     "status": true
+  },
+  {
+    "hospitalized": false,
+    "profile": "PACIENTE",
+    "name": "Theo Oliveira",
+    "email": {
+      "email": "t@email.com"
+    },
+    "cpf": {
+      "cpf": "277.097.106-97"
+    },
+    "password": {
+      "password": "12345678"
+    },
+    "phoneNumber": {
+      "phoneNumber": "(32)91111-1111"
+    },
+    "status": true
   }
 ]

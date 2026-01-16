@@ -20,7 +20,6 @@ import br.ufjf.dcc025.trabalho2.view.UserInterface.MedicPanel;
 
 
 public class Medic extends User {    
-    private boolean active;
     //private List<String> agenda;
     
 
@@ -47,17 +46,6 @@ public class Medic extends User {
     @Override
     public JPanel createPanel(MainFrame mainframe) {
         return new MedicPanel(mainframe, this);
-    }
-    
-    
-    @Override 
-    public boolean getStatus(){
-        return this.active;
-    }
-    
-    @Override 
-    public void setStatus(boolean sts){
-        this.status = sts;
     }
     
     //retorna o horário livre do médico

@@ -30,12 +30,4 @@ public class Secretary extends User {
         return new SecretaryPanel(mainframe, this);
     }
     
-    @Override
-    public boolean getStatus(){
-        return false;
-    }
-    @Override 
-    public void setStatus(boolean sts){
-        this.status = sts;
-    }
 }

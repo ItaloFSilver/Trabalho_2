@@ -21,30 +21,25 @@ public class MedicController {
  
     private WorkShiftRepository repoWS;
     
+    public void savesWorkShift(WorkShift w){
+        repoWS = new WorkShiftRepository();
+        repoWS.save(w);
+    }
+    
     public void savesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException { //Salva o horário de trabalho do médico de acordo com o dia da semana
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");                                            
         WorkShift workShift;
         repoWS = new WorkShiftRepository();
-        try {
-            workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
-            repoWS.save(workShift);
-        }
-        catch(InvalidDateException e) {
-            throw new InvalidDateException(e.getMessage());
-        }
-        
+        workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
+        repoWS.save(workShift);
     }
+    
     public void removesWorkShift(String dayOfWeek, Date start, Date end, Medic medic) throws InvalidDateException { //remove o dia de trabalho da lista do medico
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         WorkShift workShift;
         repoWS = new WorkShiftRepository();
-        try {
-            workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
-            repoWS.remove(workShift);
-        }
-        catch(InvalidDateException e) {
-            throw new InvalidDateException(e.getMessage());
-        }
+        workShift = new WorkShift(dayOfWeek, parser.format(start), parser.format(end), medic.getCPF());
+        repoWS.remove(workShift); 
     }
     
     public void removesWorkShift(WorkShift w){  //chamada alternativa para remover o dia de trabalho da lista do médico
@@ -68,8 +63,11 @@ public class MedicController {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataAgendamento);
         for(WorkShift u : medic.getDisponibilityAsList())
-            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia))
+            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia)){
                 u.setFree(dataAgendamento);
+                removesWorkShift(u);
+                savesWorkShift(u);
+            }
     }
     
     public void lockTime(Medic medic, Date dataAgendamento){    //bloqueia o horário anteriormente disponível
@@ -82,8 +80,11 @@ public class MedicController {
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         String horaDoDia = parser.format(dataAgendamento);
         for(WorkShift u : medic.getDisponibilityAsList())
-            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia))
+            if(u.getDayOfWeek().toString().equals(diaTexto) && u.getFreeTime().contains(horaDoDia)){
                 u.timeBlock(dataAgendamento);
+                removesWorkShift(u);
+                savesWorkShift(u);
+            }
     }
     
     public boolean medicoAtendeNestaData(Medic medic, Date dataConsulta) {  //verifica se o horário está disponível para agendamento

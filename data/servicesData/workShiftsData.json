@@ -1,8 +1,17 @@
 [
   {
     "dayOfWeek": "SUNDAY",
-    "start": "14:00",
-    "end": "16:30",
+    "start": "12:00",
+    "end": "16:00",
+    "medicCPF": {
+      "cpf": "291.559.680-82"
+    },
+    "block": []
+  },
+  {
+    "dayOfWeek": "MONDAY",
+    "start": "08:00",
+    "end": "15:00",
     "medicCPF": {
       "cpf": "222.222.222-22"
     },
@@ -13,7 +22,25 @@
     "start": "08:00",
     "end": "12:00",
     "medicCPF": {
-      "cpf": "222.222.222-22"
+      "cpf": "291.559.680-82"
+    },
+    "block": []
+  },
+  {
+    "dayOfWeek": "TUESDAY",
+    "start": "12:00",
+    "end": "16:00",
+    "medicCPF": {
+      "cpf": "291.559.680-82"
+    },
+    "block": []
+  },
+  {
+    "dayOfWeek": "WEDNESDAY",
+    "start": "08:00",
+    "end": "10:00",
+    "medicCPF": {
+      "cpf": "291.559.680-82"
     },
     "block": []
   },
@@ -21,6 +48,15 @@
     "dayOfWeek": "WEDNESDAY",
     "start": "13:00",
     "end": "16:30",
+    "medicCPF": {
+      "cpf": "222.222.222-22"
+    },
+    "block": []
+  },
+  {
+    "dayOfWeek": "THURSDAY",
+    "start": "08:00",
+    "end": "15:00",
     "medicCPF": {
       "cpf": "222.222.222-22"
     },
