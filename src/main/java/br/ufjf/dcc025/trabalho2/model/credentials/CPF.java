@@ -21,7 +21,7 @@ public class CPF {
     }
 
     //método que valida maticamente o CPF seguindo as normas atuais do governo
-    boolean validateCPFMathematicaly(String cpf) {
+    private boolean validateCPFMathematicaly(String cpf) {
         int firstSum = 0;
         int index = 0;
 
@@ -44,7 +44,7 @@ public class CPF {
     }
 
     //valida se o cpf informado segue a forma ###.###.###-##
-    boolean validateCPF(String cpf) {
+    private boolean validateCPF(String cpf) {
         if(cpf.matches(regex)) {
             return validateCPFMathematicaly(cpf);
         }
